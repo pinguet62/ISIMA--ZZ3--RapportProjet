@@ -1,0 +1,136 @@
+\makeatletter % début d'utilisation des variables @
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% Page vides %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\fancypagestyle{empty}{
+	% Effacer les valeurs par défaut
+	\fancyhf{}
+	
+	% Remplissage
+	\lhead	[]								% haut	gauche	pair
+			{}								% haut	gauche	impair
+	\chead	[]								% haut	centre	pair
+			{}								% haut	centre	impair
+	\rhead	[]								% haut	droite	pair
+			{}								% haut	droite	impair
+	\lfoot	[]								% bas	gauche	pair
+			{}								% bas	gauche	impair
+	\cfoot	[]								% bas	centre	pair
+			{}								% bas	centre	impair
+	\rfoot	[]								% bas	droite	pair
+			{}								% bas	droite	impair
+	
+	% Epaisseur de la ligne séparatrice
+	\renewcommand{\headrulewidth}{0 pt}		% en-tête (défaut : 0.4pt)
+	\renewcommand{\footrulewidth}{0 pt}		% pied de page (défaut : 0pt)
+	
+	% Distance du corps
+	\headsep = 25 pt						% en-tête (défaut : 25pt)
+	\footskip = 75 pt						% pied de page (défaut : 30pt)
+}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% Page des chapitre (défaut) %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\fancypagestyle{plain}{
+	% Effacer les valeurs par défaut
+	\fancyhf{}
+	
+	% Remplissage
+	\lhead	[\large \bf \fbox{\thepage}]	% haut	gauche	pair	:	numéro de page
+			{}								% haut	gauche	impair
+	\chead	[]								% haut	centre	pair
+			{}								% haut	centre	impair
+	\rhead	[]								% haut	droite	pair
+			{\large \bf \fbox{\thepage}}	% haut	droite	impair	:	numéro de page
+	\lfoot	[\@title]						% bas	gauche	pair	:	titre du rapport
+			{\@author}						% bas	gauche	impair	:	auteur du rapport
+	\cfoot	[]								% bas	centre	pair
+			{}								% bas	centre	impair
+	\rfoot	[\@author]						% bas	droite	pair	:	auteur du rapport
+			{\@title}						% bas	droite	impair	:	titre du rapport
+	
+	% Epaisseur de la ligne séparatrice
+	\renewcommand{\headrulewidth}{0 pt}		% en-tête (défaut : 0.4pt)
+	\renewcommand{\footrulewidth}{0.4 pt}	% pied de page (défaut : 0pt)
+	
+	% Distance du corps
+	\headsep = 25 pt						% en-tête (défaut : 25pt)
+	\footskip = 75 pt						% pied de page (défaut : 30pt)
+}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% Corps du rapport (hors page de chapitre) %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\fancypagestyle{corps}{
+	% Effacer les valeurs par défaut
+	\fancyhf{}
+	
+	% Remplissage
+	\lhead	[\large \bf \thepage]				% haut	gauche	pair	:	numéro de page
+			{\bf \nouppercase \rightmark}				% haut	gauche	impair	:	nom de la section
+	\chead	[]									% haut	centre	pair
+			{}									% haut	centre	impair
+	\rhead	[\large \bf \nouppercase \leftmark]	% haut	droite	pair	:	nom du chapitre
+			{\large \bf \thepage}				% haut	droite	impair	:	numéro de page
+	\lfoot	[\@title]							% bas	gauche	pair	:	titre du rapport
+			{\@author}							% bas	gauche	impair	:	auteur du rapport
+	\cfoot	[]									% bas	centre	pair
+			{}									% bas	centre	impair
+	\rfoot	[\@author]							% bas	droite	pair	:	auteur du rapport
+			{\@title}							% bas	droite	impair	:	titre du rapport
+	
+	% Epaisseur de la ligne séparatrice
+	\renewcommand{\headrulewidth}{0.4 pt}		% en-tête (défaut : 0.4pt)
+	\renewcommand{\footrulewidth}{0.4 pt}		% pied de page (défaut : 0pt)
+	
+	% Distance du corps
+	\headsep = 25 pt							% en-tête (défaut : 25pt)
+	\footskip = 75 pt							% pied de page (défaut : 30pt)
+}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% Annexes (hors page de chapitre) %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\fancypagestyle{annexe}{
+	% Effacer les valeurs par défaut
+	\fancyhf{}
+	
+	% Remplissage
+	\lhead	[\large \bf \thepage]			% haut	gauche	pair	:	numéro de page
+			{\bf \nouppercase \rightmark}	% haut	gauche	impair	:	nom de la section
+	\chead	[]								% haut	centre	pair
+			{}								% haut	centre	impair
+	\rhead	[\large \bf Annexes]			% haut	droite	pair	:	"Annexes"
+			{\large \bf \thepage}			% haut	droite	impair	:	numéro de page
+	\lfoot	[\@title]						% bas	gauche	pair	:	titre du rapport
+			{\@author}						% bas	gauche	impair	:	auteur du rapport
+	\cfoot	[]								% bas	centre	pair
+			{}								% bas	centre	impair
+	\rfoot	[\@author]						% bas	droite	pair	:	auteur du rapport
+			{\@title}						% bas	droite	impair	:	titre du rapport
+	
+	% Epaisseur de la ligne séparatrice
+	\renewcommand{\headrulewidth}{0.4 pt}	% en-tête (défaut : 0.4pt)
+	\renewcommand{\footrulewidth}{0.4 pt}	% pied de page (défaut : 0pt)
+	
+	% Distance du corps
+	\headsep = 25 pt						% en-tête (défaut : 25pt)
+	\footskip = 75 pt						% pied de page (défaut : 30pt)
+}
+
+
+\makeatother % fin d'utilisation des variables @
