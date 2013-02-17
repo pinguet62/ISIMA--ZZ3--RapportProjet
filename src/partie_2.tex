@@ -4,6 +4,14 @@
 
 \chapter{Étude de fonctionnement}
 
+La première partie de notre projet a consisté à étudier les différentes étapes du fonctionnement de notre solution : de la réception d'un SMS sur le smartphone à son affichage sur le PC, mais aussi de l'écriture d'un message sur le PC jusqu'à son envoi par le smartphone.
+Cela nous permettra de nous diriger vers la bonne direction qui produira la solution optimale.
+\\
+
+
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -23,8 +31,8 @@ Bien que peu connu du public, ce protocole possède de très nombreux avantages 
 \begin{itemize}
 	\item standard ouvert : son fonctionnement est accessible par tous ;
 	\item simple d'utilisation : les clients XMPP sont très simple d'utilisation car toute la complexité du protocole est situé coté serveur ;
-	\item décentralisé
-	\item confidentialité et sécurité
+	\item décentralisé ;
+	\item confidentialité et sécurité ;
 	\item ...
 \\
 \end{itemize}
@@ -55,7 +63,15 @@ Dans ce projet nous utiliserons aSmack, un portage sous Androïd de Smack, une b
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{GTalk}
+\section{Google Talk}
+
+Google Talk, aussi appelé GTalk, est le client de messagerie instantanée proposé par Google.
+Il est disponible à partir de la page web de Gmail, mais aussi en cleint Windows que l'on peut installer sur son ordinateur.
+
+A l'origine nous voulions utiliser ce client pour envoyer nos SMS pour la simple et bonne raison que de nombreux utilisateurs ont toujours le navigateur web ouvert, ainsi qu'un onglet avec leur boite mail.
+\\
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -63,9 +79,17 @@ Dans ce projet nous utiliserons aSmack, un portage sous Androïd de Smack, une b
 
 \subsection{Parler à soi-même}
 
-Impossible de parler à soi-même.
+Le protocole XMPP autorise et offre la possibilité de s'envoyer des messages instantanés à soi-même, si l'expéditeur et le destinataire sont les mêmes comptes.
 
-Utilisation d'un compte intermédiaire ?
+Cependant GTalk ne le permet pas, pour au moins deux raisons :
+\begin{itemize}
+	\item Pour envoyer un message à une personne il faut cliquer sur son lien dans la liste des contacts ;
+	Or notre propre adresse email n'y apparait pas même si l'on s'est ajouté dans nos contacts.
+	\item Gtalk n'affiche pas les messages que l'on s'envoie à soi-même, depuis un autre client XMPP, comme une application mobile par exemple.
+\end{itemize}
+
+De ce fait il est donc nécessaire d'utiliser un compte intermédiaire.
+On peut ainsi créer un compte spécial qui représenterai notre smartphone, et qui sera utilisé uniquement par l'application.
 \\
 
 
@@ -76,9 +100,38 @@ Utilisation d'un compte intermédiaire ?
 
 \subsection{Praticité}
 
-- On doit spécifier le numéro de téléphone
+Notre première solution envisagée consistait à envoyer le message depuis GTalk, en tapant par exemple :
+\begin{lstlisting}
+sms: 0123456789 Coucou, comment vas-tu ?
+\end{lstlisting}
+~~\\
 
-- Il faut connaitre le numéro
+Cette méthode pose toutefois plusieurs inconvénients :
+\begin{itemize}
+	\item Le message doit être formaté correctement par l'utilisateur pour pouvoir être traité ;
+	\item Il est nécessaire de connaitre le numéro de téléphone du destinataire pour pouvoir envoyer le message.
+\end{itemize}
+~~\\
 
-- Flood si plusieurs personnes sont déjà en train de nous parler
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Solution envisagée}
+
+Suite aux inconvénients de GTalk mentionnés précédemment, nous nous sommes orientés vers un site web qui permettrait une utilisation plus intuitive et pratique pour l'utilisateur.
 \\
+
+Malgré le fait qu'il faille se connecter un site tiers, cette solution permet de résoudre les différents problèmes :
+\begin{itemize}
+	\item Grâce à une bibliothèque fournie par Google il est possible d'accéder aux contacts depuis notre site web, ce qui évite de devoir spécifier le numéro du destinataire ;
+	\item Le site s'occupe de formater le message XMPP ;
+	\item L'utilisateur n'a pas besoin de créer un nouveau compte pour pouvoir utiliser notre solution.
+\end{itemize}
+~~\\

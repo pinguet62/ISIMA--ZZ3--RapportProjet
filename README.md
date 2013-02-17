@@ -1,6 +1,6 @@
 Notes :
-    Pour faire un retour à la ligne il faut passer 1 ligne blanche.
-    Pour sauter une ligne il faut mettre \\ en début de ligne suivante.
+    Retour à la ligne (sans alinéat) : passer 1 ligne blanche
+    Sauter une ligne (avec alinéat) : mettre \\ en début de ligne suivante
     Citer avec lien en bas de page: \textit{Python}\footnote{Site web : \href{http://www.python.org}{http://www.python.org}}
 
 Glossaire:
