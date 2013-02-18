@@ -9,17 +9,10 @@
 %%%%%%%%%% Context %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%% Contexte général %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+L'envoi de SMS depuis un ordinateur est très souvent fastidieux car il n'existe quasiment aucune solution simple, gratuite et pratique.
+En effet, dans la majorité des solutions existantes sont soit payantes, soit limitent leurs services à quelques envois.
 
-En informatique, la compatibilité est la capacité d'un logiciel ou d'un matériel de fonctionner sur les différents systèmes, sans en altérer le fonctionnement.
-Dans le domaine du logiciel, cela peut concerner un système d'exploitation, un programme, ou même une librairie.
-Le problème de compatibilité le plus connu est celui entre Windows, marque propriétaire, et Linux, solution gratuite et ouverte à tous.
-
-
-%%%%%%%%%% Context de l'entreprise %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-Dans le domaine de la recherche par exemple, il existe des outils scientifiques qui ne sont compatibles uniquement sous Linux.
-Lorsque les utilisateurs possèdent un ordinateur ayant comme système d'exploitation Windows, il leur est donc impossible de les utiliser de manière simple.
+Les opérateurs de téléphonie mobile proposent tous des forfait avec un envoi illimité de SMS, mais ne proposent aucune solution d'envoi à partir d'un ordinateur.
 \\
 
 
@@ -28,14 +21,9 @@ Lorsque les utilisateurs possèdent un ordinateur ayant comme système d'exploit
 %%%%%%%%%% Problème %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Cependant, il existe plusieurs techniques permettant de contourner ce problème, chacune présentant des avantages et des inconvénients.
-\begin{itemize}
-	\item La cross-compilation, qui consiste à compiler le programme sur la machine compatible avant d'exporter le programme vers la machine désirée, n'est possible que dans de rares cas.
-	\item L'installation d'un autre système d'exploitation, compatible avec l'outil, sur une autre partition du disque-dur, appelé le "multi-boot", demande un redémarrage de l'ordinateur entre chaque échange de système d'exploitation.
-	\item Enfin, la virtualisation, quant à elle, consiste à émuler un système d'exploitation à l'intérieur même du système d'exploitation utilisé.
-Cette solution est possible dans tous les cas, et permet le meilleur compromis entre temps de mise en œuvre, et puissance de calcul.
+Comment pourrait-on utiliser notre forfait téléphonique pour envoyer des SMS depuis l'ordinateur ?
+Quelle serait la solution la plus pratique pour l'utilisateur ?
 \\
-\end{itemize}
 
 
 
@@ -43,7 +31,8 @@ Cette solution est possible dans tous les cas, et permet le meilleur compromis e
 %%%%%%%%%% Objectif %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-L'objet de cette étude sera d'étudier et de développer une solution de virtualisation, simple d'utilisation voir transparente pour l'utilisateur, qui permettra d'utiliser des outils à partir d'une interface graphique.
+L'objet de cette étude sera d'étudier et de développer une solution d'envoi de SMS depuis un ordinateur, simple pour l'utilisateur et utilisable par tous.
+Cette solution se basera sur la communication entre le smartphone et l'ordinateur, qui s'échangeront les informations du SMS.
 \\
 
 
@@ -54,13 +43,13 @@ L'objet de cette étude sera d'étudier et de développer une solution de virtua
 
 %%%%%%%%%% Démarche %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-La construction d'une première machine virtuelle complète permettra de tester et de comparer les différentes techniques possibles et utilisables dans la solution finale.
-Une fois ces techniques définies, elles seront optimisées et intégrées à une seconde machine virtuelle minimale pour obtenir les meilleurs résultats possibles.
-Enfin, l'intégration de la solution dans une interface graphique permettra l'utilisation pratique et efficace d'outils, à l'origine non exécutables.
-
+L'étude des différentes solutions possibles permettra de les tester et de comparer leurs avantages et défauts pour mieux nous amener vers la solution pratique et optimale.
+Une fois la solution choisie elle sera développée pour permettre son utilisation.
+Enfin il ne restera plus qu'à l'optimiser et lui apporter de nouvelles fonctionnalités.
 
 %%%%%%%%%% Plan %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Tout d'abord, j'analyserai précisément le sujet, en présentation l'entreprise, la virtualisation, ainsi que la solution envisagée.
-Dans un deuxième temps je développerai la démarche suivie pour parvenir à la solution finale du projet.
-Pour terminer, je présenterai le développement et la solution obtenue.
+Tous d'abord nous présenterons la démarche suivie pour nous orienter vers la solution envisagée.
+Dans un deuxième temps nous présenterons les outils utilisés et les techniques mises en œuvre pour développer le projet.
+Pour terminer nous présenterons la solution finale obtenue et discuterons des améliorations possibles.
+\\
