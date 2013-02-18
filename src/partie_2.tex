@@ -131,7 +131,23 @@ Suite aux inconvénients de GTalk mentionnés précédemment, nous nous sommes o
 Malgré le fait qu'il faille se connecter un site tiers, cette solution permet de résoudre les différents problèmes :
 \begin{itemize}
 	\item Grâce à une bibliothèque fournie par Google il est possible d'accéder aux contacts depuis notre site web, ce qui évite de devoir spécifier le numéro du destinataire ;
-	\item Le site s'occupe de formater le message XMPP ;
+	\item Le site s'occupe de formater le message XMPP envoyé entre le PC et l'application du smartphone ;
 	\item L'utilisateur n'a pas besoin de créer un nouveau compte pour pouvoir utiliser notre solution.
+\\
 \end{itemize}
-~~\\
+
+\begin{figure}[!h]
+	\center
+	\includegraphics[scale=0.5]{img/schemaFonctionnement_siteWeb_reception.png}
+	\caption{Site web : Réception d'un SMS}
+	\label{schemaFonctionnement_siteWeb_reception}
+\end{figure}
+Le schéma \ref{schemaFonctionnement_siteWeb_reception} représente les différentes étapes de notre solution :
+\begin{enumerate}
+	\item Le smartphone reçoit un SMS de la part du destinataire ;
+	\item L'application mobile reçoit un événement indiquant la réception d'un nouveau SMS ;
+	\item L'application mobile lit le SMS : le numéro de téléphone du destinataire + le contenu du SMS ;
+	\item L'application mobile envoie un message XMPP (formaté pour pouvoir être traité) au propre compte Google de l'utilisateur ;
+	\item Le client XMPP de l'application web reçoit le message XMPP ;
+	\item L'application web analyse le message XMPP puis affiche le SMS à l'utilisateur.
+\end{enumerate}

@@ -43,3 +43,31 @@ TODO:
     Page de garde :
         Fillières : box (pour alignés)
         Bas de page : colonnes flexibles (pours prénoms sur même ligne)
+
+
+
+Diagramme de classe :
+    http://www.websequencediagrams.com/#
+    Sources :
+        GTalk :
+            Réception :
+                
+            Emission :
+                
+        Site web :
+            Réception :
+                title Réception d'un SMS
+                Expéditeur->Smartphone: SMS
+                Smartphone->Application mobile: Evénement réception SMS
+                Application mobile->+Smartphone: Lecture du SMS
+                Smartphone-->-Application mobile: Expéditeur + contenu
+                Application mobile->Compte Google: message XMPP
+                Compte Google->Site web: message XMPP
+                Site web->Utilisateur: Affiche le SMS
+            Emission :
+                title Envoi d'un SMS
+                Utilisateur->Site web: Saisie du SMS
+                Site web->Compte Google: message XMPP
+                Compte Google->Application mobile: message XMPP
+                Application mobile->Smartphone: Envoi du SMS
+                Smartphone->Expéditeur: SMS
