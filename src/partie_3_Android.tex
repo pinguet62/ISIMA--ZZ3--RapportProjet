@@ -142,27 +142,159 @@ ou il n'existe qu'un seul compte, celui-ci est choisi par défaut.
 \\\\
 <img connection par défaut>
 \\\\
-Suite à cela, le protocole OAuth va
-demander à l'utilisateur une seule et unique fois si il authorize l'application à accéder à son compte
-GTalk. La validation effectué, l'application pourra se connecter à chaque lancement, automatiquement et
-sans importuner l'utilisateur.
+Suite à cela, le protocole OAuth va demander à l'utilisateur une seule et unique fois si il authorise 
+l'application à accéder à son compte GTalk. La validation effectué, l'application pourra se connecter 
+à chaque lancement, automatiquement et sans importuner l'utilisateur. 
+
+\paragraph{}
+Contrairement a l'authentification sur le site web, l'authentification sur une plateforme android est
+théoriquement plus simple. En effet, une fois que l'utilisateur a donné son accord, le server 
+d'authentification de google va directement envoyer le token d'authentification. Il n'y a alors pas 
+besoin d'effectuer une deuxième étape pour récupérer ce dernier.
+\\\\
+<img obtention token via android>
+\\\\
+
+\paragraph{}
+Néanmoins, une des difficultés d'implémenter ce protocole est que la libraire de gestion de compte
+XMPP pour Android dénommé Asmack est différente de celle utiliser pour le site web. Asmack est un fork 
+de la librairie Smack pour Android et est l'unique librairie gérant les comptes XMPP présente sur
+Android. Ne souhaitant pas réimplémenter toute les fonctionnalités présentes dans celle-ci, nous avons
+choisi de l'utiliser. Malheuresement, les différences entre les deux librairies nous ont empechés de 
+réimplementer notre précédent travail effectué pour le site web qui était fonctionnel. 
+\\
+Le langage Java fonctionne sur une machine virtuelle. Celle-ci contient des fonctionnalités basique sur
+lesquelles le langage peut s'appuyer. Dalvik, la machine virtuelle pour Java présente sur Android n'est 
+pas exactement la meme que la machine virtuelle basique. En effet, pour des soucis de rapidité et de 
+légèreté, certaines parties de Dalvik ont été réécrites pour en faire une machine virtuelle plus adapté
+aux plateformes mobiles.
+\\
+Smack a été développé sur la machine virtuelle Java basique tandis que Asmack a été développé sur Dalvik.
+Cette différence implique des changements quand aux fonctionnements de celles-ci. 
+\\
+Finalement, en réimplémentant certaines fonctionnalités, nous avons réussi à nous authentifier avec OAuth.
+
+\paragraph{}
+Authentifier un utilisateur via OAuth2.0 sur Android a était un réel challenge. Il nous a fallu comprendre 
+et trouver des équivalences au fonctionnement de Smack. 
 
 
-OAuth nous a donc permis d'authentifier l'utilisateur. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Récéption d'un SMS}
+\subsection{Envoi et réception d'un SMS}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Envoi d'un SMS}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Récéption d'un SMS}
+
+\paragraph{}
+Une fois authentifié, nous souhaitons pouvoir utiliser notre téléphone comme proxy. Notre application
+doit en effet servir d'intermédiaire entre le site web et un correspondant. Pour cela elle doit tout
+d'abord surveiller l'arrivée de nouveaux messages. 
+\\
+Sur Android, le monitoring d'évènements n'implique pas de devoirs sortir des sentiers battus. En effet,
+des outils mis en place par Google authorise la surveillance du comportement du téléphone. Dans notre cas 
+nous avons pu utiliser le principe de "Broadcast Receiver" du système. 
+\\
+Un broadcast receiver est un outils qui permet de rendre une application consciente de son environnement.
+Cela permet généralement à l'application qui l'utilise d'etre prévenu lors de nouvelles notifications ou 
+d'un comportement particulier du téléphone.
+Son fonctionnement est simple. Il permet de s'enregistrer auprès du téléphone qui maintient une base de donnée des 
+membres à avertir lors d'un changement particulier.
+\\\\
+<img broadcast receiver pour les sms avec systèmes, app, autre,...>
+\\\\
+Ci dessus, on peut voir le système du téléphone qui contient les différents broadcast receiver à avertir
+en cas de nouveaux messages. Ici l'application de rédaction de SMS ainsi que deux autres applications seront
+avertis.
+\\
+Dans notre cas, nous nous en sommes servis pour d'une part etre avertis de l'arrivé de nouveaux SMS et d'autre 
+part pour pouvoir récupérer le dit message et le traiter.
+\\
+
+
+\subsubsection{Envoi d'un SMS}
+
+\paragraph{}
+L'envoi quand à lui est beaucoup plus trivial. Android met à disposition un outils permettant d'envoyer
+des messages.
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Traitement des évènements}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\subsubsection{Architecture de l'application}
+
+\paragraph{}
+Pour pouvoir réagir en fonction d'un évènement, notre application a successivement adopté deux méthodes.
 \\
+La première a été réalisé pour répondre aux besoins de notre projet. Il s'agissait d'un test sur le 
+type de l'évènement entrant. Plus précisément, il s'agissait de vérifier si l'évènement en question 
+était la récéption d'un nouveaux SMS ou bien la récéption d'un nouveau message XMPP en provenance du 
+site web. En fonction du type de message en entrée, l'application décidé d'envoyer transmettre le message
+vers le bon destinataire. 
+\\
+Ce fonctionnement basique convenait totalement à nos besoins mais par soucis de rendre notre application
+évolutive nous avons travaillé sur une deuxième solutions.
+\\
+Lors de la réception d'un message XMPP, nous souhaitions pouvoir réagir différement en fonction du contenu
+du message. Dans le cadre de notre projet, nous n'avions comme but que l'envoi de sms à partir du webservice
+seulement. Notre travail respecté donc ce principe mais ne permettait aucune évolutivité.
+\\
+A supposer qu'un tiers soit intéressé par la communication entre le webservice et le téléphone par 
+l'intermédiaire de XMPP mais que son but ne soit pas d'envoyer de simple sms, nous avons implémenté une
+architecture permettant de rajouter facilement de nouvelles fonctionnalités. Pour donner des exemples, 
+un utilisateur pourrait décider d'implémenter une fonctionnalité lui permettant de déclencher la capture
+de photos de son téléphone à partir du webserver.
+\\
+Pour permettre cette évolutivité, nous avons réalisé une architecture qui s'adapte automatiquement en
+fonction des messages reçus. Il s'agit ici des patrons de conceptions fabrique et stratégie. 
+
+\paragraph{}
+Le patron de stratégie est un patron de conception de type comportemental. Il permet de d'adopter 
+dynamiquement un comportement particulier en fonction des conditions de son éxecution.
+\\\\
+<img pattern stratégie>
+\\
+Dans notre cas, il permet de créer différents type de stratégie qui pourront potentiellement utiliser. 
+Notre projet ne contenait que la stratégie "envoi de SMS" mais, avec cette architecture, il est possible 
+de rajouter d'autres stratégies comme l'extinction du téléphone ou encore l'envoi d'un email par exemple.
+\\
+
+\paragraph{}
+La fabrique quand à elle permet de créer des objets sans en connaitre l'éxistence avant le lancement du 
+programme.
+\\\\
+<img pattern fabrique>
+\\
+Dans notre cas, elle permet d'utiliser de créer les stratégies et de les utiliser. En effet, la fabrique 
+qui va analyser chaque nouveau message. En fonction de leurs contenus, elle devra décider d'une stratégie
+et l'appliquer.
+
+
+\subsubsection{Architecture de l'application}
+
+Selon l'évènement reçu, le traitement à effectuer n'est pas le meme. Pour notre application, nous avons 
+créer recensés deux évènements et traitements associés possible.
+\\
+La réception d'un SMS est notre premier cas. Comme le montre le schéma ci dessous, le traitement se 
+décompose en trois étapes. 
+\\\\
+<img réception->encapsulation->envoie xmpp>
+\\\\
+Il faut tout d'abord récupérer le contenu du message ainsi que son auteur. Puis il fallait encapsuler 
+ses données dans un message au format Json. Enfin nous terminions par envoyer le message encapsulé vers 
+le webservice qui s'occupera de notifier l'utilisateur de l'arrivé d'un nouveau message.
+\\
+Concernant le deuxième évènement possible, il s'agit de la réception d'un nouveau message XMPP. Contrairement
+au premier traitement, il va etre désencapsulé pour pouvoir y récupérer l'information utile. Cela fait, 
+notre fabrique va s'occupper de d'appliquer la stratégie adapter pour ce nouveau message. Dans notre cas, 
+puissque nous avions juste la stratégie d'envoi de SMS, c'était toujours celle-ci qui était appliqué.
+\\\\
+<img réception->décapsulation->envoi SMS>
+\\\\
 
 
