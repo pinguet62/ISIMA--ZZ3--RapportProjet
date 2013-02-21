@@ -1,8 +1,5 @@
-\cleardoublepage
+\newpage
 
-
-
-\chapter{Réalisation de la solution}
 
 \paragraph{}
 Pour ce projet, nous avions initialement établis de pouvoir le faire fonctionner sur plusieurs 
@@ -41,7 +38,7 @@ Aujourd'hui, Android est l'OS le plus utilisé dans le monde sur les téléphone
 
 
 \paragraph{}
-Le fonctionnement global du projet sur la plateforme Android est relativement simple. Nous souhaitons
+e fonctionnement global du projet sur la plateforme Android est relativement simple. Nous souhaitons
 simplement pouvoir utiliser le téléphone portable comme un intermédiaire entre notre site web et le 
 correspondant avec qui nous discutons. Pour cela le téléphone fait office de proxy entre les deux 
 entités éloignés. Un proxy est un composant qui se place entre un interlocuteur et sont auditeur. Le 
@@ -114,6 +111,10 @@ gmail. Ce meme compte peut etre utiliser pour accéder à tous les services de G
 C'est une des raisons qui a fait que nous avons choisi XMPP plutot qu'un autre protocole. L'utilisateur
 n'a ainsi pas besoin de créer quelquonque nouveaux comptes et peux utiliser celui qu'il utilise déja.
 
+\\\\
+<schéma communication gtalk entre téléphone et site>
+\\\\
+
 \paragraph{}
 Pour pouvoir converser avec le site web, l'application a besoin de s'authentifier auprès du service
 GTalk. Pour cela, nous sommes passés par deux étapes. 
@@ -122,10 +123,32 @@ Initialement, nous utilisions la méthode classique d'authentification. Lorsque 
 l'application, celle-ci lui demande de rentrer ses identifiant et mot de passe. Cela effectué, 
 l'application se charge de se connecter et de s'authentifier sur les serveurs GTalk en utilisant les
 paramètres rentrés par l'utilisateur.
+\\
+Cette solution qui est la plus simple à implémenter mais n'est malheureusement pas la plus agréable
+à utiliser ni la plus sure. Nous forçons en effet l'utilisateur à rentrer ses identifiants ce qui 
+pourrait paraitre légitime mais reste contraignant pour l'utilisateur. Celui-ci ne sait pas ce que 
+nous faisons avec son mot de passe. Une application malveillante pourrait récupérer les identifiants
+et s'en servir à des fins illégales. Dans notre cas, meme si nous n'avions aucune mauvaise intentions,
+nous ne pouvons demander aux utilisateurs de nous faire confiance. Nous avons donc opté pour une 
+deuxième solution, l'identification avec OAuth2.0.
+\\
+Comme vu précédement, OAuth permet de réaliser des actions en agissant à la place de l'utilisateur. 
+Ici nous souhaitions simplement utiliser le compte GTalk de l'utilisateur sans que celui-ci ai à rentrer
+ses identifiants. 
+\\
+Le fonctionnement est simple. Lorsque utilisateur lance l'application, celle-ci demande tout d'abord
+à l'utilisateur quel compte gmail il veut utiliser parmi ceux présent sur sont téléphone. Dans le cas
+ou il n'existe qu'un seul compte, celui-ci est choisi par défaut.
 \\\\
-<schéma communication gtalk entre téléphone et site>
+<img connection par défaut>
 \\\\
+Suite à cela, le protocole OAuth va
+demander à l'utilisateur une seule et unique fois si il authorize l'application à accéder à son compte
+GTalk. La validation effectué, l'application pourra se connecter à chaque lancement, automatiquement et
+sans importuner l'utilisateur.
 
+
+OAuth nous a donc permis d'authentifier l'utilisateur. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Récéption d'un SMS}
