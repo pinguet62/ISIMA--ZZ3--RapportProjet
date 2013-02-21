@@ -4,8 +4,15 @@
 
 \chapter{Réalisation de la solution}
 
+\paragraph{}
+Pour ce projet, nous avions initialement établis de pouvoir le faire fonctionner sur plusieurs 
+architectures mobiles. Ayant des cours sur les deux plateformes phares actuelles, nous avons choisi
+d'étudier les mobiles de types iOS et Android. De plus comme nous possédions chacun un téléphone 
+sur les deux systèmes d'exploitation, il nous est apparu intelligent de se répartir le travail en 
+travaillant chacun sur un OS.
+\\
+La partie qui suit traite donc de l'étude et de la réalisation du projet sur l'environnement Android.
 
-blablablah
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -20,13 +27,12 @@ blablablah
 
 
 \paragraph{}
-Pour ce projet, nous avions initialement établis de pouvoir le faire fonctionner sur plusieurs 
-architectures mobiles. Ayant des cours sur les deux plateformes phares actuelles, nous avons choisi
-d'étudier les mobiles de types iOS et Android. De plus comme nous possédions chacun un téléphone 
-sur les deux systèmes d'exploitation, il nous est apparu intelligent de se répartir le travail en 
-travaillant chacun sur un OS.
+Android est un système d'exploitation open source crée principalement pour les appareils mobiles et 
+les tablettes tactiles. Le système d'exploitation basé sur Linux est dirigé par l'entreprise Google
+depuis 2005. Il possède une surcouche utilisant le langage Java sur lequel tourne les applications 
+Android.
 \\
-La partie qui suit traite donc de l'étude et de la réalisation du projet sur l'environnement Android.
+Aujourd'hui, Android est l'OS le plus utilisé dans le monde sur les téléphones portables.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -35,16 +41,63 @@ La partie qui suit traite donc de l'étude et de la réalisation du projet sur l
 
 
 \paragraph{}
-Android est un système d'exploitation open source crée principalement pour les appareils mobiles et 
-les tablettes tactiles. Le système d'exploitation basé sur Linux est dirigé par l'entreprise Google
-depuis 2005. 
-Aujourd'hui, Android est l'OS le plus utilisé sur les téléphones portables.
+Le fonctionnement global du projet sur la plateforme Android est relativement simple. Nous souhaitons
+simplement pouvoir utiliser le téléphone portable comme un intermédiaire entre notre site web et le 
+correspondant avec qui nous discutons. Pour cela le téléphone fait office de proxy entre les deux 
+entités éloignés. Un proxy est un composant qui se place entre un interlocuteur et sont auditeur. Le 
+proxy sert principalement à relayer l'information d'un élément vers un autre, il sert d'intermédiaire.
+Dans notre cas, le proxy s'occuppe de recevoir des SMS et de les rediriger vers le site web. 
+Réciproquement, il récupère les messages envoyés par le site web et envoie un SMS vers le correspondant
+définis dans le message reçu.
+
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Création du service}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\paragraph{}
+Les applications fonctionnant sous Android régissent par un principe simple, celui des "activités".
+Pour simplifier, une activité représente une fonctionnalité graphique d'une application. Par exemple,
+lorsqu'une application est ouverte, on tombe sur un menu avec les différentes possibilités d'actions 
+qui nous sont offertes. Le menu représente donc ici une activité. 
+\\
+Il faut savoir que une activité lorsqu'elle est active occupe le système qui attend des évènements.
+Si l'utilisateur ne fait rien alors que le menu est affiché, le système peut s'occupper d'autres 
+taches annexes. Si en revanche l'utilisateur navigue dans le menu, alors l'activité est considérée
+comme en fonctionnement et bloque toute autres opérations non relative à l'application executée.
+\\
+Dans le cadre de notre application, nous devons à son lancement effectuer une série d'opérations 
+afin de mettre l'application en fonctionnement. Cela consiste notamment à, vérifier l'état de la 
+connectivité internet, récupérer les identifiants et se connecter sur le service GTalk. Ces 
+opérations rende le système bloquant durant leur exécutions. Cela n'est pas un problème lorsque la 
+connection s'effectue sans erreurs. Le traitement durant moins d'une seconde, le système n'est pas
+gravement impacté. En revanche, si une erreur intervient, le programme va alors essayer de la résoudre.
+Cela n'est pas concevable. En effet, une perte soudaine de réseau pourrait par exemple mettre 
+l'application dans un état de recherche ce qui est potentiellement très lent. Cette situation rendrait
+le terminal complètement blocké durant la recherche. 
+\\
+Ce comportement n'étant pas souhaitable, nous avons du trouver une solution pour pouvoir outrepasser ce blocage.
+\\
+Nous avons alors utilisé le concept Android de "services". Celui-ci consiste à executer une fonctionnalité 
+de manière asynchrone. Le service n'impacte pas le système, au contraire il fonctionne avec lui. 
+
+\\
+<img service fonctionnement>
+\\
+
+Comme montré ci dessus, le service n'est pas bloquant. Lors de son éxecution, le système continue de 
+fonctionner sur d'autres taches en paire avec le service lancé.
+
+\paragraph{}
+Dans notre cas, le service sert à deux taches principales. Tout d'abord il va configurer l'authentification
+de l'utilisateur sur GTalk. Ensuite il va simplement se mettre en attente d'évènement et le cas échéant, 
+traiter ce meme évènement.
+
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
