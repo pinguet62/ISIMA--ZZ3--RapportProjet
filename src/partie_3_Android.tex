@@ -85,9 +85,9 @@ Ce comportement n'étant pas souhaitable, nous avons du trouver une solution pou
 Nous avons alors utilisé le concept Android de "services". Celui-ci consiste à executer une fonctionnalité 
 de manière asynchrone. Le service n'impacte pas le système, au contraire il fonctionne avec lui. 
 
-\\
+\\\\
 <img service fonctionnement>
-\\
+\\\\
 
 Comme montré ci dessus, le service n'est pas bloquant. Lors de son éxecution, le système continue de 
 fonctionner sur d'autres taches en paire avec le service lancé.
@@ -105,8 +105,30 @@ traiter ce meme évènement.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+\paragraph{}
+Pour pouvoir relayer communiquer avec le site web, notre projet utilise le protocole XMPP. Plus 
+précisément, nous utilisons un meme et unique compte GTalk. 
+\\
+Initialement, le projet devait etre conçu pour Android. Or chaque utilisateur Android a un compte 
+gmail. Ce meme compte peut etre utiliser pour accéder à tous les services de Google dont GTalk.
+C'est une des raisons qui a fait que nous avons choisi XMPP plutot qu'un autre protocole. L'utilisateur
+n'a ainsi pas besoin de créer quelquonque nouveaux comptes et peux utiliser celui qu'il utilise déja.
+
+\paragraph{}
+Pour pouvoir converser avec le site web, l'application a besoin de s'authentifier auprès du service
+GTalk. Pour cela, nous sommes passés par deux étapes. 
+\\
+Initialement, nous utilisions la méthode classique d'authentification. Lorsque l'utilisateur lance 
+l'application, celle-ci lui demande de rentrer ses identifiant et mot de passe. Cela effectué, 
+l'application se charge de se connecter et de s'authentifier sur les serveurs GTalk en utilisant les
+paramètres rentrés par l'utilisateur.
+\\\\
+<schéma communication gtalk entre téléphone et site>
+\\\\
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Reception d'un SMS}
+\subsection{Récéption d'un SMS}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
