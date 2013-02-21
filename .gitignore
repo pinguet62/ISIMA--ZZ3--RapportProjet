@@ -12,6 +12,6 @@
 *.pdf
 *.synctex.gz
 *.toc
-
+*.swp
 */Thumbs.db
 Rapport.dvi
