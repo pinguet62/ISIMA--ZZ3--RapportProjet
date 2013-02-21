@@ -63,7 +63,7 @@ Dans ce projet nous utiliserons aSmack, un portage sous Androïd de Smack, une b
 
 La première raison qui nous a poussé à choisir le protocole XMPP pour échanger les messages entre l'ordinateur et le smartphone est le fait qu'il s'agit du protocole de base de GTalk.
 A l'origine nous voulions envoyer et recevoir les messages depuis GTalk.
-Nous vous expliquerons dans la partie \ref{Service proposé} les détails du service que nous proposerons à l'utilisateur.
+Ce choix nous a donc paru judicieux car l'application mobile pourra échanger facilement des messages avec l'ordinateur sans aucun problème d'adaptation.
 \\
 
 
@@ -76,8 +76,8 @@ Nous vous expliquerons dans la partie \ref{Service proposé} les détails du ser
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Service proposé}
-\label{Service proposé}
+\section{Service proposé à l'utilisateur}
+\label{Service proposé à l'utilisateur}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -158,4 +158,25 @@ Le schéma \ref{schemaFonctionnement_siteWeb_reception} représente les différe
 	\item L'application mobile envoie un message XMPP (formaté pour pouvoir être traité) au propre compte Google de l'utilisateur ;
 	\item Le client XMPP de l'application web reçoit le message XMPP ;
 	\item L'application web analyse le message XMPP puis affiche le SMS à l'utilisateur.
+\\
+\end{enumerate}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Les application mobiles}
+
+Il est nécessaire que l'utilisateur installe une application sur son smartphone.
+Celle-ci fonctionnera en tache de fond et sera chargée de réagir aux événements suivants :
+\begin{enumerate}
+	\item Réception des SMS : l'application lit le contenu du SMS ainsi que le numéro de l'expéditeur, puis envoie le message formaté sur le compte XMPP Google ;
+	\item Réception des messages XMPP : l'application extrait les données (numéro de téléphone du destinataire, contenu du SMS) puis envoie le SMS.
+\\
 \end{enumerate}
