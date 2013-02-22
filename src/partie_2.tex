@@ -18,6 +18,38 @@ Nous détaillerons plus précisément le choix du service proposé à l'utilisat
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{Les application mobiles}
+
+Il est nécessaire que l'utilisateur installe une application sur son smartphone pour réagir aux réception de SMS et aux demandes d'envoi de l'utilisateur.
+\\
+
+
+Lors de la réception d'un SMS, l'application va recevoir une événement puis va lire le dernier SMS reçu.
+Une fois le contenu et l'expéditeur du SMS lus, l'application va envoyer le message "sur l'ordinateur" de l'utilisateur pour l'avertir de la réception.
+
+Lors de la réception d'un message (contenu du SMS et destinataire) provenant de "l'ordinateur" de l'utilisateur, l'application va envoyer le SMS au destinataire.
+Cet envoi doit bien évidemment se faire de manière automatique et transparente.
+
+Le schéma \ref{schemaFonctionnement_applicationMobile} représente le fonctionnement global des applications mobiles qui seront utilisées dans notre projet.
+\begin{figure}[!h]
+	\center
+	\includegraphics[width=0.9\textwidth]{img/schemaFonctionnement_applicationMobile.png}
+	\caption{Applications mobiles : fonctionnement}
+	\label{schemaFonctionnement_siteWeb_reception}
+\end{figure}
+~~\\
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Transfert du message}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -41,6 +73,7 @@ Bien que peu connu du public, ce protocole possède de très nombreux avantages 
 \\
 \end{itemize}
 
+
 Le protocole XMPP est de plus en plus utilisé par les services de messagerie instantanée, tels que iChat sur les produits Apple, le chat Facebook, ou Gtalk de Google que nous utiliserons dans ce projet.
 \\
 
@@ -50,7 +83,7 @@ Le protocole XMPP est de plus en plus utilisé par les services de messagerie in
 
 En raison de la nature dynamique, évolutive et ouverte du protocole XMPP, de très nombreuses bibliothèques sont disponibles (référencées sur le \href{http://xmpp.org/xmpp-software/libraries/}{site officiel} de la fondation) dans la majorité des langages de programmation.
 
-Dans ce projet nous utiliserons aSmack, un portage sous Androïd de Smack, une bibliothèque Java, ainsi que XMPPFramework une bibliothèque pour Objective-C.
+Dans ce projet nous utiliserons \textit{aSmack}, un portage sous Androïd de la biblioyhèqhe Java \textit{Smack}, une bibliothèque Java, ainsi que \textit{XMPPFramework} une bibliothèque pour Objective-C.
 \\
 
 
@@ -62,9 +95,31 @@ Dans ce projet nous utiliserons aSmack, un portage sous Androïd de Smack, une b
 \subsection{Choix du protocole}
 
 La première raison qui nous a poussé à choisir le protocole XMPP pour échanger les messages entre l'ordinateur et le smartphone est le fait qu'il s'agit du protocole de base de GTalk.
-A l'origine nous voulions envoyer et recevoir les messages depuis GTalk.
+Initialement nous voulions envoyer et recevoir les messages depuis GTalk, comme nous l'expliquerons uste après dans la partie \ref{GTalk}.
 Ce choix nous a donc paru judicieux car l'application mobile pourra échanger facilement des messages avec l'ordinateur sans aucun problème d'adaptation.
+
+La seconde raison est le fait que la grande majorité des personnes possèdent un compte Google (Gmail), du fait de l'importance de Google sur l'univers d'internet.
+De plus les smartphones Androïd nécessitent l'association à un compte Google pour fonctionner (téléchargement d'application, mises à jour, ...), donc ces utilisateurs possèderont forcément un compte Google.
 \\
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Fonctionnement}
+
+Les messages sont échangés entre les deux clients XMPP : un présent dans l'application mobile et l'autre dans la solution présente sur l'ordinateur de l'utilisateur.
+
+Le schéma \ref{schemaFonctionnement_protocoleTransfert} décrit les entités qui échangeront des messages en utilisant le protocole XMPP.
+\begin{figure}[!h]
+	\center
+	\includegraphics[width=0.9\textwidth]{img/schemaFonctionnement_protocoleTransfert.png}
+	\caption{Transfert du message : fonctionnement}
+	\label{schemaFonctionnement_siteWeb_reception}
+\end{figure}
+~~\\
 
 
 
@@ -84,46 +139,54 @@ Ce choix nous a donc paru judicieux car l'application mobile pourra échanger fa
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{GTalk}
+\label{GTalk}
 
 Google Talk, aussi appelé GTalk, est le client de messagerie instantanée proposé par Google.
-Il est disponible à partir de la page web de Gmail, mais aussi en cleint Windows que l'on peut installer sur son ordinateur.
+Il est disponible à partir de la page web de Gmail, mais aussi en client Windows que l'on peut installer sur son ordinateur (Windows).
 
-A l'origine nous voulions utiliser ce client pour envoyer nos SMS pour la simple et bonne raison que de nombreux utilisateurs ont toujours le navigateur web ouvert, ainsi qu'un onglet avec leur boite mail.
+Initialement nous voulions utiliser ce client pour envoyer nos SMS pour la simple et bonne raison que de nombreux utilisateurs ont toujours le navigateur web ouvert, ainsi qu'un onglet avec leur boite mail.
+De plus, nous voulions nous inspirer d'une solution existante qui utilise GTalk pour l'approfondir et lui ajouter de nouvelles fonctionnalités.
 \\
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\subsection{Problèmes}
+\label{Problèmes}
+
 \subsubsection{Parler à soi-même}
 
-Le protocole XMPP autorise et offre la possibilité de s'envoyer des messages instantanés à soi-même, si l'expéditeur et le destinataire sont les mêmes comptes.
+Le protocole XMPP autorise et offre la possibilité de s'envoyer des messages instantanés à soi-même si l'expéditeur et le destinataire sont les mêmes comptes.
 
 Cependant GTalk ne le permet pas, pour au moins deux raisons :
 \begin{itemize}
-	\item Pour envoyer un message à une personne il faut cliquer sur son lien dans la liste des contacts ;
-	Or notre propre adresse email n'y apparait pas même si l'on s'est ajouté dans nos contacts.
-	\item Gtalk n'affiche pas les messages que l'on s'envoie à soi-même, depuis un autre client XMPP, comme une application mobile par exemple.
+	\item Pour envoyer un message à une personne il faut cliquer sur son lien dans la liste des contacts.
+	Or notre propre adresse email n'y apparait pas même si l'on s'est ajouté dans nos contacts ;
+	\item Gtalk n'affiche pas les messages que l'on s'envoie à soi-même, depuis un autre client XMPP comme une application mobile par exemple.
 \end{itemize}
 
 De ce fait il est donc nécessaire d'utiliser un compte intermédiaire.
 On peut ainsi créer un compte spécial qui représenterai notre smartphone, et qui sera utilisé uniquement par l'application.
-\\
+Le fonctionnement global de la solution se résumerait au schéma \ref{schemaFonctionnement_GTalk}.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[!h]
+	\center
+	\includegraphics[width=0.9\textwidth]{img/schemaFonctionnement_GTalk.png}
+	\caption{GTalk : Utilisation d'un compte intermédiaire}
+	\label{schemaFonctionnement_GTalk}
+\end{figure}
+~~\\
+
 
 \subsubsection{Praticité}
 
-Notre première solution envisagée consistait à envoyer le message depuis GTalk, en tapant par exemple :
+Pour différencier les SMS que l'utilisateur voudrait envoyer et les messages privés qui pourraient transiter par le biais du compte intermédiaire, nous voulions imposer une "règle", c'est à dire un format comme par exemple :
 \begin{lstlisting}
 sms 0123456789 Coucou, comment vas-tu ?
 \end{lstlisting}
-~~\\
 
-Cette méthode pose toutefois plusieurs inconvénients :
-\begin{itemize}
-	\item Le message doit être formaté correctement par l'utilisateur pour pouvoir être traité ;
-	\item Il est nécessaire de connaitre le numéro de téléphone du destinataire pour pouvoir envoyer le message.
-\end{itemize}
-~~\\
+Mais cela impose à l'utilisateur de saisir un message correctement formaté.
+De plus l'utilisateur doit saisir le numéro de téléphone du destinataire pour pouvoir envoyer le message, ce qui soulève les problèmes cités dans la partie \ref{Introduction de l'étude} du rapport.
+\\
 
 
 
@@ -133,50 +196,29 @@ Cette méthode pose toutefois plusieurs inconvénients :
 
 \subsection{Solution envisagée}
 
-Suite aux inconvénients de GTalk mentionnés précédemment, nous nous sommes orientés vers un site web qui permettrait une utilisation plus intuitive et pratique pour l'utilisateur.
+Suite aux inconvénients de GTalk mentionnés précédemment dans la partie \ref{Problèmes}, nous avons dû nous orienter vers une autre solution, indépendante de GTalk.
+Plusieurs solutions sont possibles offrant chacune des avantages et des inconvénients.
 \\
 
-Malgré le fait qu'il faille se connecter un site tiers, cette solution permet de résoudre les différents problèmes :
-\begin{itemize}
-	\item Grâce à une bibliothèque fournie par Google il est possible d'accéder aux contacts depuis notre site web, ce qui évite de devoir spécifier le numéro du destinataire ;
-	\item Le site s'occupe de formater le message XMPP envoyé entre le PC et l'application du smartphone ;
-	\item L'utilisateur n'a pas besoin de créer un nouveau compte pour pouvoir utiliser notre solution.
-\\
-\end{itemize}
 
+Le client lourd est un logiciel autonome que l'utilisateur doit "installer" sur son ordinateur.
+Son fonctionnement est indépendant de tout serveur, hormis les échanges de données nécessaires aux traitements.
+Pour notre projet, l'inconvénient de cette solution est l'obligation d'installation, ce qui peut poser problème lorsque l'on se trouve par exemple au travail ou que l'on utilise un ordinateur qui n'est pas le notre.
+\\
+
+
+Le site web est une application fourni par un serveur distant et accessible depuis n'importe quel navigateur internet.
+Aucun programme ne devra être installé car cette solution est totalement indépendante de l'ordinateur de l'utilisateur.
+Le seule pré-requis est un accès à internet, qui, quelque soit le type de solution proposé à l'utilisateur (client lourd, client léger, ...), est obligatoire pour l'utilisation du protocole XMPP.
+C'est cette solution que nous utiliseront dans ce projet.
+\\
+
+
+Les différentes étapes du fonctionnement du site web est représenté sur le schéma \ref{schemaFonctionnement_siteWeb}
 \begin{figure}[!h]
 	\center
-	\includegraphics[scale=0.5]{img/schemaFonctionnement_siteWeb_reception.png}
+	\includegraphics[width=0.9\textwidth]{img/schemaFonctionnement_siteWeb.png}
 	\caption{Site web : Réception d'un SMS}
-	\label{schemaFonctionnement_siteWeb_reception}
+	\label{schemaFonctionnement_siteWeb}
 \end{figure}
-Le schéma \ref{schemaFonctionnement_siteWeb_reception} représente les différentes étapes de notre solution :
-\begin{enumerate}
-	\item Le smartphone reçoit un SMS de la part du destinataire ;
-	\item L'application mobile reçoit un événement indiquant la réception d'un nouveau SMS ;
-	\item L'application mobile lit le SMS : le numéro de téléphone du destinataire + le contenu du SMS ;
-	\item L'application mobile envoie un message XMPP (formaté pour pouvoir être traité) au propre compte Google de l'utilisateur ;
-	\item Le client XMPP de l'application web reçoit le message XMPP ;
-	\item L'application web analyse le message XMPP puis affiche le SMS à l'utilisateur.
-\\
-\end{enumerate}
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Les application mobiles}
-
-Il est nécessaire que l'utilisateur installe une application sur son smartphone.
-Celle-ci fonctionnera en tache de fond et sera chargée de réagir aux événements suivants :
-\begin{enumerate}
-	\item Réception des SMS : l'application lit le contenu du SMS ainsi que le numéro de l'expéditeur, puis envoie le message formaté sur le compte XMPP Google ;
-	\item Réception des messages XMPP : l'application extrait les données (numéro de téléphone du destinataire, contenu du SMS) puis envoie le SMS.
-\\
-\end{enumerate}
+~~\\
