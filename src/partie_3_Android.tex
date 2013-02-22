@@ -82,9 +82,11 @@ Ce comportement n'étant pas souhaitable, nous avons du trouver une solution pou
 Nous avons alors utilisé le concept Android de "services". Celui-ci consiste à executer une fonctionnalité 
 de manière asynchrone. Le service n'impacte pas le système, au contraire il fonctionne avec lui. 
 
-\\\\
-%\includegraphics[scale=0.09]{img/fonctionnement-des-services-android.png}
-\\\\
+\begin{figure}[!h]
+	\center
+	\includegraphics[width=15cm]{img/fonctionnement-des-services-android.png}
+	\caption{fonctionnement d'un service Android}
+\end{figure}
 
 Comme montré ci dessus, le service n'est pas  bloquant. Lors de son éxecution, le système continue de 
 fonctionner sur d'autres taches en paire avec le service lancé.
@@ -100,6 +102,7 @@ traiter ce meme évènement.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Authentification sur GTalk}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 
 \paragraph{}
@@ -147,6 +150,7 @@ Contrairement a l'authentification sur le site web, l'authentification sur une p
 théoriquement plus simple. En effet, une fois que l'utilisateur a donné son accord, le server 
 d'authentification de google va directement envoyer le token d'authentification. Il n'y a alors pas 
 besoin d'effectuer une deuxième étape pour récupérer ce dernier.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %title Envoi d'un SMS
 
@@ -156,9 +160,13 @@ besoin d'effectuer une deuxième étape pour récupérer ce dernier.
 %Application->serveur gtalk: authentification(token)
 %serveur gtalk->Application: authentification validéA
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\\\\
-%\includegraphics[scale=0.09]{img/obtention-token-avec-android.png}
-\\\\
+
+\begin{figure}[!h]
+	\center
+	\includegraphics[width=15cm]{img/obtention-token-avec-android.png}
+	\caption{procédure d'obtention d'un token avec un appareil Android}
+\end{figure}
+
 
 \paragraph{}
 Néanmoins, une des difficultés d'implémenter ce protocole est que la libraire de gestion de compte
@@ -190,6 +198,7 @@ et trouver des équivalences au fonctionnement de Smack.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+
 \subsubsection{Récéption d'un SMS}
 
 \paragraph{}
@@ -206,9 +215,13 @@ Cela permet généralement à l'application qui l'utilise d'etre prévenu lors d
 d'un comportement particulier du téléphone.
 Son fonctionnement est simple. Il permet de s'enregistrer auprès du téléphone qui maintient une base de donnée des 
 membres à avertir lors d'un changement particulier.
-\\\\
-<img broadcast receiver pour les sms avec systèmes, app, autre,...>
-\\\\
+
+\begin{figure}[!h]
+	\center
+	\includegraphics[width=12cm]{img/broadcast-receivers.png}
+	\caption{fonctionnement des broadcasts receivers sur Android}
+\end{figure}
+
 Ci dessus, on peut voir le système du téléphone qui contient les différents broadcast receiver à avertir
 en cas de nouveaux messages. Ici l'application de rédaction de SMS ainsi que deux autres applications seront
 avertis.
@@ -229,6 +242,7 @@ des messages.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Traitement des évènements}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 
 \subsubsection{Architecture de l'application}
@@ -261,9 +275,13 @@ fonction des messages reçus. Il s'agit ici des patrons de conceptions fabrique 
 \paragraph{}
 Le patron de stratégie est un patron de conception de type comportemental. Il permet de d'adopter 
 dynamiquement un comportement particulier en fonction des conditions de son éxecution.
-\\\\
-%\includegraphics[scale=0.09]{img/pattern-strategie.png}
-\\
+
+\begin{figure}[!h]
+	\center
+	\includegraphics[width=12cm]{img/pattern-strategie.png}
+	\caption{Diagramme UML du pattern stratégie}
+\end{figure}
+
 Dans notre cas, il permet de créer différents type de stratégie qui pourront potentiellement utiliser. 
 Notre projet ne contenait que la stratégie "envoi de SMS" mais, avec cette architecture, il est possible 
 de rajouter d'autres stratégies comme l'extinction du téléphone ou encore l'envoi d'un email par exemple.
@@ -298,8 +316,11 @@ Concernant le deuxième évènement possible, il s'agit de la réception d'un no
 au premier traitement, il va etre désencapsulé pour pouvoir y récupérer l'information utile. Cela fait, 
 notre fabrique va s'occupper de d'appliquer la stratégie adapter pour ce nouveau message. Dans notre cas, 
 puissque nous avions juste la stratégie d'envoi de SMS, c'était toujours celle-ci qui était appliqué.
-\\\\
-<img réception->décapsulation->envoi SMS>
-\\\\
+
+\begin{figure}[!h]
+	\center
+	\includegraphics[width=12cm]{img/pattern-strategie.png}
+	\caption{Diagramme UML du pattern stratégie}
+\end{figure}
 
 
