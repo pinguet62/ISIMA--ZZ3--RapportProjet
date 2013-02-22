@@ -83,10 +83,10 @@ Nous avons alors utilisé le concept Android de "services". Celui-ci consiste à
 de manière asynchrone. Le service n'impacte pas le système, au contraire il fonctionne avec lui. 
 
 \\\\
-<img service fonctionnement>
+%\includegraphics[scale=0.09]{img/fonctionnement-des-services-android.png}
 \\\\
 
-Comme montré ci dessus, le service n'est pas bloquant. Lors de son éxecution, le système continue de 
+Comme montré ci dessus, le service n'est pas  bloquant. Lors de son éxecution, le système continue de 
 fonctionner sur d'autres taches en paire avec le service lancé.
 
 \paragraph{}
@@ -109,11 +109,7 @@ précisément, nous utilisons un meme et unique compte GTalk.
 Initialement, le projet devait etre conçu pour Android. Or chaque utilisateur Android a un compte 
 gmail. Ce meme compte peut etre utiliser pour accéder à tous les services de Google dont GTalk.
 C'est une des raisons qui a fait que nous avons choisi XMPP plutot qu'un autre protocole. L'utilisateur
-n'a ainsi pas besoin de créer quelquonque nouveaux comptes et peux utiliser celui qu'il utilise déja.
-
-\\\\
-<schéma communication gtalk entre téléphone et site>
-\\\\
+n'a ainsi pas besoin de créer quelquonque nouveaux comptes et peux utiliser celui qu'il upossede déja.
 
 \paragraph{}
 Pour pouvoir converser avec le site web, l'application a besoin de s'authentifier auprès du service
@@ -151,8 +147,17 @@ Contrairement a l'authentification sur le site web, l'authentification sur une p
 théoriquement plus simple. En effet, une fois que l'utilisateur a donné son accord, le server 
 d'authentification de google va directement envoyer le token d'authentification. Il n'y a alors pas 
 besoin d'effectuer une deuxième étape pour récupérer ce dernier.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%title Envoi d'un SMS
+
+%Utilisateur->Application: dégation de l'authentification
+%Application->Serveur google: requete pour un token d'authentification
+%Serveur google->Application: token d'authentification
+%Application->serveur gtalk: authentification(token)
+%serveur gtalk->Application: authentification validéA
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \\\\
-<img obtention token via android>
+%\includegraphics[scale=0.09]{img/obtention-token-avec-android.png}
 \\\\
 
 \paragraph{}
@@ -257,7 +262,7 @@ fonction des messages reçus. Il s'agit ici des patrons de conceptions fabrique 
 Le patron de stratégie est un patron de conception de type comportemental. Il permet de d'adopter 
 dynamiquement un comportement particulier en fonction des conditions de son éxecution.
 \\\\
-<img pattern stratégie>
+%\includegraphics[scale=0.09]{img/pattern-strategie.png}
 \\
 Dans notre cas, il permet de créer différents type de stratégie qui pourront potentiellement utiliser. 
 Notre projet ne contenait que la stratégie "envoi de SMS" mais, avec cette architecture, il est possible 
