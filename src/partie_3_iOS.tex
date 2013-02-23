@@ -2,7 +2,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Objective-C et X-Code}
+\subsection{Objective-C et Xcode}
 
 Objective-C est un langage de programmation orienté objet et réflexif.
 Compilé et libre, il hérite du langage C (comme le C++) en lui rajoutant l'aspect objet, ce qui lui permet d'être interfacé avec du Langage C ou du C++.
@@ -61,5 +61,43 @@ Pour cela, il est nécessaire d'inclure les fichiers d'entête privés qui perme
 Apple n'autorise l'envoi de SMS qu'en utilisant leur framework officiel \textit{MessageUI}.
 Lorsque l'application désire envoyer le SMS une fenêtre s'affiche et l'utilisateur doit confirmer l'envoi en appuyant sur le bouton prévu à cet effet.
 Cette méthode ne peut pas être utilisée dans ce projet, car l'application mobile fonctionne en tâche de fond et doit envoyer les SMS de manière automatique.
+
+Cependant l'utilisation du framework privé \textit{CoreTelephony} le permet.
+L'envoi de SMS peut ainsi se faire grâce à une ligne de code et de manière totalement automatique.
 \\
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Réception de SMS}
+
+La réception des SMS se décomposent en deux étapes : l'événement de réception, puis la lecture.
+
+\paragraph{Événement de réception -}
+Le système envoie des notifications lors des appels ou de la réception des SMS.
+Pour que notre programme reçoive ces notifications il est nécessaire de définir une fonction qui sera appelée lorsque ces événements seront émis.
+Cela se fait grâce à la fonction \lstinline{CTTelephonyCenterAddObserver()} dans laquelle un des paramètres correspond à la fonction appelée.
+
+% TODO: jailbreak ?
+
+
+\paragraph{Lecture des SMS -}
+Les SMS sont stockés dans une base de données SQLite dont le fichier est \lstinline{/private/var/mobile/Library/SMS/sms.db} dans le répertoire du terminal.
+Pour parcourir les messages il est nécessaire d'effectuer des requêtes SQL, comme dans n'importe quelle base de données.
+
+Mais un problème critique : il est impossible d'accéder à ce fichier depuis une application.
+En effet, les application iOS fonctionnent dans une \textit{Sandbox}, qui est un environnement virtuel clos permettant la protection contre les processus malveillants.
+
+Malheureusement aucune solution d'accès au fichier n'a été trouvée pour le moment.
+En attendant de trouver une solution, nous avons copié le fichier dans un répertoire accessible pour effectuer les différents tests de lecture, et la fonction permettant la lecture des SMS renvoie des données "statiques" pour valider le fonctionnement de l'application.
+\\
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Les messages XMPP}
+
+ICI
+\\
