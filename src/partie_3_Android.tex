@@ -64,10 +64,11 @@ de manière asynchrone. Le service n'impacte pas le système, au contraire il fo
 	\center
 	\includegraphics[width=13cm]{img/fonctionnement-des-services-android.png}
 	\caption{fonctionnement d'un service Android}
+	\label{fonctionnement-des-services-android}
 \end{figure}
 
-Comme montré ci-dessus, le service n'est pas  bloquant. Lors de son éxecution, le système continue de 
-fonctionner sur d'autres taches en paire avec le service lancé.
+Comme montré dans la figure \ref{fonctionnement-des-services-android}, le service n'est pas  bloquant. 
+Lors de son éxecution, le système continue de fonctionner sur d'autres taches en paire avec le service lancé.
 \\\\
 Dans notre cas, le service sert à deux taches principales. Tout d'abord il va configurer l'authentification
 de l'utilisateur sur GTalk. Ensuite il va simplement se mettre en attente d'évènement et le cas échéant, 
@@ -127,7 +128,8 @@ l'application à accéder à son compte GTalk. La validation effectué, l'applic
 Contrairement a l'authentification sur le site web, l'authentification sur une plateforme android est
 théoriquement plus simple. En effet, une fois que l'utilisateur a donné son accord, le server 
 d'authentification de google va directement envoyer le token d'authentification. Il n'y a alors pas 
-besoin d'effectuer une deuxième étape pour récupérer ce dernier.
+besoin d'effectuer une deuxième étape pour récupérer ce dernier comme le montre le diagramme 
+\ref{obtention-token-avec-android}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %title Envoi d'un SMS
@@ -143,6 +145,7 @@ besoin d'effectuer une deuxième étape pour récupérer ce dernier.
 	\center
 	\includegraphics[width=15cm]{img/obtention-token-avec-android.png}
 	\caption{procédure d'obtention d'un token avec un appareil Android}
+	\label{obtention-token-avec-android}
 \end{figure}
 
 Néanmoins, une des difficultés d'implémenter ce protocole est que la libraire de gestion de compte
@@ -195,12 +198,13 @@ membres à avertir lors d'un changement particulier.
 	\center
 	\includegraphics[width=12cm]{img/broadcast-receivers.png}
 	\caption{fonctionnement des broadcasts receivers sur Android}
+	\label{broadcast-receivers}
 \end{figure}
 
-Ci dessus, on peut voir le système du téléphone qui contient les différents broadcast receiver à avertir
-en cas de nouveaux messages. Ici l'application de rédaction de SMS ainsi que deux autres applications seront
-avertis.
-
+Le schéma \ref{broadcast-receivers} permet de voir le système du téléphone qui contient les différents broadcast 
+receiver à avertir en cas de nouveaux messages. Ici l'application de rédaction de SMS ainsi que deux autres 
+applications seront avertis.
+\\
 Dans notre cas, nous nous en sommes servis pour d'une part etre avertis de l'arrivé de nouveaux SMS et d'autre 
 part pour pouvoir récupérer le dit message et le traiter.
 \\
@@ -247,12 +251,14 @@ fonction des messages reçus. Il s'agit ici des patrons de conceptions fabrique 
 
 
 Le patron de stratégie est un patron de conception de type comportemental. Il permet de d'adopter 
-dynamiquement un comportement particulier en fonction des conditions de son éxecution.
+dynamiquement un comportement particulier en fonction des conditions de son éxecution. Le schéma 
+\ref{pattern-strategie} décrit le fonctionnement du modèle.
 
 \begin{figure}[H]
 	\center
 	\includegraphics[width=12cm]{img/pattern-strategie.png}
 	\caption{Diagramme UML du pattern stratégie}
+	\label{pattern-strategie}
 \end{figure}
 
 Dans notre cas, il permet de créer différents type de stratégie qui pourront potentiellement utiliser. 
@@ -261,20 +267,32 @@ de rajouter d'autres stratégies comme l'extinction du téléphone ou encore l'e
 \\
 
 
-La fabrique quand à elle permet de créer des objets sans en connaitre l'éxistence avant le lancement du 
+La fabrique décrit sur le schéma \ref{fabrique} quand à elle permet de créer des objets sans en connaitre l'éxistence avant le lancement du 
 programme.
 
 \begin{figure}[H]
 	\center
 	\includegraphics[width=10cm]{img/fabrique.png}
 	\caption{Diagramme UML du pattern fabrique}
+	\label{fabrique}
 \end{figure}
 
 Dans notre cas, elle permet d'utiliser de créer les stratégies et de les utiliser. En effet, la fabrique 
 qui va analyser chaque nouveau message. En fonction de leurs contenus, elle devra décider d'une stratégie
 et l'appliquer.
 \\
-<TODO exemple de comment fonctionne le projet en fonction des events en input, img>
+la figure \ref{fonctionnement-strategie-factorie} montre le fonctionement du projet lors de l'arrivé d'un
+nouveau message. L'intéret principal de ce pattern est l'évolutivité qu'il apporte. Le choix dynamique à
+l'éxécution de la stratégie à un intéret pour le développeur. En effet, celui-ci n'a plus besoin de se
+soucier de l'implémentation du choix de la stratégie. Cette partie est figé et est fonctionnelle en plus d'etre
+très facilement complété.
+
+\begin{figure}[H]
+	\center
+	\includegraphics[width=10cm]{img/fonctionnement-strategie-factorie.png}
+	\caption{Diagramme UML du pattern fabrique}
+	\label{fonctionnement-strategie-factorie}
+\end{figure}
 
 
 \subsubsection{Traitements des évènements}
@@ -282,23 +300,25 @@ et l'appliquer.
 Selon l'évènement reçu, le traitement à effectuer n'est pas le meme. Pour notre application, nous avons 
 créer recensés deux évènements et traitements associés possible.
 
-La réception d'un SMS est notre premier cas. Comme le montre le schéma ci dessous, le traitement se 
+La réception d'un SMS est notre premier cas. Comme le montre le schéma \ref{encapsulation-sms}, le traitement se 
 décompose en trois étapes. 
 
 \begin{figure}[!h]
 	\center
 	\includegraphics[width=12cm]{img/encapsulation-sms.png}
 	\caption{Traitements lors de la réception d'un SMS}
+	\label{encapsulation-sms}
 \end{figure}
 
 Il faut tout d'abord récupérer le contenu du message ainsi que son auteur. Puis il fallait encapsuler 
 ses données dans un message au format Json. Enfin nous terminions par envoyer le message encapsulé vers 
 le webservice qui s'occupera de notifier l'utilisateur de l'arrivé d'un nouveau message.
 
-Concernant le deuxième évènement possible, il s'agit de la réception d'un nouveau message XMPP. Contrairement
-au premier traitement, il va etre désencapsulé pour pouvoir y récupérer l'information utile. Cela fait, 
-notre fabrique va s'occupper de d'appliquer la stratégie adapter pour ce nouveau message. Dans notre cas, 
-puissque nous avions juste la stratégie d'envoi de SMS, c'était toujours celle-ci qui était appliqué.
+Concernant le deuxième évènement possible, il s'agit de la réception d'un nouveau message XMPP. Comme le
+montre le schéma \ref{desencapsulation}, contrairement au premier traitement, il va etre désencapsulé pour 
+pouvoir y récupérer l'information utile. Cela fait, notre fabrique va s'occupper de d'appliquer la stratégie 
+adapter pour ce nouveau message. Dans notre cas, puisque nous avions juste la stratégie d'envoi de SMS, c'était 
+toujours celle-ci qui était appliqué.
 
 %XMPP->Application: arrivé d'un nouveau message XMPP
 %Application->Application: désencapsulation du Json contenu dans le message
@@ -308,4 +328,5 @@ puissque nous avions juste la stratégie d'envoi de SMS, c'était toujours celle
 	\center
 	\includegraphics[width=12cm]{img/desencapsulation.png}
 	\caption{Traitements lors de la reception d'un message XMPP}
+	\label{desencapsulation}
 \end{figure}
