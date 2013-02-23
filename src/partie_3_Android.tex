@@ -11,8 +11,6 @@ Aujourd'hui, Androïd est l'OS le plus utilisé dans le monde sur les téléphon
 \subsection{Fonctionnement global}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-
 Le fonctionnement global du projet sur la plateforme Androïd est relativement simple. Nous souhaitons
 simplement pouvoir utiliser le téléphone portable comme un intermédiaire entre notre site web et le 
 correspondant avec qui nous discutons. Pour cela le téléphone fait office de proxy entre les deux 
@@ -28,8 +26,6 @@ définis dans le message reçu.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Création du service}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
 
 Les applications fonctionnant sous Androïd régissent par un principe simple, celui des "activités".
 Pour simplifier, une activité représente une fonctionnalité graphique d'une application. Par exemple,
@@ -64,13 +60,15 @@ de manière asynchrone. Le service n'impacte pas le système, au contraire il fo
 
 \begin{figure}[!h]
 	\center
-	\includegraphics[width=13cm]{img/fonctionnement-des-services-Android.png}
+	\includegraphics[width=13cm]{img/fonctionnement-des-services-android.png}
 	\caption{fonctionnement d'un service Androïd}
+	\label{fonctionnement-des-services-android}
 \end{figure}
 
-Comme montré ci-dessus, le service n'est pas  bloquant. Lors de son exécution, le système continue de 
-fonctionner sur d'autres taches en paire avec le service lancé.
-\\\\
+Comme montré dans la figure \ref{fonctionnement-des-services-android}, le service n'est pas  bloquant. 
+Lors de son éxecution, le système continue de fonctionner sur d'autres taches en paire avec le service lancé.
+\\
+
 Dans notre cas, le service sert à deux taches principales. Tout d'abord il va configurer l'authentification
 de l'utilisateur sur GTalk. Ensuite il va simplement se mettre en attente d'évènement et le cas échéant, 
 traiter ce meme évènement.
@@ -81,8 +79,6 @@ traiter ce meme évènement.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Authentification sur GTalk}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
 
 Pour pouvoir relayer communiquer avec le site web, notre projet utilise le protocole XMPP. Plus 
 précisément, nous utilisons un même et unique compte GTalk. 
@@ -115,7 +111,7 @@ Ici nous souhaitions simplement utiliser le compte GTalk de l'utilisateur sans q
 ses identifiants. 
 
 Le fonctionnement est simple. Lorsque utilisateur lance l'application, celle-ci demande tout d'abord
-à l'utilisateur quel compte gmail il veut utiliser parmi ceux présent sur sont téléphone. Dans le cas
+à l'utilisateur quel compte Gmail il veut utiliser parmi ceux présent sur sont téléphone. Dans le cas
 ou il n'existe qu'un seul compte, celui-ci est choisi par défaut.
 \\
 
@@ -128,8 +124,9 @@ l'application à accéder à son compte GTalk. La validation effectué, l'applic
 
 Contrairement a l'authentification sur le site web, l'authentification sur une plateforme Androïd est
 théoriquement plus simple. En effet, une fois que l'utilisateur a donné son accord, le server 
-d'authentification de Google va directement envoyer le token d'authentification. Il n'y a alors pas 
-besoin d'effectuer une deuxième étape pour récupérer ce dernier.
+d'authentification de google va directement envoyer le token d'authentification. Il n'y a alors pas 
+besoin d'effectuer une deuxième étape pour récupérer ce dernier comme le montre le diagramme 
+\ref{obtention-token-avec-android}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %title Envoi d'un SMS
@@ -143,8 +140,9 @@ besoin d'effectuer une deuxième étape pour récupérer ce dernier.
 
 \begin{figure}[!h]
 	\center
-	\includegraphics[width=15cm]{img/obtention-token-avec-Android.png}
+	\includegraphics[width=15cm]{img/obtention-token-avec-android.png}
 	\caption{procédure d'obtention d'un token avec un appareil Androïd}
+	\label{obtention-token-avec-android}
 \end{figure}
 
 Néanmoins, une des difficultés d'implémenter ce protocole est que la libraire de gestion de compte
@@ -177,7 +175,6 @@ et trouver des équivalences au fonctionnement de Smack.
 \subsection{Envoi et réception d'un SMS}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
 \subsubsection{Réception d'un SMS}
 
 Une fois authentifié, nous souhaitons pouvoir utiliser notre téléphone comme proxy. Notre application
@@ -198,14 +195,13 @@ membres à avertir lors d'un changement particulier.
 	\center
 	\includegraphics[width=12cm]{img/broadcast-receivers.png}
 	\caption{fonctionnement des broadcasts receivers sur Androïd}
+	\label{broadcast-receivers}
 \end{figure}
 
-Ci dessus, on peut voir le système du téléphone qui contient les différents broadcast receiver à avertir
-en cas de nouveaux messages. Ici l'application de rédaction de SMS ainsi que deux autres applications seront
-avertis.
+Le schéma \ref{broadcast-receivers} permet de voir le système du téléphone qui contient les différents broadcast receiver à avertir en cas de nouveaux messages. Ici l'application de rédaction de SMS ainsi que deux autres 
+applications seront avertis.
 
-Dans notre cas, nous nous en sommes servis pour d'une part être avertis de l'arrivée de nouveaux SMS et d'autre 
-part pour pouvoir récupérer le dit message et le traiter.
+Dans notre cas, nous nous en sommes servis pour d'une part être avertis de l'arrivée de nouveaux SMS et d'autre part pour pouvoir récupérer le dit message et le traiter.
 \\
 
 
@@ -227,7 +223,7 @@ Pour pouvoir réagir en fonction d'un évènement, notre application a successiv
 
 La première a été réalisé pour répondre aux besoins de notre projet. Il s'agissait d'un test sur le 
 type de l'évènement entrant. Plus précisément, il s'agissait de vérifier si l'évènement en question 
-était la récéption d'un nouveaux SMS ou bien la réception d'un nouveau message XMPP en provenance du 
+était la réception d'un nouveaux SMS ou bien la réception d'un nouveau message XMPP en provenance du 
 site web. En fonction du type de message en entrée, l'application décidé d'envoyer transmettre le message
 vers le bon destinataire. 
 
@@ -250,12 +246,14 @@ fonction des messages reçus. Il s'agit ici des patrons de conceptions fabrique 
 
 
 Le patron de stratégie est un patron de conception de type comportemental. Il permet de d'adopter 
-dynamiquement un comportement particulier en fonction des conditions de son exécution.
+dynamiquement un comportement particulier en fonction des conditions de son exécution. Le schéma 
+\ref{pattern-strategie} décrit le fonctionnement du modèle.
 
 \begin{figure}[H]
 	\center
 	\includegraphics[width=12cm]{img/pattern-strategie.png}
 	\caption{Diagramme UML du pattern stratégie}
+	\label{pattern-strategie}
 \end{figure}
 
 Dans notre cas, il permet de créer différents type de stratégie qui pourront potentiellement utiliser. 
@@ -264,13 +262,13 @@ de rajouter d'autres stratégies comme l'extinction du téléphone ou encore l'e
 \\
 
 
-La fabrique quand à elle permet de créer des objets sans en connaitre l'existence avant le lancement du 
-programme.
+La fabrique décrit sur le schéma \ref{fabrique} quand à elle permet de créer des objets sans en connaitre l'éxistence avant le lancement du programme.
 
 \begin{figure}[H]
 	\center
 	\includegraphics[width=10cm]{img/fabrique.png}
 	\caption{Diagramme UML du pattern fabrique}
+	\label{fabrique}
 \end{figure}
 
 Dans notre cas, elle permet d'utiliser de créer les stratégies et de les utiliser. En effet, la fabrique 
@@ -278,29 +276,42 @@ qui va analyser chaque nouveau message. En fonction de leurs contenus, elle devr
 et l'appliquer.
 \\
 
+La figure \ref{fonctionnement-strategie-factorie} montre le fonctionnement du projet lors de l'arrivée d'un
+nouveau message. L'intérêt principal de ce pattern est l'évolutivité qu'il apporte. Le choix dynamique à
+l'exécution de la stratégie à un intérêt pour le développeur. En effet, celui-ci n'a plus besoin de se
+soucier de l'implémentation du choix de la stratégie. Cette partie est figé et est fonctionnelle en plus d'être très facilement complété.
+
+\begin{figure}[H]
+	\center
+	\includegraphics[width=10cm]{img/fonctionnement-strategie-factorie.png}
+	\caption{Diagramme UML du pattern fabrique}
+	\label{fonctionnement-strategie-factorie}
+\end{figure}
+
 
 \subsubsection{Traitements des évènements}
 
 Selon l'évènement reçu, le traitement à effectuer n'est pas le même. Pour notre application, nous avons 
 créer recensés deux évènements et traitements associés possible.
 
-La réception d'un SMS est notre premier cas. Comme le montre le schéma ci dessous, le traitement se 
+La réception d'un SMS est notre premier cas. Comme le montre le schéma \ref{encapsulation-sms}, le traitement se 
 décompose en trois étapes. 
 
 \begin{figure}[!h]
 	\center
 	\includegraphics[width=12cm]{img/encapsulation-sms.png}
 	\caption{Traitements lors de la réception d'un SMS}
+	\label{encapsulation-sms}
 \end{figure}
 
 Il faut tout d'abord récupérer le contenu du message ainsi que son auteur. Puis il fallait encapsuler 
 ses données dans un message au format Json. Enfin nous terminions par envoyer le message encapsulé vers 
 le webservice qui s'occupera de notifier l'utilisateur de l'arrivée d'un nouveau message.
 
-Concernant le deuxième évènement possible, il s'agit de la réception d'un nouveau message XMPP. Contrairement
-au premier traitement, il va être désencapsulé pour pouvoir y récupérer l'information utile. Cela fait, 
-notre fabrique va s'occuper de d'appliquer la stratégie adapter pour ce nouveau message. Dans notre cas, 
-puisque nous avions juste la stratégie d'envoi de SMS, c'était toujours celle-ci qui était appliqué.
+Concernant le deuxième évènement possible, il s'agit de la réception d'un nouveau message XMPP. Comme le
+montre le schéma \ref{desencapsulation}, contrairement au premier traitement, il va être désencapsulé pour 
+pouvoir y récupérer l'information utile. Cela fait, notre fabrique va s'occuper de d'appliquer la stratégie 
+adapter pour ce nouveau message. Dans notre cas, puisque nous avions juste la stratégie d'envoi de SMS, c'était toujours celle-ci qui était appliqué.
 
 %XMPP->Application: arrivé d'un nouveau message XMPP
 %Application->Application: désencapsulation du Json contenu dans le message
@@ -310,4 +321,5 @@ puisque nous avions juste la stratégie d'envoi de SMS, c'était toujours celle-
 	\center
 	\includegraphics[width=12cm]{img/desencapsulation.png}
 	\caption{Traitements lors de la réception d'un message XMPP}
+	\label{desencapsulation}
 \end{figure}
