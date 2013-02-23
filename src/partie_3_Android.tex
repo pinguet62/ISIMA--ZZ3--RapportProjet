@@ -7,7 +7,7 @@ Aujourd'hui, Android est l'OS le plus utilisé dans le monde sur les téléphone
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Fonctionnement global}
+\subsection{Fonctionnement global}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -24,7 +24,7 @@ définis dans le message reçu.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Création du service}
+\subsection{Création du service}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -77,7 +77,7 @@ traiter ce meme évènement.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Authentification sur GTalk}
+\subsection{Authentification sur GTalk}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -171,11 +171,11 @@ et trouver des équivalences au fonctionnement de Smack.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Envoi et réception d'un SMS}
+\subsection{Envoi et réception d'un SMS}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\paragraph{Réception d'un SMS}
+\subsubsection{Réception d'un SMS}
 
 Une fois authentifié, nous souhaitons pouvoir utiliser notre téléphone comme proxy. Notre application
 doit en effet servir d'intermédiaire entre le site web et un correspondant. Pour cela elle doit tout
@@ -206,19 +206,19 @@ part pour pouvoir récupérer le dit message et le traiter.
 \\
 
 
-\paragraph{Envoi d'un SMS}
+\subsubsection{Envoi d'un SMS}
 
 L'envoi quand à lui est beaucoup plus trivial. Android met à disposition un outils permettant d'envoyer
 des messages.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Traitement des évènements}
+\subsection{Traitement des évènements}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
-\paragraph{Architecture de l'application}
+\subsubsection{Architecture de l'application}
 
 Pour pouvoir réagir en fonction d'un évènement, notre application a successivement adopté deux méthodes.
 
@@ -275,7 +275,7 @@ qui va analyser chaque nouveau message. En fonction de leurs contenus, elle devr
 et l'appliquer.
 
 
-\paragraph{Traitements des évènements}
+\subsubsection{Traitements des évènements}
 
 Selon l'évènement reçu, le traitement à effectuer n'est pas le meme. Pour notre application, nous avons 
 créer recensés deux évènements et traitements associés possible.
@@ -307,5 +307,3 @@ puissque nous avions juste la stratégie d'envoi de SMS, c'était toujours celle
 	\includegraphics[width=12cm]{img/desencapsulation.png}
 	\caption{Traitements lors de la reception d'un message XMPP}
 \end{figure}
-
-
