@@ -1,7 +1,16 @@
-Notes :
-    Retour à la ligne (sans alinéat) : passer 1 ligne blanche
-    Sauter une ligne (avec alinéat) : mettre \\ en début de ligne suivante
-    Citer avec lien en bas de page: \textit{Python}\footnote{Site web : \href{http://www.python.org}{http://www.python.org}}
+Je pense que ça serait mieux de faire une partie "Applications mobiles" qui regroupent Android et iOS car au final c'est le même principe de fonctionnement.
+
+J'ai quelques bugs dans la compilation du glossaire, donc j'ai commenté les lignes qui pour l'instant ne servent pas.
+Je ne sais pas si ça vient de mon compilateur, je regarderai ça à la fin quand on aura fini et qu'il ne restera plus que le glossaire.
+
+
+
+
+
+
+
+
+
 
 Glossaire:
     XMPP
@@ -13,36 +22,11 @@ A ajouter :
 
 
 
-Plan:
-    Remerciements
-    Résumé
-    Abstract
-    Table des matières
-    Introduction
-    I- Introduction de l'étude
-        A- Besoin de l'utilisateur
-        B- Solution envivagée
-    II- Etude de fonctionnement
-        A- Protocole XMPP
-        B- GTalk
-    III- Réalisation de la solution
-        A- Site web
-        B- Applications mobiles
-            a- Androïd
-            b- iOS
-            c- Windows Phone
-    IV- Résultats obtenus
-        A- Site web
-        B- Applications mobiles
-    Conclusion
-    Bibliographie
-
-
-
 TODO:
     Page de garde :
         Fillières : box (pour alignés)
         Bas de page : colonnes flexibles (pours prénoms sur même ligne)
+    Glossaire
 
 
 
