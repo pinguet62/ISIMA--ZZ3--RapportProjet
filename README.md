@@ -1,20 +1,11 @@
-Je pense que ça serait mieux de faire une partie "Applications mobiles" qui regroupent Android et iOS car au final c'est le même principe de fonctionnement.
-
-J'ai quelques bugs dans la compilation du glossaire, donc j'ai commenté les lignes qui pour l'instant ne servent pas.
-Je ne sais pas si ça vient de mon compilateur, je regarderai ça à la fin quand on aura fini et qu'il ne restera plus que le glossaire.
-
-
-
-
-
-
 
 
 
 
 Glossaire:
+    JSON
     XMPP
-    
+
 
 
 A ajouter :
@@ -23,10 +14,12 @@ A ajouter :
 
 
 TODO:
+    Mettre en commun le fonctionnement général des application Androïd et iOS -> ça évite de répéter les mêmes choses...
     Page de garde :
         Fillières : box (pour alignés)
         Bas de page : colonnes flexibles (pours prénoms sur même ligne)
     Glossaire
+    Parler de la licence
 
 
 

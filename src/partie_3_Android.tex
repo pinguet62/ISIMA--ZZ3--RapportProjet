@@ -123,8 +123,8 @@ l'application à accéder à son compte GTalk. La validation effectué, l'applic
 
 
 Contrairement a l'authentification sur le site web, l'authentification sur une plateforme Androïd est
-théoriquement plus simple. En effet, une fois que l'utilisateur a donné son accord, le server 
-d'authentification de google va directement envoyer le token d'authentification. Il n'y a alors pas 
+théoriquement plus simple. En effet, une fois que l'utilisateur a donné son accord, le serveur 
+d'authentification de Google va directement envoyer le token d'authentification. Il n'y a alors pas 
 besoin d'effectuer une deuxième étape pour récupérer ce dernier comme le montre le diagramme 
 \ref{obtention-token-avec-android}.
 
@@ -132,16 +132,16 @@ besoin d'effectuer une deuxième étape pour récupérer ce dernier comme le mon
 %title Envoi d'un SMS
 
 %Utilisateur->Application: dégation de l'authentification
-%Application->Serveur google: requete pour un token d'authentification
-%Serveur google->Application: token d'authentification
-%Application->serveur gtalk: authentification(token)
-%serveur gtalk->Application: authentification validé
+%Application->Serveur Google: requete pour un token d'authentification
+%Serveur Google->Application: token d'authentification
+%Application->serveur GTalk: authentification(token)
+%serveur GTalk->Application: authentification validé
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{figure}[!h]
 	\center
 	\includegraphics[width=15cm]{img/obtention-token-avec-android.png}
-	\caption{procédure d'obtention d'un token avec un appareil Androïd}
+	\caption{Procédure d'obtention d'un token avec un appareil Androïd}
 	\label{obtention-token-avec-android}
 \end{figure}
 
@@ -194,7 +194,7 @@ membres à avertir lors d'un changement particulier.
 \begin{figure}[!h]
 	\center
 	\includegraphics[width=12cm]{img/broadcast-receivers.png}
-	\caption{fonctionnement des broadcasts receivers sur Androïd}
+	\caption{Fonctionnement des broadcasts receivers sur Androïd}
 	\label{broadcast-receivers}
 \end{figure}
 
@@ -247,13 +247,13 @@ fonction des messages reçus. Il s'agit ici des patrons de conceptions fabrique 
 
 Le patron de stratégie est un patron de conception de type comportemental. Il permet de d'adopter 
 dynamiquement un comportement particulier en fonction des conditions de son exécution. Le schéma 
-\ref{pattern-strategie} décrit le fonctionnement du modèle.
+\ref{pattern_strategie} décrit le fonctionnement du modèle.
 
 \begin{figure}[H]
 	\center
-	\includegraphics[width=12cm]{img/pattern-strategie.png}
+	\includegraphics[width=12cm]{img/pattern_strategie.png}
 	\caption{Diagramme UML du pattern stratégie}
-	\label{pattern-strategie}
+	\label{pattern_strategie}
 \end{figure}
 
 Dans notre cas, il permet de créer différents type de stratégie qui pourront potentiellement utiliser. 

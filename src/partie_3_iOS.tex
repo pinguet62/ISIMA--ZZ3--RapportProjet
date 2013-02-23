@@ -31,19 +31,13 @@ Ces frameworks font la force des applications iOS car ils permettent d'interagir
 \\
 
 
-Pour pouvoir publier des applications sur l'Apple Store, il est nécessaire d'utiliser des frameworks dits "publics" : documentés et approuvés.
-Cette politique très ferme d'Apple permet d'éviter toute faille de sécurité et permet de proposer des applications sûres aux utilisateurs.
-\\
+Il existe deux types de frameworks : les frameworks dits public et les frameworks dits privés.
 
+Les frameworks \textit{publics} doivent être documentés et approuvés par Apple pour que les applications qui les utilisent puissent être publiable sur l'Apple Store.
+Cette politique très ferme d'Apple permet d'éviter toute faille de sécurité dans le système et permet de proposer des applications sûres aux utilisateurs.
 
-Les frameworks d'Apple sont composés de deux parties : le framework dit "public" et le framework dit "privé".
-
-Pour pouvoir publier des applications sur l'Apple Store, il est nécessaire d'utiliser des frameworks publics : documentés et approuvés.
-Cette politique très ferme d'Apple permet d'éviter toute faille de sécurité et permet de proposer des applications sûres aux utilisateurs.
-
-Les frameworks privés ne sont pas directement utilisables comme les publics.
-En effet, les fichiers d'entête (headers ".h") n'incluent pas les prototypes des fonctions et méthodes privées, et le programme n'est pas compilable.
-Pour cela, il est nécessaire d'inclure les fichiers d'entête privés qui permettront la compilation du programme.
+Les frameworks \textit{privés} proposent des outils de bas niveau non-documentés.
+Apple en disposent de plusieurs dans leur kit de développement mais ceux-ci ne peuvent pas être directement utilisés : il est nécessaire d'importer "à la main" des fichiers d'entête (headers ".h") pour pouvoir compiler le projet.
 \\
 
 
@@ -85,7 +79,14 @@ Les SMS sont stockés dans une base de données SQLite dont le fichier est \lsti
 Pour parcourir les messages il est nécessaire d'effectuer des requêtes SQL, comme dans n'importe quelle base de données.
 
 Mais un problème critique : il est impossible d'accéder à ce fichier depuis une application.
-En effet, les application iOS fonctionnent dans une \textit{Sandbox}, qui est un environnement virtuel clos permettant la protection contre les processus malveillants.
+En effet, chaque application iOS fonctionne séparément dans sa \textit{sandbox}, qui est un environnement virtuel clos permettant la protection contre les processus malveillants.
+Le schéma \ref{iOS_sandbox} représente les différents répertoires des sandbox.
+\begin{figure}[!h]
+	\center
+	\includegraphics[width=0.4\textwidth]{img/iOS_sandbox.png}
+	\caption{Sandbox sous iOS}
+	\label{iOS_sandbox}
+\end{figure}
 
 Malheureusement aucune solution d'accès au fichier n'a été trouvée pour le moment.
 En attendant de trouver une solution, nous avons copié le fichier dans un répertoire accessible pour effectuer les différents tests de lecture, et la fonction permettant la lecture des SMS renvoie des données "statiques" pour valider le fonctionnement de l'application.
@@ -99,5 +100,27 @@ En attendant de trouver une solution, nous avons copié le fichier dans un répe
 
 \subsection{Les messages XMPP}
 
-ICI
+Pour communiquer avec le site internet, le client XMPP de l'application a été développé grâce à \textit{XMPPFramework}\footnote{Source : \href{https://github.com/robbiehanson/XMPPFramework}{https://github.com/robbiehanson/XMPPFramework}}.
+Il s'agit d'un framework libre et open-source développé et maintenu par principalement Robbie Hanson.
+XMPPFramework est développé en Objective-C destiné aux applications OS X ou iOS.
 \\
+
+
+% TODO: mise en commun avec Androïd ?
+Le client XMPP fonctionne comme celui sous Androïd.
+Lors de la réception d'un SMS l'application va formater le message sous le format JSON plus envoyer un message XMPP au propre compte Google.
+Lors de la réception de messages XMPP l'application va récupérer les données stockées sous le format XMPP puis va envoyer le SMS.
+\\
+
+
+Dans l'application mobile nous n'utiliserons qu'un seul client XMPP et nous voulions qu'il persiste durant toute la vie de l'application (jusqu'à ce que l'utilisateur tue le processus).
+Le patron de conception (design pattern) \textit{singleton} a donc été utilisé dans le projet iOS.
+En effet singleton permet de s'assurer de n'avoir qu'une seule instance qui persiste en mémoire, et qui de plus est accessible dans toute l'application.
+Le schéma \ref{pattern_singleton} représente le diagramme de classe du singleton.
+\begin{figure}[!h]
+	\center
+	\includegraphics[width=0.3\textwidth]{img/pattern_singleton.png}
+	\caption{Pattern singleton : diagramme de classe}
+	\label{pattern_singleton}
+\end{figure}
+~~\\
