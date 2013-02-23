@@ -1,2 +1,65 @@
-Ahah Objective-C c'est super, sauf les crochets...
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Objective-C et X-Code}
+
+Objective-C est un langage de programmation orienté objet et réflexif.
+Compilé et libre, il hérite du langage C (comme le C++) en lui rajoutant l'aspect objet, ce qui lui permet d'être interfacé avec du Langage C ou du C++.
+Principalement présent sur les systèmes d'exploitation des produits de la marque Apple (OS X et iOS), ce langage est multi-plateforme.
 \\
+
+
+Xcode est l'environnement de développement intégré (EDI, ou IDE pour Integrated Development Environment) pour Mac OS X.
+Il permet le développement d'application en Langage C, C++ et bien évidemment en Objective-C pour OS X ou iOS.
+C'est un IDE très complet qui comporte un éditeur de texte, un débogueur, un compilateur, un gestionnaire de projet et de version, un gestionnaire de documents pour la documentation, et d'autres outils facilitant le développement.
+\\
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Les frameworks}
+
+Un \textit{framework} est un ensemble d'outils et de composants structurels qui permettent le développement de logiciels ou de sites web.
+
+Apple propose de nombreux frameworks permettant de simplifier la tâche des développeurs.
+Ils respectent les \textit{design patterns} pour structurer l'agencement des différents objets, comme par exemple l'architecture MVC des interfaces graphiques.
+Ces frameworks font la force des applications iOS car ils permettent d'interagir très facilement avec les composants des terminaux, comme par exemple le gyroscope, l'appareil photo, l'envoi de mail, l'affichage d'une carte, ...
+\\
+
+
+Pour pouvoir publier des applications sur l'Apple Store, il est nécessaire d'utiliser des frameworks dits "publics" : documentés et approuvés.
+Cette politique très ferme d'Apple permet d'éviter toute faille de sécurité et permet de proposer des applications sûres aux utilisateurs.
+\\
+
+
+Les frameworks d'Apple sont composés de deux parties : le framework dit "public" et le framework dit "privé".
+
+Pour pouvoir publier des applications sur l'Apple Store, il est nécessaire d'utiliser des frameworks publics : documentés et approuvés.
+Cette politique très ferme d'Apple permet d'éviter toute faille de sécurité et permet de proposer des applications sûres aux utilisateurs.
+
+Les frameworks privés ne sont pas directement utilisables comme les publics.
+En effet, les fichiers d'entête (headers ".h") n'incluent pas les prototypes des fonctions et méthodes privées, et le programme n'est pas compilable.
+Pour cela, il est nécessaire d'inclure les fichiers d'entête privés qui permettront la compilation du programme.
+\\
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Manipulation des SMS}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Envoi de SMS}
+
+Apple n'autorise l'envoi de SMS qu'en utilisant leur framework officiel \textit{MessageUI}.
+Lorsque l'application désire envoyer le SMS une fenêtre s'affiche et l'utilisateur doit confirmer l'envoi en appuyant sur le bouton prévu à cet effet.
+Cette méthode ne peut pas être utilisée dans ce projet, car l'application mobile fonctionne en tâche de fond et doit envoyer les SMS de manière automatique.
+\\
+

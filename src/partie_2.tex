@@ -4,7 +4,8 @@
 
 \chapter{Étude de fonctionnement}
 
-La première partie de notre projet a consisté à étudier les différentes étapes du fonctionnement de notre solution : de la réception d'un SMS sur le smartphone à son affichage sur le PC, mais aussi de l'écriture d'un message sur le PC jusqu'à son envoi par le smartphone.
+La première partie de notre projet a consisté à étudier les différentes étapes du fonctionnement de notre solution : de la réception d'un SMS sur le smartphone à son affichage sur l'ordinateur, mais aussi de l'écriture d'un message sur l'ordinateur jusqu'à son envoi par le smartphone.
+L'objectif de cette étude était de trouver la solution optimale que nous développeront pour ce projet.
 Nous détaillerons plus précisément le choix du service proposé à l'utilisateur pour l'envoi du SMS depuis l'ordinateur.
 \\
 
@@ -35,7 +36,7 @@ Le schéma \ref{schemaFonctionnement_applicationMobile} représente le fonctionn
 	\center
 	\includegraphics[width=0.9\textwidth]{img/schemaFonctionnement_applicationMobile.png}
 	\caption{Applications mobiles : fonctionnement}
-	\label{schemaFonctionnement_siteWeb_reception}
+	\label{schemaFonctionnement_applicationMobile}
 \end{figure}
 ~~\\
 
@@ -98,8 +99,8 @@ La première raison qui nous a poussé à choisir le protocole XMPP pour échang
 Initialement nous voulions envoyer et recevoir les messages depuis GTalk, comme nous l'expliquerons uste après dans la partie \ref{GTalk}.
 Ce choix nous a donc paru judicieux car l'application mobile pourra échanger facilement des messages avec l'ordinateur sans aucun problème d'adaptation.
 
-La seconde raison est le fait que la grande majorité des personnes possèdent un compte Google (Gmail), du fait de l'importance de Google sur l'univers d'internet.
-De plus les smartphones Androïd nécessitent l'association à un compte Google pour fonctionner (téléchargement d'application, mises à jour, ...), donc ces utilisateurs possèderont forcément un compte Google.
+La seconde raison est le fait que la grande majorité des personnes possèdent un compte Google (Gmail), du fait de l'importance de Google sur l'univers d'Internet.
+De plus les smartphones Androïd nécessitent l'association à un compte Google pour fonctionner (téléchargement d'application, mises à jour, ...), donc les utilisateurs n'auront pas à créer de compte Google ni même de compte XMPP.
 \\
 
 
@@ -117,7 +118,7 @@ Le schéma \ref{schemaFonctionnement_protocoleTransfert} décrit les entités qu
 	\center
 	\includegraphics[width=0.9\textwidth]{img/schemaFonctionnement_protocoleTransfert.png}
 	\caption{Transfert du message : fonctionnement}
-	\label{schemaFonctionnement_siteWeb_reception}
+	\label{schemaFonctionnement_protocoleTransfert}
 \end{figure}
 ~~\\
 
