@@ -164,33 +164,35 @@ Le résultat est montré dans l'image \ref{message-xmpp-json-gmail}, un message 
 
 \paragraph{Limite des SMS}
 
-Un autre soucis que nous avons rencontré sur la plateforme Android est la limite de SMS. Pour empecher
-les applications de spammer à la place d'un utilisateur, Android a mis en place une limite d'envoi de 
+Un autre soucis que nous avons rencontré sur la plateforme Androïd est la limite de SMS. Pour empêcher
+les applications de spammer à la place d'un utilisateur, Androïd a mis en place une limite d'envoi de 
 SMS pour une application. Toute application ne peut envoyer plus de 100 SMS par jours. Une fois la limite
 atteinte, l'application est bridé. Chaque nouveau SMS envoyé doit alors faire l'objet d'une confirmation
 par l'utilisateur ce qui rend le projet inutile car nous perdons l'avantage de pouvoir se passer du 
 téléphone portable.
-\\
-Malgrés nos recherches sur le sujet, il s'est avéré impossible de modifier cette limite en passant par
+
+Malgré nos recherches sur le sujet, il s'est avéré impossible de modifier cette limite en passant par
 des solutions réglementaires. La limite est défini dans la base de donnée système du système d'exploitation
 qu'on ne peut modifier sans avoirs les droits Root.
-\\
+
 Les droits Root correspondent simplement à avoir le droit de tout modifier sur son système avec les 
 risques que cela comporte. Il faut savoir que pour obtenir ces droits, il faut rooter son téléphone.
 Bien que rooter son téléphone est légal en soit, il comporte certains risques. Une mauvaise manipulation
-peut engendrer des dommages sur le téléphone. De plus l'action en elle meme n'est pas à la porté des 
+peut engendrer des dommages sur le téléphone. De plus l'action en elle même n'est pas à la porté des 
 débutants.
-\\\\
-Ces principales raisons font que notre application ne fonctionnera correctement que sur les téléphones
-possédant les droits root. Cela implique que l'utilisateur devra etre capable de manipuler son téléphone.
 \\
-Pour pouvoir outrepasser ces contraintes, il est nécessaire de modifier le comportement par défaut du 
-système. Nous avons utiliser un editeur de bases de données SQLite avec lequel nous avons modifié une clé 
-particulière. Il s'aggit de la clé sms_outgoing_check_max_count que nous avons positionné à un nombre négatif
-afin de ne plus avoir de limite d'envoi de message.
-\\
-Cela modifié, nous sommes alors en mesure d'envoyer autant de messages que désiré. 
 
+
+Ces principales raisons font que notre application ne fonctionnera correctement que sur les téléphones
+possédant les droits root. Cela implique que l'utilisateur devra être capable de manipuler son téléphone.
+
+Pour pouvoir outrepasser ces contraintes, il est nécessaire de modifier le comportement par défaut du 
+système. Nous avons utiliser un éditeur de bases de données SQLite avec lequel nous avons modifié une clé 
+particulière. Il s'agit de la clé sms\_outgoing\_check\_max\_count que nous avons positionné à un nombre négatif
+afin de ne plus avoir de limite d'envoi de message.
+
+Cela modifié, nous sommes alors en mesure d'envoyer autant de messages que désiré. 
+\\
 
 
 
