@@ -34,7 +34,7 @@ qui nous sont offertes. Le menu représente donc ici une activité.
 \\
 
 
-Il faut savoir que une activité lorsqu'elle est active occupe le système qui attend des évènements.
+Il faut savoir que une activité lorsqu'elle est active occupe le système qui attend des événements.
 Si l'utilisateur ne fait rien alors que le menu est affiché, le système peut s'occuper d'autres 
 taches annexes. Si en revanche l'utilisateur navigue dans le menu, alors l'activité est considérée
 comme en fonctionnement et bloque toute autres opérations non relative à l'application exécutée.
@@ -49,7 +49,7 @@ connection s'effectue sans erreurs. Le traitement durant moins d'une seconde, le
 gravement impacté. En revanche, si une erreur intervient, le programme va alors essayer de la résoudre.
 Cela n'est pas concevable. En effet, une perte soudaine de réseau pourrait par exemple mettre 
 l'application dans un état de recherche ce qui est potentiellement très lent. Cette situation rendrait
-le terminal complètement blocké durant la recherche. 
+le terminal complètement bloqué durant la recherche. 
 
 Ce comportement n'étant pas souhaitable, nous avons du trouver une solution pour pouvoir outrepasser ce blocage.
 \\
@@ -66,12 +66,12 @@ de manière asynchrone. Le service n'impacte pas le système, au contraire il fo
 \end{figure}
 
 Comme montré dans la figure \ref{fonctionnement-des-services-android}, le service n'est pas  bloquant. 
-Lors de son éxecution, le système continue de fonctionner sur d'autres taches en paire avec le service lancé.
+Lors de son exécution, le système continue de fonctionner sur d'autres taches en paire avec le service lancé.
 \\
 
 Dans notre cas, le service sert à deux taches principales. Tout d'abord il va configurer l'authentification
-de l'utilisateur sur GTalk. Ensuite il va simplement se mettre en attente d'évènement et le cas échéant, 
-traiter ce meme évènement.
+de l'utilisateur sur GTalk. Ensuite il va simplement se mettre en attente d'événements et le cas échéant, 
+traiter ce même événement.
 \\
 
 
@@ -85,7 +85,7 @@ précisément, nous utilisons un même et unique compte GTalk.
 
 Initialement, le projet devait être conçu pour Androïd. Or chaque utilisateur Androïd a un compte 
 Gmail. Ce même compte peut être utiliser pour accéder à tous les services de Google dont GTalk.
-C'est une des raisons qui a fait que nous avons choisi XMPP plutot qu'un autre protocole. L'utilisateur
+C'est une des raisons qui a fait que nous avons choisi XMPP plutôt qu'un autre protocole. L'utilisateur
 n'a ainsi pas besoin de créer quelconque nouveaux comptes et peux utiliser celui qu'il possède déjà.
 \\
 
@@ -100,7 +100,7 @@ paramètres rentrés par l'utilisateur.
 
 Cette solution qui est la plus simple à implémenter mais n'est malheureusement pas la plus agréable
 à utiliser ni la plus sure. Nous forçons en effet l'utilisateur à rentrer ses identifiants ce qui 
-pourrait paraitre légitime mais reste contraignant pour l'utilisateur. Celui-ci ne sait pas ce que 
+pourrait paraître légitime mais reste contraignant pour l'utilisateur. Celui-ci ne sait pas ce que 
 nous faisons avec son mot de passe. Une application malveillante pourrait récupérer les identifiants
 et s'en servir à des fins illégales. Dans notre cas, même si nous n'avions aucune mauvaise intentions,
 nous ne pouvons demander aux utilisateurs de nous faire confiance. Nous avons donc opté pour une 
@@ -131,8 +131,8 @@ besoin d'effectuer une deuxième étape pour récupérer ce dernier comme le mon
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %title Envoi d'un SMS
 
-%Utilisateur->Application: dégation de l'authentification
-%Application->Serveur Google: requete pour un token d'authentification
+%Utilisateur->Application: délégation de l'authentification
+%Application->Serveur Google: requête pour un token d'authentification
 %Serveur Google->Application: token d'authentification
 %Application->serveur GTalk: authentification(token)
 %serveur GTalk->Application: authentification validé
@@ -181,12 +181,12 @@ Une fois authentifié, nous souhaitons pouvoir utiliser notre téléphone comme 
 doit en effet servir d'intermédiaire entre le site web et un correspondant. Pour cela elle doit tout
 d'abord surveiller l'arrivée de nouveaux messages. 
 
-Sur Androïd, le monitoring d'évènements n'implique pas de devoirs sortir des sentiers battus. En effet,
+Sur Androïd, le monitoring d’événements n'implique pas de devoirs sortir des sentiers battus. En effet,
 des outils mis en place par Google autorise la surveillance du comportement du téléphone. Dans notre cas 
 nous avons pu utiliser le principe de "Broadcast Receiver" du système. 
 
 Un broadcast receiver est un outils qui permet de rendre une application consciente de son environnement.
-Cela permet généralement à l'application qui l'utilise d'etre prévenu lors de nouvelles notifications ou 
+Cela permet généralement à l'application qui l'utilise d’être prévenu lors de nouvelles notifications ou 
 d'un comportement particulier du téléphone.
 Son fonctionnement est simple. Il permet de s'enregistrer auprès du téléphone qui maintient une base de donnée des 
 membres à avertir lors d'un changement particulier.
@@ -214,15 +214,15 @@ des messages.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Traitement des évènements}
+\subsection{Traitement des événements}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsubsection{Architecture de l'application}
 
-Pour pouvoir réagir en fonction d'un évènement, notre application a successivement adopté deux méthodes.
+Pour pouvoir réagir en fonction d'un événement, notre application a successivement adopté deux méthodes.
 
 La première a été réalisé pour répondre aux besoins de notre projet. Il s'agissait d'un test sur le 
-type de l'évènement entrant. Plus précisément, il s'agissait de vérifier si l'évènement en question 
+type de l’événement entrant. Plus précisément, il s'agissait de vérifier si l’événement en question 
 était la réception d'un nouveaux SMS ou bien la réception d'un nouveau message XMPP en provenance du 
 site web. En fonction du type de message en entrée, l'application décidé d'envoyer transmettre le message
 vers le bon destinataire. 
@@ -231,11 +231,11 @@ Ce fonctionnement basique convenait totalement à nos besoins mais par soucis de
 évolutive nous avons travaillé sur une deuxième solutions.
 
 Lors de la réception d'un message XMPP, nous souhaitions pouvoir réagir différemment en fonction du contenu
-du message. Dans le cadre de notre projet, nous n'avions comme but que l'envoi de sms à partir du webservice
+du message. Dans le cadre de notre projet, nous n'avions comme but que l'envoi de SMS à partir du webservice
 seulement. Notre travail respecté donc ce principe mais ne permettait aucune évolutivité.
 
 A supposer qu'un tiers soit intéressé par la communication entre le webservice et le téléphone par 
-l'intermédiaire de XMPP mais que son but ne soit pas d'envoyer de simple sms, nous avons implémenté une
+l'intermédiaire de XMPP mais que son but ne soit pas d'envoyer de simple SMS, nous avons implémenté une
 architecture permettant de rajouter facilement de nouvelles fonctionnalités. Pour donner des exemples, 
 un utilisateur pourrait décider d'implémenter une fonctionnalité lui permettant de déclencher la capture
 de photos de son téléphone à partir du webserver.
@@ -262,7 +262,7 @@ de rajouter d'autres stratégies comme l'extinction du téléphone ou encore l'e
 \\
 
 
-La fabrique décrit sur le schéma \ref{fabrique} quand à elle permet de créer des objets sans en connaitre l'éxistence avant le lancement du programme.
+La fabrique décrit sur le schéma \ref{fabrique} quand à elle permet de créer des objets sans en connaître l’existence avant le lancement du programme.
 
 \begin{figure}[H]
 	\center
@@ -289,10 +289,10 @@ soucier de l'implémentation du choix de la stratégie. Cette partie est figé e
 \end{figure}
 
 
-\subsubsection{Traitements des évènements}
+\subsubsection{Traitements des événements}
 
-Selon l'évènement reçu, le traitement à effectuer n'est pas le même. Pour notre application, nous avons 
-créer recensés deux évènements et traitements associés possible.
+Selon l’événement reçu, le traitement à effectuer n'est pas le même. Pour notre application, nous avons 
+créer recensés deux événements et traitements associés possible.
 
 La réception d'un SMS est notre premier cas. Comme le montre le schéma \ref{encapsulation-sms}, le traitement se 
 décompose en trois étapes. 
@@ -308,7 +308,7 @@ Il faut tout d'abord récupérer le contenu du message ainsi que son auteur. Pui
 ses données dans un message au format Json. Enfin nous terminions par envoyer le message encapsulé vers 
 le webservice qui s'occupera de notifier l'utilisateur de l'arrivée d'un nouveau message.
 
-Concernant le deuxième évènement possible, il s'agit de la réception d'un nouveau message XMPP. Comme le
+Concernant le deuxième événement possible, il s'agit de la réception d'un nouveau message XMPP. Comme le
 montre le schéma \ref{desencapsulation}, contrairement au premier traitement, il va être désencapsulé pour 
 pouvoir y récupérer l'information utile. Cela fait, notre fabrique va s'occuper de d'appliquer la stratégie 
 adapter pour ce nouveau message. Dans notre cas, puisque nous avions juste la stratégie d'envoi de SMS, c'était toujours celle-ci qui était appliqué.
