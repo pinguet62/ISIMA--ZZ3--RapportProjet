@@ -96,11 +96,44 @@ Dans ce projet nous utiliserons \textit{aSmack}, un portage sous Androïd de la 
 \subsection{Choix du protocole}
 
 La première raison qui nous a poussé à choisir le protocole XMPP pour échanger les messages entre l'ordinateur et le smartphone est le fait qu'il s'agit du protocole de base de GTalk.
-Initialement nous voulions envoyer et recevoir les messages depuis GTalk, comme nous l'expliquerons uste après dans la partie \ref{GTalk}.
+Initialement nous voulions envoyer et recevoir les messages depuis GTalk, comme nous l'expliquerons juste après dans la partie \ref{GTalk}.
 Ce choix nous a donc paru judicieux car l'application mobile pourra échanger facilement des messages avec l'ordinateur sans aucun problème d'adaptation.
 
 La seconde raison est le fait que la grande majorité des personnes possèdent un compte Google (Gmail), du fait de l'importance de Google sur l'univers d'Internet.
 De plus les smartphones Androïd nécessitent l'association à un compte Google pour fonctionner (téléchargement d'application, mises à jour, ...), donc les utilisateurs n'auront pas à créer de compte Google ni même de compte XMPP.
+\\
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Formatage}
+
+Un SMS contient plusieurs informations : le numéro de téléphone de l'expéditeur ou du destinataire et son contenu.
+Il va donc falloir définir un format à respecter dans lequel seront échangés les messages XMPP et qui va contenir l'ensemble de ces informations.
+\\
+
+
+Il existe plusieurs formats de données comme le XML (Extensible Markup Language), le JSON (JavaScript Object Notation) ou encore YAML (YAML Ain't Markup Language).
+Nous avons décidé d'utiliser le \textit{JSON} du fait de sa popularité "à la mode", son aspect peux verbeux et sa bonne lisibilité.
+\\
+
+
+Voici l'exemple d'un message XMPP qui transitera du smartphone de l'utilisateur jusqu'à son ordinateur :
+\begin{lstlisting}
+{
+    "action": "receive-sms-action",
+    "authorPhoneNumber": "0123456789",
+    "recipient": "987654321",
+    "body": "Ceci est le contenu du SMS"
+}
+\end{lstlisting}
+La première ligne corresponde au type de message : "receive-sms-action" lorsque l'utilise reçoit un SMS, "send-sms-action" lorsqu'il souhaite en envoyer un.
+La seconde ligne correspond au numéro de l'auteur du SMS (facultatif lors d'un envoi).
+La troisième ligne correspond au numéro du destinataire (facultatif lors de la réception).
+Et enfin la dernière ligne correspond au contenu du SMS.
 \\
 
 
