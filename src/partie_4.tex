@@ -4,18 +4,22 @@
 
 \chapter{Résultats - Discussion}
 
-Nous ayons pu terminer le projet dans les temps seulement, même si celui-ci est aujourd'hui fonctionnel,
-il persiste encore certains problèmes. Concernant tout d'abord les applications mobiles, certaines 
-contraintes imposés par les systèmes d'exploitations nous ont empêches de construire une application 
-qui marche sur n'importe quel téléphone.
-\\
-Au vu des des techniques employés, il nous parait peu probable de pouvoir publier aucune des
-deux applications sur les "markets" officiels de Apple et Google.
-\\\\
+Nous ayons pu terminer le projet dans les temps seulement, même si celui-ci est aujourd'hui fonctionnel, il persiste encore certains problèmes.
+Concernant tout d'abord les applications mobiles, certaines contraintes imposés par les systèmes d'exploitations nous ont empêches de construire une application qui marche sur n'importe quel téléphone.
 
-En ce qui concerne le site web, les résultats sont probants. Néanmoins, plusieurs fonctionnalités
-auxquels nous avions pensé manquent. Nous discuterons principalement des possibilités d'évolutions du 
-produit.
+Au vu des des techniques employés, il nous parait peu probable de pouvoir publier aucune des
+deux applications sur les "markets" officiels de Apple et Google. % dans la sous partie ?
+\\
+
+
+En ce qui concerne le site web, les résultats sont probants.
+Néanmoins, plusieurs fonctionnalités auxquels nous avions pensé manquent.
+Nous discuterons principalement des possibilités d'évolutions du produit.
+\\
+
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -25,9 +29,50 @@ produit.
 
 \section{Site web}
 
-- Réception de SMS de personnes qui ne sont pas dans nos contacts
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-- Peut-être charger la liste des anciens contacts
+\subsection{Les contacts}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Cahier des charges}
+
+Notre cahier des charges requérait une gestion simple et transparente des contacts pour l'utilisateur.
+
+Le téléchargement des contacts du compte Google couplé avec l'affichage de la liste des noms de ces contacts, permet à l'utilisateur d'envoyer des SMS très simplement sans avoir à spécifier le numéro de téléphone.
+\\
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Apple}
+
+Par défaut sous Androïd les contacts du téléphone sont dupliqués sur le serveur Google grâce au compte associés au smartphone, et on peut y avoir accès depuis Gmail par exemple.
+Sous iOS cette fonction existe mais n'est pas associé à Google : Apple utilise iCloud qui permet aux utilisateurs une synchronisation automatique des contacts sur tous les appareils Apple associés à l'adresse mail.
+Ainsi par défaut il n'est pas possible d'accéder aux contacts de l'iPhone depuis le site web.
+
+Contrairement à Google qui effectue ses authentifications avec OAuth, Apple ne propose pas d'API permettant l'authentification sur iCloud.
+La solution trouvée a donc été de synchroniser les contacts de l'iPhone avec un compte Google, au détriment de la synchronisation d'iCloud.
+\\
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Filtre}
+
+Dans notre site web nous avons filtré la liste des contacts à ceux présents dans notre carnet d'adresses et en nous limitant aux numéros de téléphone portable (06.xx.xx.xx.xx ou 07.xx.xx.xx.xx).
+
+Or il est possible de recevoir des SMS venant de numéro "courts" (8.xx.xx), de numéros de téléphone fixe, ou bien encore de contacts non présents dans nos contacts.
+
+Notre version actuelle ne permet pas de résoudre ce problème.
+Une solution serait d'ajouter un filtre sur la page web et enregistrer tous les contacts ainsi que ceux non présents dans Google.
+\\
+
+
+
+
+TODO:
+- Peut-être charger la liste des anciens messages
 \\
 
 
@@ -48,6 +93,8 @@ produit.
 
 \subsection{Androïd}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \subsubsection{Problèmes rencontrés}
 
 De nombreux problèmes sont venus troubler l'avancement du projet. Nous avons toujours essayer de les
@@ -55,6 +102,7 @@ résoudre de la manière la plus efficiente qui soit. Seulement, il nous est arr
 parties pour lesquelles aucune solutions propres n'étaient réalisable. Nous avons alors du appliquer 
 des manipulations qui empêcheront ce projet d'être un projet considéré comme stable dans un environnement
 grand public.
+
 
 \paragraph{Message Gtalk}
 
@@ -64,11 +112,13 @@ Le choix de prendre GTalk comme moyen de communication n'était pas sans conséq
 est apparu impossible d'avoir une gestion fine de GTalk.
 \\
 
+
 Lors de l'envoi d'un message XMPP d'un compte A vers un compte B, toutes les interfaces de connexions
 de B recevront le message. GTalk ne fait malheureusement pas exception de plus dans notre cas, l'envoi
 se fait d'un compte A vers le même compte A. En pratique cela revient à recevoir et traiter beaucoup de
 message inutiles.
 \\
+
 
 Premièrement, en ce qui concerne le traitement, les applications étant connectés sur leur compte GTalk, 
 le message envoyé sera immédiatement reçu par l'application. Celle-ci bien heureusement filtrera les 
@@ -83,11 +133,13 @@ messages qui ne lui sont pas destinés.
 
 Comme le montre l'image \ref{boucle-envoi-xmpp}, une boucle se crée. Dans les faits, elle ne causera jamais de problème 
 néanmoins c'est un comportement qui n'était pas désiré et qu'on aurait souhaitait évité.
-\\\\
+\\
+
+
 Deuxièmement, l'utilisation de GTalk était problématique. L'impossibilité de gérer finement GTalk fait que
 tous les messages que nous envoyons, que ce soit depuis le téléphone ou bien depuis le site web étaient
 aussi redirigés vers les outils utilisant GTalk.
-\\
+
 En pratique, cela impliquait de recevoir des messages au format JSon sur plusieurs lieux indésirables.
 
 \begin{figure}[!h]
@@ -108,6 +160,8 @@ Le résultat est montré dans l'image \ref{message-xmpp-json-gmail}, un message 
 	\label{message-xmpp-json-gmail}
 \end{figure}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \paragraph{Limite des SMS}
 ~~\\
 
@@ -119,9 +173,13 @@ Le résultat est montré dans l'image \ref{message-xmpp-json-gmail}, un message 
 
 \subsection{iOS}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\subsubsection{Les SMS}
+
 - envoi du SMS : n'apparait pas dans les messages : ajout à la main dans la BDD ?
-
-
 
 Impossible de lire les contacts...
 \\

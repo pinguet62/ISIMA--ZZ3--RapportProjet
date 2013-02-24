@@ -1,1 +1,7 @@
 pdflatex -synctex=1 -interaction=nonstopmode %.tex %.glo|makeindex -t %.glg -s %.ist -o %.gls %.glo|bibtex %|pdflatex -synctex=1 -interaction=nonstopmode %.tex %.glo|"C:/Program Files (x86)/Adobe/Reader 10.0/Reader/AcroRd32.exe" %.pdf
+
+pdflatex -synctex=1 -interaction=nonstopmode %.tex %.glo
+makeindex -t %.glg -s %.ist -o %.gls %.glo
+bibtex %
+pdflatex -synctex=1 -interaction=nonstopmode %.tex %.glo
+"C:/Program Files (x86)/Adobe/Reader 10.0/Reader/AcroRd32.exe" %.pdf
