@@ -5,6 +5,8 @@
 Glossaire:
     JSON
     XMPP
+    Session
+    Cache
 
 
 

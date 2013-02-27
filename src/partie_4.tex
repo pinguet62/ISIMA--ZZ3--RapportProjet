@@ -80,8 +80,8 @@ Le résultat est montré dans l'image \ref{message-xmpp-json-gmail}, un message 
 	\includegraphics[width=10cm]{img/message-xmpp-json-gmail.png}
 	\caption{Message XMPP au format JSON reçu avec GTalk}
 	\label{message-xmpp-json-gmail}
-\end{figure}
 ~~\\
+\end{figure}
 
 
 
@@ -105,7 +105,7 @@ Néanmoins, plusieurs fonctionnalités auxquels nous avions pensé manquent.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Les contacts}
+\subsection{Gestion des contacts}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -118,7 +118,7 @@ Le téléchargement des contacts du compte Google couplé avec l'affichage de la
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsubsection{Apple}
+\subsubsection{Problème}
 
 Par défaut sous Androïd les contacts du téléphone sont dupliqués sur le serveur Google grâce au compte associés au smartphone, et on peut y avoir accès depuis Gmail par exemple.
 Sous iOS cette fonction existe mais n'est pas associé à Google : Apple utilise iCloud qui permet aux utilisateurs une synchronisation automatique des contacts sur tous les appareils Apple associés à l'adresse mail.
@@ -130,14 +130,22 @@ La solution trouvée a donc été de synchroniser les contacts de l'iPhone avec 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsubsection{Filtre}
+\subsubsection{Amélioration possibles}
 
+\paragraph{Filtres -}
 Dans notre site web nous avons filtré la liste des contacts à ceux présents dans notre carnet d'adresses et en nous limitant aux numéros de téléphone portable (06.xx.xx.xx.xx ou 07.xx.xx.xx.xx).
-
 Or il est possible de recevoir des SMS venant de numéro "courts" (8.xx.xx), de numéros de téléphone fixe, ou bien encore de contacts non présents dans nos contacts.
 
 Notre version actuelle ne permet pas de résoudre ce problème.
 Une solution serait d'ajouter un filtre sur la page web et enregistrer tous les contacts ainsi que ceux non présents dans Google.
+\\
+
+
+\paragraph{Anciens SMS -}
+Lorsque l'on se déconnecte du site web toutes les conversations sont supprimées du serveur en raison de la politique de sécurisé que nous avons voulu garder.
+
+Nous avons pensé apporter une amélioration à notre site web dans la prochaine version, qui aurait pour objectif de télécharger les anciens messages échangés avec un contact.
+Ces SMS transiteraient aussi par le protocole XMPP, soit un par un, soit sous forme de liste selon les performances et la taille maximale des messages XMPP.
 \\
 
 
@@ -146,11 +154,19 @@ Une solution serait d'ajouter un filtre sur la page web et enregistrer tous les 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Anciens SMS}
+\subsection{Le cache}
 
-Lorsque l'on se déconnecte du site web toutes les conversations sont supprimées du serveur en raison de la politique de sécurisé que nous avons voulu garder.
-Nous avons pensé apporter une amélioration à notre site web, qui aurait pour objectif de télécharger les anciens messages échangés avec un contact.
-Ces SMS transiteraient aussi par le protocole XMPP, soit un par un, soit sous forme de liste selon les performances et la taille maximale des messages XMPP.
+La \textit{session} est une courte période pendant laquelle le serveur web communique avec le client (l'utilisateur).
+Durant cette période une quantité de mémoire est allouée au client pour y stocker différentes informations, que l'on appelle "variable de session".
+
+Dans le framework Play que nous avons utilisé la notion de "session" est quasiment inexistante en raison de sa nature "RESTful", c'est à dire qui ne conserve pas de données liées aux clients durant la session.
+Play propose l'utilisation de \textit{caches}, mais ceux-ci sont accessible depuis chaque utilisateur et possèdent une durée de vie limitée.
+\\
+
+
+Ainsi nous avons été obligé de contourner le problème en utilisant des méthodes "peu orthodoxes" ce qui rend l'application peu maintenable.
+De plus cela ne facilite pas l'ajout de fonctionnalités.
+L'utilisation d'un framework plus adapté aurait été un choix plus judicieux.
 \\
 
 
