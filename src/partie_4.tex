@@ -223,8 +223,7 @@ possédant les droits root. Cela implique que l'utilisateur devra être capable 
 
 Pour pouvoir outrepasser ces contraintes, il est nécessaire de modifier le comportement par défaut du 
 système. Nous avons utiliser un éditeur de bases de données SQLite avec lequel nous avons modifié une clé 
-particulière. Il s'agit de la clé sms\_outgoing\_check\_max\_count que nous avons positionné à un nombre négatif
-afin de ne plus avoir de limite d'envoi de message.
+particulière. Il s'agit de la clé sms\_outgoing\_check\_max\_count que nous avons positionné à un nombre négatif afin de ne plus avoir de limite d'envoi de message.
 
 Cela modifié, nous sommes alors en mesure d'envoyer autant de messages que désiré. 
 \\
@@ -239,11 +238,27 @@ Cela modifié, nous sommes alors en mesure d'envoyer autant de messages que dés
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\subsubsection{Généralité}
 
+L'utilisation des frameworks privés rendra impossible la publication de notre solution sur l'Apple Store.
+Ceci pourra réduire fortement le nombre d'utilisateurs car ceux-ci devront installer l'application manuellement. 
+
+Compte tenu des problèmes rencontrés et des solutions utilisées, il est clair que l'application iOS nécessite de nombreuses améliorations.
+La lecture des SMS, imposant de lire un fichier hors de la Sandbox comme expliqué dans la partie \ref{III_iOS_receptionSMS}, sera le problème principal à résoudre dans la prochaine version de l'application iOS.
+\\
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsubsection{Les SMS}
 
-- envoi du SMS : n'apparait pas dans les messages : ajout à la main dans la BDD ?
+Lorsque l'on envoie un SMS manuellement depuis un iPhone, le message s'ajoute dans la conversation ce qui permet d'avoir un historique et un suivi des messages échangés avec la personne.
+Par contre lorsque les SMS sont envoyés depuis l'application, ceux-ci ne s'ajoutent pas dans la conversation avec le destinataire.
 
-Impossible de lire les contacts...
+La solution qui pourrait être utilisée serait d'ajouter "manuellement" le message dans la base de données des SMS de l'iPhone depuis l'application juste avant son envoi.
+Cette solution n'a pas peu être testée pour l'instant car le fichier de la base de données est (pour l'instant) inaccessible comme expliqué dans la partie \ref{III_iOS_receptionSMS}.
+\\
+
+De plus lors de l'envoi des SMS aucune confirmation d'envoi n'est possible.
+Cela pourrait poser certains problème lorsque le SMS à envoyer est important.
+La solution pourrait être recherchée dans les prochaines versions de notre solution.
 \\
