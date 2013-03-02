@@ -6,17 +6,66 @@ Le fonctionnement de ce projet repose grandement sur la partie qui suit.
 \\
 
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Play Framework 2.0}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+
+
 \subsubsection{primefaces vs playframework}
 
+Pour créer notre webservice, nous souhaitions utiliser des technologies récentes. Nous nous sommes
+alors confrontés à deux choix complètements opposés. Premièrement, utilisé le jeune framework Play 
+qui est un framework d'application web RESTFul. Le deuxième candidat, primefaces, est un framework
+basé sur les JSF. Il contient une bibliothèque graphique très riche.
+\\
+Notre choix s'est porté sur Play dont l'approche original nous à attirer. Play framework est basé sur
+les langages Java et Scala et permet le développement sur ces deux langages. C'est un framework RESTFul
+ce qui implique que le serveur ne gère pas d'état pour les clients.
+\\
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Authentification avec OAuth 2.0}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+L'authentification des utilisateurs est un point sensible lors du développement d'un service car il
+implique souvent le stockage des mots de passes et donc de sécuriser l'application, veiller à corriger
+les failles de sécurité,... 
+\\ 
+Le protocole OAuth 2.0 permet de contourner ce problème en délégant la gestion de l'authentification
+à une autre entité. Beaucoup de services internet populaire implémentent ce système ce qui permet de 
+aux utilisateurs de se connecter à un service en utilisant un de leurs comptes déja éxistant. Ce 
+protocole facilite donc la connection pour le service qui l'utilise et les utilisateurs qui n'ont pas 
+à créer un nouveau compte sur chaque nouveau site web par exemple.
+\\
+Nous avons alors décider d'utiliser OAuth 2.0 car nous ne souhaitions pas d'une part mettre en place 
+et administrer une base de donnée et d'autre part, nous ne voulions pas avoir à gérer la sécurité de 
+des données stockés. OAuth s'est donc avéré comme la solution idéale pour notre projet.
+\\
+\paragraph{fonctionnement}
+
+Comme le montre le schéma \ref{schema-oauth-google}, l'authentification se compose de plusieurs étapes.
+Premièrement, l'utilisateur va se voir rediriger vers les sites de google ou il devra donner son accord
+à l'application d'effectuer des actions sur son compte. Dans notre cas, il s'agissait comme le montre
+l'impression d'écran \ref{croquette-droit-delegation} de pouvoir récupérer les contacts et d'utiliser 
+le compte GTalk de l'utilisateur.
+\\
+Une fois que l'utilisateur à accepter, il doit s'identifier sur la plateforme de google avec ses identifiants.
+Si l'authentification réussi alors l'application se voit offrir un token. Elle doit alors échanger 
+son token avec les serveurs de google dans le but d'obtenir un token d'accès. Si tout se déroule correctement,
+elle obtient le token d'accès.
+\\
+Lors de chaque requete pour récupérer des informations sur l'utilisateur, le webservice devra alors
+joindre son token d'accès à la requete pour avoir une réponse. De cette manière, nous pouvons récupérer
+des informations de l'utilisateur sans utiliser son mot de passe et son identifiant. Nous délégons donc
+la sécurisation du mot de passe à Google.
+\\
+Nous avons choisi d'utiliser l'authentification avec la plateforme Google car nous pouvions ainsi 
+successivement, s'authentifier sur GTalk et récupérer les contacts de l'utilisateur.
+
 
 
 
@@ -73,9 +122,11 @@ encore pour organiser l'affichage des contacts proprement.
 
 \subsubsection{jquery layout}
 
-JQuery layout est aussi un framework web. Contrairement au boostrap de Twitter, il nous à permis d'organiser notre site en plusieurs interfaces distinctes. 
+JQuery layout est aussi un framework web. Contrairement au boostrap de Twitter, il nous à permis d'organiser 
+notre site en plusieurs interfaces distinctes. 
 
-L'utilité de JQuery layout réside dans sa possibilité à fractionner un espace en plusieurs fenêtres. Cela permet de retrouver l'ergonomie et le coté simple et ordonné des logiciels. 
+L'utilité de JQuery layout réside dans sa possibilité à fractionner un espace en plusieurs fenêtres. Cela 
+permet de retrouver l'ergonomie et le coté simple et ordonné des logiciels. 
 
 Ce framework très riche nous a donc été très profitable pour pouvoir obtenir une bonne ergonomie sans avoir
 à trop passer du temps sur cette partie.
@@ -84,12 +135,12 @@ Ce framework très riche nous a donc été très profitable pour pouvoir obtenir
 
 Comme le montre l'image \ref{design-final}, le couplage de ces deux frameworks a aidé à obtenir un design simple mais efficient. 
 
-\begin{figure}[!h]
-	\center
-	\includegraphics[width=13cm]{img/design-final.png}
-	\caption{interface finale du site web}
-	\label{design-final}
-\end{figure}
+%\begin{figure}[!h]
+%	\center
+%	\includegraphics[width=13cm]{img/design-final.png}
+%	\caption{interface finale du site web}
+%	\label{design-final}
+%\end{figure}
 
 
 %\begin{figure}[!h]
