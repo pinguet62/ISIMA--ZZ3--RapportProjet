@@ -7,6 +7,7 @@ Glossaire:
     XMPP
     Session
     Cache
+    front end
 
 
 

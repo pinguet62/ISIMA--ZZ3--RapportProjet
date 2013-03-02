@@ -70,17 +70,7 @@ traiter ce même événement.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Authentification sur GTalk}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- 
-Pour pouvoir relayer, communiquer avec le site web, notre projet utilise le protocole XMPP. Plus 
-précisément, nous utilisons un même et unique compte GTalk. 
- 
-Initialement, le projet devait être conçu pour Androïd. Or chaque utilisateur Androïd a un compte 
-Gmail. Ce même compte peut être utilisé pour accéder à tous les services de Google dont GTalk.
-C'est une des raisons qui a fait que nous ayons choisi XMPP plutôt qu'un autre protocole. L'utilisateur
-n'a ainsi pas besoin de créer quelconques nouveaux comptes et peut utiliser celui qu'il possède déjà.
-\\
- 
- 
+
 Pour pouvoir converser avec le site web, l'application a besoin de s'authentifier auprès du service
 GTalk. Pour cela, nous sommes passés par deux étapes. 
  
@@ -107,7 +97,7 @@ ou il n'existe qu'un seul compte, celui-ci est choisi par défaut.
 \\
  
  
-Suite à cela, le protocole OAuth va demander à l'utilisateur une seule et unique fois s’il autorise 
+Suite à cela, le protocole OAuth va demander à l'utilisateur une seule et unique fois s'il autorise 
 l'application à accéder à son compte GTalk. La validation effectuée, l'application pourra se connecter 
 à chaque lancement, automatiquement et sans importuner l'utilisateur. 
  
@@ -153,8 +143,8 @@ Cette différence implique des changements quant aux fonctionnements de celles-c
  
 Finalement, en ré-implémentant certaines fonctionnalités, nous avons réussi à nous authentifier avec OAuth.
 \\
- 
- 
+
+
 Authentifier un utilisateur via OAuth2.0 sur Androïd a été un réel challenge. Il nous a fallu comprendre 
 et trouver des équivalences au fonctionnement de Smack. 
 \\
@@ -171,7 +161,7 @@ Une fois authentifié, nous souhaitons pouvoir utiliser notre téléphone comme 
 doit en effet servir d'intermédiaire entre le site web et un correspondant. Pour cela elle doit tout
 d'abord surveiller l'arrivée de nouveaux messages. 
  
-Sur Androïd, le monitoring d’événements n'implique pas de devoir sortir des sentiers battus. En effet,
+Sur Androïd, le monitoring d'événements n'implique pas de devoir sortir des sentiers battus. En effet,
 des outils mis en place par Google autorisent la surveillance du comportement du téléphone. Dans notre cas 
 nous avons pu utiliser le principe de "Broadcast Receiver" du système. 
  
@@ -212,7 +202,7 @@ des messages.
 Pour pouvoir réagir en fonction d'un événement, notre application a successivement adopté deux méthodes.
  
 La première a été réalisée pour répondre aux besoins de notre projet. Il s'agissait d'un test sur le 
-type de l’événement entrant. Plus précisément, il s'agissait de vérifier si l’événement en question 
+type de l'événement entrant. Plus précisément, il s'agissait de vérifier si l’événement en question 
 était la réception d'un nouveau SMS ou bien la réception d'un nouveau message XMPP en provenance du 
 site web. En fonction du type de message en entrée, l'application décide d'envoyer, de  transmettre le message
 vers le bon destinataire. 
@@ -252,7 +242,7 @@ de rajouter d'autres stratégies comme l'extinction du téléphone ou encore l'e
 \\
  
  
-La fabrique décrite sur le schéma \ref{fabrique}, permet, quant à elle, de créer des objets sans en connaître l’existence avant le lancement du programme.
+La fabrique décrite sur le schéma \ref{fabrique}, permet, quant à elle, de créer des objets sans en connaître l'existence avant le lancement du programme.
  
 \begin{figure}[H]
   \center
@@ -282,7 +272,7 @@ soucier de l'implémentation du choix de la stratégie. Cette partie est figée 
  
 \subsubsection{Traitements des événements}
  
-Selon l’événement reçu, le traitement à effectuer n'est pas le même. Pour notre application, nous avons 
+Selon l'événement reçu, le traitement à effectuer n'est pas le même. Pour notre application, nous avons 
 crée et recensé deux événements et traitements associés possibles.
  
 La réception d'un SMS est notre premier cas. Comme le montre le schéma \ref{encapsulation-sms}, le traitement se 
