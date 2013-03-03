@@ -132,7 +132,7 @@ une communication bidirectionnelle et full duplex entre un navigateur web et un 
 qu'un lien de communication s'établis entre les deux entités et permet la communication simultanée
 dans les deux sens. 
 
-\subsubsection{websocket}
+\subsubsection{Websocket}
 
 Pour ce projet, les fonctionnalités des websockets étaient une véritable aubaine car elles nous permettaient
 lors d'un changement d'état coté serveur d'avertir le client web. Dans notre cas, le serveur souhaite avertir
@@ -172,6 +172,21 @@ l'utilisateur courant du nombre de message non lus envoyés par un de ses contac
 %~~\\
 %\end{figure}
 
+\subsubsection{Notifications}
+
+Lors de la réception d'un SMS l'application mobile va envoyer un message XMPP qui sera reçu par le serveur web.
+Le serveur va ensuite envoyer une notification à l'utilisateur grâce à la websocket qui sera traitée en JavaScript dans le navigateur web de l'utilisateur.
+Cette notification consiste à indiquer le nombre de messages non lus pour un contact.
+Lorsque l'utilisateur affiche la conversation la notification éventuelle est effacée.
+Le schéma \ref{siteWeb_notifications} montre un exemple de notification.
+\begin{figure}[!h]
+	\center
+	\includegraphics[width=0.3\textwidth]{img/siteWeb_notifications.png}
+	\caption{Site web : notifications}
+	\label{siteWeb_notifications}
+~~\\
+\end{figure}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Design du site}
@@ -210,7 +225,7 @@ Le schéma \ref{siteWeb_jQueryLayout} représente l'agencement général de notr
 
 \begin{figure}[!h]
 	\center
-	\includegraphics[width=13cm]{img/siteWeb_jQueryLayout.png}
+	\includegraphics[width=0.6\textwidth]{img/siteWeb_jQueryLayout.png}
 	\caption{jQuery Layout : structure du site web}
 	\label{siteWeb_jQueryLayout}
 ~~\\
