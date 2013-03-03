@@ -71,15 +71,54 @@ successivement, s'authentifier sur GTalk et récupérer les contacts de l'utilis
 \subsection{Gestion des contacts}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-La gestion des contacts de l'utilisateur est un point important de notre cahier des charges.
+La gestion des contacts de l'utilisateur est un point important de notre projet.
+De plus notre cahier des charges spécifie leurs gestion simple et transparente.
 \\
 
+
 \subsubsection{Téléchargement des contacts Google}
+\label{Téléchargement des contacts Google}
+
+Par défaut sous Androïd les contacts du téléphone sont dupliqués sur le serveur Google grâce au compte associés au smartphone, ce qui permet d'avoir une synchronisation sur tous les services Google dont Gmail.
+\\
+
+
+Étant connecté sur notre site internet via son compte Google, notre application web va ainsi pouvoir récupérer la liste des contacts de l'utilisateur grâce au token délivré par Google lors de l'authentification.
+\\
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsubsection{Tri et Formatage}
 
-\subsubsection{Google cache}
+Le carnet de contacts de l'utilisateur peut contenir de nombreux types de numéros : téléphone mobiles, téléphone fixes, numéros étrangers, numéros surtaxés, ...
+Nous avons donc filtré la liste des contacts aux numéros de mobiles, c'est-à-dire ceux commençant par "0" ou "+33" suivi de 9 chiffres.
 
+Cela permet de ne pas surcharger la liste des contacts avec de nombreux numéros à qui l'on envoie jamais de SMS.
+De plus c'est un aspect sécuritaire car l'utilisateur ne pourra pas envoyer des SMS surtaxés depuis le site web.
+\\
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Google Guava}
+
+Une fois la liste des contacts téléchargés il est nécessaire de la stocker.
+Il existe plusieurs types de stockages.
+
+Une \textit{base de données} permet de stocker efficacement des données.
+Nous avons voulu proposer aux utilisateurs une solution "sûre" dans laquelle aucune donnée ne sera enregistrées sur le serveur, ce qui implique que l'on n'utilisera pas cette méthode.
+
+La \textit{session} est une courte période pendant laquelle le serveur web communique avec le client (l'utilisateur).
+Durant cette période une quantité de mémoire est allouée au client pour y stocker différentes informations, que l'on appelle "variable de session".
+Dans Play la notion de "session" est quasiment inexistante en raison de sa nature "RESTful", c'est à dire qui ne conserve pas de données liées aux clients durant la session.
+
+Play propose l'utilisation de \textit{caches} qui est une zone mémoire commune à toutes les utilisateurs, mais avec une durée de vie limitée.
+Lorsque le délai est écoulé les données sont effacées automatiquement.
+Le problème de cette solution sont les nombreux tests à effectuer pour vérifier que les données sont toujours présentes et effectuer la mise à jour à chaque fois que le cache est vidé.
+
+Nous avons utilisé la classe \lstinline{CacheBuilder} de la bibliothèque Java \textit{Guava} proposé par Google.
+Cette classe agit globalement comme un cache (association clé-valeur, durée de vie limitée) tout en ajoutant de nombreuses fonctionnalités.
+Il est notamment possible de définir une fonction qui sera exécutée lors de chaque "mise à jour" du cache, qui dans notre cas rafraichira la liste des contacts de l'utilisateur.
+\\
 
 
 
