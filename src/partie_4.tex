@@ -251,57 +251,102 @@ De plus lors de l'envoi des SMS aucune confirmation d'envoi n'est possible.
 Cela pourrait poser certains problème lorsque le SMS à envoyer est important.
 La solution pourrait être recherchée dans les prochaines versions de notre solution.
 
-\subsection{Perspectives d'évolutions}
 
-Malgrés son fonctionnement, nous considérons le projet comme non mature et nous aurions souhaité y apporter de
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Perspectives d'évolutions}
+
+Malgré son fonctionnement, nous considérons le projet comme non mature et nous aurions souhaité y apporter de
 nouvelle fonctionnalités pour le rendre véritablement fonctionnel.
 
-\subsubsection{Fonctionnement dans le cloud}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Fonctionnement dans le cloud}
 
 Notre web service fonctionne à condition d'avoir un serveur. Nous l'avons exclusivement fait fonctionner en local
 sur nos machines personnelles et nous n'avons donc pas pu vérifier son fonctionnement en condition réel à grande
-échelle. Pour cela, nous aurions souhaité déployé notre service dans le cloud. Cela signifie simplemement que le 
+échelle. Pour cela, nous aurions souhaité déployé notre service dans le cloud. Cela signifie simplement que le 
 projet aurait un support matériel qui ne nous appartient pas mais que nous louons. 
-\\
-\textit{Heroku}\footnote{Site web : \href{http://http://www.heroku.com/}} permet de louer un emplacement virtuel 
-dans lequel nous aurions pu y placer notre service. Ce système est très intéressant principalement pour une raison.
-Il permet ainsi de déléguer la gestion du ou des serveurs à une autre entreprise. Un peu de la meme manière que pour
-le protocole OAuth, une tache précise est alors géré par une entité compétente. Plus aucuns besoins alors de s'occupper
+
+\textit{Heroku}\footnote{Site web : \href{http://www.heroku.com/}{http://www.heroku.com/}} permet de louer un emplacement virtuel 
+dans lequel nous aurions pu y placer notre service. Ce système est très intéressant principalement pour une raison : il permet ainsi de déléguer la gestion du ou des serveurs à une autre entreprise. Un peu de la meme manière que pour
+le protocole OAuth, une tache précise est alors géré par une entité compétente. Plus aucuns besoins alors de s'occuper
 de la maintenance des serveurs ou de gérer les charges des serveurs pour avoir un load balancing idéal.
-\\
+
 Pour nous s'était aussi l'occasion d'utiliser un service de gestion d'application dans le cloud. Pour des contraintes
 principalement monétaire, nous avons choisi de ne pas déployer notre application dans le cloud.
 
-\subsubsection{Déploiement dans les markets}
 
-De meme, nous pensons que, une fois le projet mature, il serait intéressant de mettre nos applications android et iOS dans 
-leur market respectifs. Les markets sont les plateformes de téléchargement officiels de iOS et Android. Déployer notre 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Déploiement dans les markets}
+
+De même, nous pensons que, une fois le projet mature, il serait intéressant de mettre nos applications Androïd et iOS dans 
+leur market respectifs. Les markets sont les plateformes de téléchargement officiels de iOS et Androïd. Déployer notre 
 travail sur ces markets est avant tout un soucis de compréhension de ses plateformes. Cela permet aussi de gagner en visibilité
-meme si n'est pas l'objectif premier de ce projet.
+même si n'est pas l'objectif premier de ce projet.
 \\
-Malheureusement, il nous parait impossible aujourd'hui de publier sur les markets. Les raisons sont les moyens mis en oeuvre 
-pour dévellopper nos applications. Sur iOS comme sur Android nous utilisons des solutions non présentes sur les frameworks officiels
+Malheureusement, il nous parait impossible aujourd'hui de publier sur les markets. Les raisons sont les moyens mis en œuvre 
+pour développer nos applications. Sur iOS comme sur Androïd nous utilisons des solutions non présentes sur les frameworks officiels
 pour réaliser certaines fonctionnalités. Rendre notre travail publique sur un market ne serait donc surement pas possible ou bien
 inutilisable pour une grande majorité des utilisateurs.
 
-\subsubsection{Couverture de test}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Couverture de test}
 
 C'est clairement le maillon faible de notre travail. Nous avons privilégié le développement rapide pour atteindre nos objectifs
-primaires, les fonctionnalités. Plutot que de se concentrer sur une tache et de garantir son fonctionnement, nous avons préféré
-dévellopper le plus possibles de fonctionnalités et nous nous sommes occuppés de beaucoup de taches secondaire. La couverture 
+primaires, les fonctionnalités. Plutôt que de se concentrer sur une tache et de garantir son fonctionnement, nous avons préféré
+développer le plus possibles de fonctionnalités et nous nous sommes occupés de beaucoup de taches secondaire. La couverture 
 de test du projet est donc nul. Couvrir un projet signifie garantir que celui-ci fonctionne à l'aide d'un jeu de tests. Cette partie
 d'un projet professionnel est souvent conséquente et nous avons fait le choix de ne pas travailler dessus. Il s'agit, à nos yeux, 
-d'une erreur et nous pensons adopté un dévelloppement orienté \textit{Tests Driven Development} sur nos prochains projets. Les méthodes
+d'une erreur et nous pensons adopté un développement orienté \textit{Tests Driven Development} sur nos prochains projets. Les méthodes
 TDD reposent sur une approche ou les tests de fonctionnement seront écris avant les fonctionnalités. Cela permet de maintenir un projet
 fonctionnel.
 
-\subsubsection{Documentation}
 
-Nous n'avons produit aucune documentation avec notre projet. Tout est sous forme de commentaires directement écris dans le code. Écrire
-une documentation rendrait le projet plus ouvert. C'est aussi une condition importante quand à la délivration d'un projet. Nous avons
-néanmoins délibérement abandonner la conception d'une documentation pour des raisons de temps.
 
-\subsubsection{Gestion des MMS}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Documentation}
+
+Nous n'avons produit aucune documentation avec notre projet.
+Tout est sous forme de commentaires directement écris dans le code.
+
+Écrire une documentation rendrait le projet plus ouvert.
+C'est aussi une condition importante quand à la délivrance d'un projet.
+
+De plus cela permettrait de renseigner les utilisateurs curieux sur la nature du projet et son fonctionnement pour lever les doutes concernant la sécurité.
+
+Nous avons néanmoins délibérément abandonner la conception d'une documentation pour des raisons de temps.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Gestion des MMS}
 
 Actuellement, le projet ne gère que les SMS. Nous avons envisagé de rendre possible l'utilisation de MMS. L'un des avantages principal
 de l'ordinateur par rapport au téléphone portable et la facilité avec laquelle on peut par exemple récupérer une image et à l'aide d'un
