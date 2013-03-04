@@ -121,30 +121,54 @@ Il est notamment possible de définir une fonction qui sera exécutée lors de c
 \subsection{Communication entre le serveur web et le navigateur du client}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsubsection{WebSocket}
-
-\textit{WebSocket} est un protocole standard du Web et normalisé.
-Il permet une communication bidirectionnel entre client et serveur dans les navigateurs et serveurs web en se basant sur une socket TCP.
-
-Pour réaliser notre solution il est nécessaire d'utiliser ce mécanisme pour permettre d'avoir une page dynamique sans avoir à la rafraichir.
-Lors de la réception d'un SMS celui-ci pourra s'afficher automatiquement à l'écran.
+L'un des points clés du framework Play est sa capacité à gérer les websockets. Il fait en effet partis des rares
+frameworks offrant cette fonctionnalité relativement récente. Le protocole websocket vise à établir 
+une communication bidirectionnelle et full duplex entre un navigateur web et un serveur. Cela signifie
+qu'un lien de communication s'établit entre les deux entités et permet la communication simultanée
+dans les deux sens. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsubsection{Notifications}
+\subsubsection{Websocket}
 
-Lors de la réception d'un SMS l'application mobile va envoyer un message XMPP qui sera reçu par le serveur web.
-Le serveur va ensuite envoyer une notification à l'utilisateur grâce à la websocket qui sera traitée en JavaScript dans le navigateur web de l'utilisateur.
-Cette notification consiste à indiquer le nombre de messages non lus pour un contact.
-Lorsque l'utilisateur affiche la conversation la notification éventuelle est effacée.
-Le schéma \ref{siteWeb_notifications} montre un exemple de notification.
+Pour ce projet, les fonctionnalités des websockets étaient une véritable aubaine car elles nous permettaient
+lors d'un changement d'état coté serveur d'avertir le client web. Dans notre cas, le serveur souhaite avertir
+le client lors de la réception d'un SMS et le client souhaite avertir le serveur lors de l'envoi d'un message
+XMPP. Les websockets sont donc adaptés à cette situation. Elles sont la clé de voute de ce projet car elles 
+s'occupent des communications entre le client et le serveur.
+
+Une fois que l'utilisateur s'est authentifié, plus aucun rechargement de pages ne sera fait.
+Tout est géré 
+dynamiquement via les websockets. 
+
+La prise en charge du coté serveur se fait avec le framework Play qui gère nativement les websockets. Coté client,
+c'est le navigateur qui à l'aide du langage JavaScript va gérer les websockets. Celles-ci sont en cours de standardisation
+du coté du W3C et les différents navigateur les implémentent donc chacun à leurs façons. 
+
+En ce qui nous concerne, nous avons choisi de ne travailler que sur les navigateurs Mozilla Firefox et Google Chrome.
+Ce projet est donc inutilisable aujourd'hui sur d'autres navigateurs.
+
+Pour pouvoir communiquer les SMS et message XMPP, nous avons choisi d'utiliser le format JSON qui est le format de
+donnée naturel pour les applications JavaScript. De plus, puisque nous utilisons ce format pour faire transiter les
+données entre les applications mobiles et le serveur, c'était pour nous très pratique de ne pas avoir à modifier
+les données lors des différents échanges.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{notification}
+
+Les messages XMPP et SMS ne sont pas les seuls à transiter sur les websockets. En effet nous avons 
+implémenter de la même manière un système de notification de nouveau message. Le système est simple,
+lors de la réception d'un nouveau message, si l'utilisateur ne dialogue pas au même moment avec l'auteur
+du nouveau message, une notification va s'afficher. Comme le montre l'image \ref{siteWeb_notifications}, le contact
+qui a envoyé le message verra un compteur apparaitre à coté de son nom. Cela permet simplement d'avertir
+l'utilisateur courant du nombre de message non lus envoyés par un de ses contacts.
 \begin{figure}[!h]
 	\center
 	\includegraphics[width=0.3\textwidth]{img/siteWeb_notifications.png}
 	\caption{Site web : notifications}
 	\label{siteWeb_notifications}
 \end{figure}
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Design du site}
