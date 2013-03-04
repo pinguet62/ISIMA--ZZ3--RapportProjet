@@ -10,6 +10,7 @@
 *.log
 *.out
 *.pdf
+*.ps
 *.synctex.gz
 *.swp
 *.toc

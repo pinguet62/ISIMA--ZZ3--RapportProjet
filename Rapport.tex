@@ -30,9 +30,6 @@
 ]{geometry}
 
 
-
-
-
 %%%%%%%%%% Inter-ligne %%%%%%%%%%
 \usepackage{setspace}
 \onehalfspacing			% 1.5
@@ -43,7 +40,7 @@
 \lstset{
 	showstringspaces = false,	% masquer les espaces
 	tabsize = 4,				% nombre d'espace par tabulation
-	basicstyle=\ttfamily,		% caractères de même taille
+	basicstyle = \ttfamily,		% caractères de même taille
 	xleftmargin = 30 pt,		% marge à gauche
 	xrightmargin = 0 pt,		% marge à droite
 	aboveskip = -1 pt,			% espace au dessus de la zone
@@ -97,7 +94,7 @@
 \usepackage{titlesec}
 \titlespacing*{\chapter}
 	{0pt}							% retrait à gauche
-	{10pt plus 10pt minus 10pt}		% espace avant
+	{0pt}							% espace avant
 	{10pt}							% espace après
 \titlespacing*{\section}
 	{0pt}							% retrait à gauche
@@ -167,14 +164,18 @@
 
 %%%%%%%%%% Table des matières %%%%%%%%%%
 \cleardoublepage
+\pagestyle{empty}
 \tableofcontents
+\thispagestyle{empty}
 
 %%%%%%%%%% Table des figures %%%%%%%%%%
 \cleardoublepage
+\pagestyle{empty}
 \listoffigures
 \thispagestyle{empty}
 
 %%%%%%%%%% Corps du rapport %%%%%%%%%%
+\cleardoublepage
 \pagestyle{corps}
 \pagenumbering{arabic} % pagination en chiffres arabes
 
@@ -198,6 +199,7 @@
 
 \clearpage
 \pagestyle{empty}
+\cleardoublepage
 
 %%%%%%%%%% Bibliographie %%%%%%%%%%
 %\cleardoublepage

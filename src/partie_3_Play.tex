@@ -28,22 +28,38 @@ ce qui implique que le serveur ne gère pas d'état pour les clients.
 
 L'authentification des utilisateurs est un point sensible lors du développement d'un service car il
 implique souvent le stockage des mots de passes et donc de sécuriser l'application, veiller à corriger
-les failles de sécurité,... 
+les failles de sécurité, ... 
 
-Le protocole OAuth 2.0 permet de contourner ce problème en délégant la gestion de l'authentification
-à une autre entité. Beaucoup de services internet populaire implémentent ce système ce qui permet de 
-aux utilisateurs de se connecter à un service en utilisant un de leurs comptes déjà existant. Ce 
-protocole facilite donc la connexion pour le service qui l'utilise et les utilisateurs qui n'ont pas 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{OAuth 2.0}
+
+\textit{OAuth}\footnote{Site web : \href{http://oauth.net/}{http://oauth.net/}} est un protocole standard et libre d'accès aux données.
+Il permet l'authentification à une API en demandant à l'utilisateur les données qu'il souhaite partager.
+La gestion des utilisateurs se fait ensuite grâce à un "token" unique délivré par le service tiers.
+
+Beaucoup de services internet populaire implémentent ce système ce qui permet de aux utilisateurs de se connecter à un service en utilisant un de leurs comptes déjà existant.
+C'est le cas par exemple de Deezer ou de StackOverflow qui proposent de s'identifier avec un compte Google, Facebook, Twitter, Windows Live ou autre.
+Ce protocole facilite donc la connexion pour le service qui l'utilise et les utilisateurs qui n'ont pas 
 à créer un nouveau compte sur chaque nouveau site web par exemple.
 
-Nous avons alors décider d'utiliser OAuth 2.0 car nous ne souhaitions pas d'une part mettre en place 
-et administrer une base de donnée et d'autre part, nous ne voulions pas avoir à gérer la sécurité de 
-des données stockés. OAuth s'est donc avéré comme la solution idéale pour notre projet.
+Nous avons alors décider d'utiliser OAuth 2.0 car nous ne souhaitions pas mettre en place et administrer une base de donnée pour les utilisateurs.
+D'autre part nous ne voulions pas avoir à gérer la sécurité des données stockés.
+OAuth s'est donc avéré comme la solution idéale pour notre projet.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\paragraph{Fonctionnement -}
+\subsubsection{Fonctionnement}
 
-Comme le montre le schéma \ref{schema-oauth-google}, l'authentification se compose de plusieurs étapes.
+\begin{figure}[!h]
+	\center
+	\includegraphics[width=0.6\textwidth]{img/OAuth.png}
+	\caption{OAuth : fonctionnement}
+	Source : \href{http://www.siteduzero.com/informatique/tutoriels/creez-des-applications-pour-windows-phone/qu-est-ce-qu-oauth}{http://www.siteduzero.com}
+	\label{OAuth}
+\end{figure}
+
+Comme le montre le schéma \ref{OAuth}, l'authentification se compose de plusieurs étapes.
 Premièrement, l'utilisateur va se voir rediriger vers les sites de Google ou il devra donner son accord
 à l'application d'effectuer des actions sur son compte. Dans notre cas, il s'agissait comme le montre
 l'impression d'écran \ref{croquette-droit-delegation} de pouvoir récupérer les contacts et d'utiliser 
@@ -51,8 +67,7 @@ le compte GTalk de l'utilisateur.
 
 Une fois que l'utilisateur à accepter, il doit s'identifier sur la plateforme de Google avec ses identifiants.
 Si l'authentification réussi alors l'application se voit offrir un token. Elle doit alors échanger 
-son token avec les serveurs de google dans le but d'obtenir un token d'accès. Si tout se déroule correctement,
-elle obtient le token d'accès.
+son token avec les serveurs de Google dans le but d'obtenir un token d'accès. Si tout se déroule correctement elle obtient le token d'accès.
 
 Lors de chaque requête pour récupérer des informations sur l'utilisateur, le webservice devra alors
 joindre son token d'accès à la requête pour avoir une réponse. De cette manière, nous pouvons récupérer
@@ -61,6 +76,7 @@ la sécurisation du mot de passe à Google.
 
 Nous avons choisi d'utiliser l'authentification avec la plateforme Google car nous pouvions ainsi 
 successivement, s'authentifier sur GTalk et récupérer les contacts de l'utilisateur.
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -78,8 +94,6 @@ De plus notre cahier des charges spécifie leurs gestion simple et transparente.
 \label{Téléchargement des contacts Google}
 
 Par défaut sous Androïd les contacts du téléphone sont dupliqués sur le serveur Google grâce au compte associés au smartphone, ce qui permet d'avoir une synchronisation sur tous les services Google dont Gmail.
-\\
-
 
 Étant connecté sur notre site internet via son compte Google, notre application web va ainsi pouvoir récupérer la liste des contacts de l'utilisateur grâce au token délivré par Google lors de l'authentification.
 
@@ -155,7 +169,7 @@ les données lors des différents échanges.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsubsection{notification}
+\subsubsection{Notifications}
 
 Les messages XMPP et SMS ne sont pas les seuls à transiter sur les websockets. En effet nous avons 
 implémenter de la même manière un système de notification de nouveau message. Le système est simple,
@@ -165,14 +179,14 @@ qui a envoyé le message verra un compteur apparaitre à coté de son nom. Cela 
 l'utilisateur courant du nombre de message non lus envoyés par un de ses contacts.
 \begin{figure}[!h]
 	\center
-	\includegraphics[width=0.3\textwidth]{img/siteWeb_notifications.png}
+	\includegraphics[width=0.2\textwidth]{img/siteWeb_notifications.png}
 	\caption{Site web : notifications}
 	\label{siteWeb_notifications}
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \subsection{Design du site}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Le design du site est l'un des thèmes que nous avons travaillé pour cette partie la du projet.
 
