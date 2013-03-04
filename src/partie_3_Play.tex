@@ -36,15 +36,18 @@ les failles de sécurité, ...
 
 \textit{OAuth}\footnote{Site web : \href{http://oauth.net/}{http://oauth.net/}} est un protocole standard et libre d'accès aux données.
 Il permet l'authentification à une API en demandant à l'utilisateur les données qu'il souhaite partager.
-La gestion des utilisateurs se fait ensuite grâce à un "token" unique délivré par le service tiers.
+La gestion des utilisateurs se fait ensuite grâce à un "jeton", appelé "token" par la suite, unique délivré par le service tiers.
 
 Beaucoup de services internet populaire implémentent ce système ce qui permet de aux utilisateurs de se connecter à un service en utilisant un de leurs comptes déjà existant.
-C'est le cas par exemple de Deezer ou de StackOverflow qui proposent de s'identifier avec un compte Google, Facebook, Twitter, Windows Live ou autre.
+C'est le cas par exemple de Deezer ou de Stack Overflow qui proposent de s'identifier avec un compte Google, Facebook, Twitter, Windows Live ou autre.
 Ce protocole facilite donc la connexion pour le service qui l'utilise et les utilisateurs qui n'ont pas 
 à créer un nouveau compte sur chaque nouveau site web par exemple.
+\\
 
-Nous avons alors décider d'utiliser OAuth 2.0 car nous ne souhaitions pas mettre en place et administrer une base de donnée pour les utilisateurs.
-D'autre part nous ne voulions pas avoir à gérer la sécurité des données stockés.
+
+Nous avons alors décider d'utiliser OAuth 2.0 pour deux raisons importantes.
+La première concerne la gestion des utilisateurs sur notre service web qui n'aura pas lieu d'être, ce qui facilite le développement en laissant Google s'occuper de la sécurité, et le fait que nous voulions proposer une solution sans enregistrement des informations des utilisateurs.
+La seconde raison concerne l'accès aux données et aux services du compte Google, qui nous permettra l'accès aux contacts et à GTalk.
 OAuth s'est donc avéré comme la solution idéale pour notre projet.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -53,21 +56,43 @@ OAuth s'est donc avéré comme la solution idéale pour notre projet.
 
 \begin{figure}[!h]
 	\center
-	\includegraphics[width=0.6\textwidth]{img/OAuth.png}
+	\includegraphics[width=0.8\textwidth]{img/OAuth_fonctionnement.png}
 	\caption{OAuth : fonctionnement}
-	Source : \href{http://www.siteduzero.com/informatique/tutoriels/creez-des-applications-pour-windows-phone/qu-est-ce-qu-oauth}{http://www.siteduzero.com}
-	\label{OAuth}
+	Source : \href{http://www.ibm.com/developerworks/web/library/wa-oauthsupport/ThreeLeggedOAuthDance.gif}{http://www.ibm.com}
+	\label{OAuth_fonctionnement}
 \end{figure}
 
-Comme le montre le schéma \ref{OAuth}, l'authentification se compose de plusieurs étapes.
-Premièrement, l'utilisateur va se voir rediriger vers les sites de Google ou il devra donner son accord
-à l'application d'effectuer des actions sur son compte. Dans notre cas, il s'agissait comme le montre
-l'impression d'écran \ref{croquette-droit-delegation} de pouvoir récupérer les contacts et d'utiliser 
-le compte GTalk de l'utilisateur.
+L'authentification se déroule en plusieurs étapes présentées dans le schéma \ref{OAuth_fonctionnement}.
+\\
 
-Une fois que l'utilisateur à accepter, il doit s'identifier sur la plateforme de Google avec ses identifiants.
-Si l'authentification réussi alors l'application se voit offrir un token. Elle doit alors échanger 
-son token avec les serveurs de Google dans le but d'obtenir un token d'accès. Si tout se déroule correctement elle obtient le token d'accès.
+
+\begin{figure}[!h]
+	\center
+	\includegraphics[width=0.6\textwidth]{img/OAuth_authentificationGoogle.png}
+	\caption{OAuth : authentification sur Google}
+	\label{OAuth_authentificationGoogle}
+\end{figure}
+
+Premièrement l'utilisateur doit s'authentifier sur la plateforme de l'API proposant le service OAuth.
+Dans notre cas il s'agit de Google, comme le montre la capture \ref{OAuth_authentificationGoogle}.
+\\
+
+
+\begin{figure}[!h]
+	\center
+	\includegraphics[width=0.6\textwidth]{img/OAuth_demandeAutorisations.png}
+	\caption{OAuth : demande d'autorisation}
+	\label{OAuth_demandeAutorisations}
+\end{figure}
+
+Ensuite l'utilisateur est redirigé vers la page des autorisations où il doit accepter les demandes de l'application.
+Dans notre cas il s'agit de récupérer les contacts et d'utiliser le compte GTalk de l'utilisateur, comme le montre la capture d'écran \ref{OAuth_demandeAutorisations}.
+
+Si l'authentification réussi alors l'application se voit offrir un token.
+Elle doit alors l'échanger avec les serveurs de Google dans le but d'obtenir un token d'accès.
+Si tout se déroule correctement elle obtient le token d'accès.
+\\
+
 
 Lors de chaque requête pour récupérer des informations sur l'utilisateur, le webservice devra alors
 joindre son token d'accès à la requête pour avoir une réponse. De cette manière, nous pouvons récupérer
