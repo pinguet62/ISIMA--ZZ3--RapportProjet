@@ -21,12 +21,6 @@
 \usepackage{ulem}				% souligner
 
 
-%%%%%%%%%% Numérotation des paragraphes %%%%%%%%%%
-\setcounter{secnumdepth}{3}		% corps
-\setcounter{tocdepth}{3}		% table des matières
-%\setafterparaskip{1ex}
-
-
 %%%%%%%%%% Marges %%%%%%%%%%
 \usepackage[
 	tmargin = 2.5 cm,	% haut
@@ -34,6 +28,9 @@
 	lmargin = 2.5 cm,	% gauche
 	rmargin = 2.5 cm	% droite
 ]{geometry}
+
+
+
 
 
 %%%%%%%%%% Inter-ligne %%%%%%%%%%
@@ -75,10 +72,6 @@
 %\input{src/glossaire}
 
 
-%%%%%%%%%% Notes de bas de page %%%%%%%%%%
-\usepackage[bottom]{footmisc}	% Collé au bas de page
-
-
 %%%%%%%%%% En-tête et Pied de page %%%%%%%%%%
 \usepackage{fancyhdr}
 \input{src/en_tete-pied_de_page}
@@ -89,6 +82,35 @@
 	\thispagestyle{empty}
 	\@starttoc{toc}}
 \makeatother
+
+
+%%%%%%%%%% Notes de bas de page %%%%%%%%%%
+\usepackage[bottom]{footmisc}	% Collé au bas de page
+
+
+%%%%%%%%%% Numérotation des parties %%%%%%%%%%
+\setcounter{secnumdepth}{3}		% corps
+\setcounter{tocdepth}{3}		% table des matières
+
+
+%%%%%%%%%% Espacement des parties %%%%%%%%%%
+\usepackage{titlesec}
+\titlespacing*{\chapter}
+	{0pt}							% retrait à gauche
+	{10pt plus 10pt minus 10pt}		% espace avant
+	{10pt}							% espace après
+\titlespacing*{\section}
+	{0pt}							% retrait à gauche
+	{40pt plus 10pt minus 10pt}		% espace avant
+	{10pt}							% espace après
+\titlespacing*{\subsection}
+	{0pt}							% retrait à gauche
+	{30pt plus 10pt minus 10pt}		% espace avant
+	{10pt}							% espace après
+\titlespacing*{\subsubsection}
+	{0pt}							% retrait à gauche
+	{20pt plus 10pt minus 10pt}		% espace avant
+	{10pt}							% espace après
 
 
 %%%%%%%%%% En-tête de chapitre %%%%%%%%%%
@@ -113,7 +135,8 @@
 	\vskip 40\p@						% espace vertical 
 }
 \makeatother							% fin d'utilisation des variables @
-
+% Format des titres de paragraphe
+%\renewcommand{\paragraph}{\paragraph{#1}\newline} TODO
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

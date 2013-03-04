@@ -13,7 +13,6 @@ Principalement présent sur les systèmes d'exploitation des produits de la marq
 Xcode est l'environnement de développement intégré (EDI, ou IDE pour Integrated Development Environment) pour Mac OS X.
 Il permet le développement d'application en Langage C, C++ et bien évidemment en Objective-C pour OS X ou iOS.
 C'est un IDE très complet qui comporte un éditeur de texte, un débogueur, un compilateur, un gestionnaire de projet et de version, un gestionnaire de documents pour la documentation, et d'autres outils facilitant le développement.
-\\
 
 
 
@@ -38,7 +37,6 @@ Cette politique très ferme d'Apple permet d'éviter toute faille de sécurité 
 
 Les frameworks \textit{privés} proposent des outils de bas niveau non-documentés.
 Apple en disposent de plusieurs dans leur kit de développement mais ceux-ci ne peuvent pas être directement utilisés : il est nécessaire d'importer "à la main" des fichiers d'entête (headers ".h") pour pouvoir compiler le projet.
-\\
 
 
 
@@ -58,7 +56,6 @@ Cette méthode ne peut pas être utilisée dans ce projet, car l'application mob
 
 Cependant l'utilisation du framework privé \textit{CoreTelephony} le permet.
 L'envoi de SMS peut ainsi se faire grâce à une ligne de code et de manière totalement automatique.
-\\
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -92,7 +89,6 @@ Le schéma \ref{iOS_sandbox} représente les différents répertoires des sandbo
 
 Malheureusement aucune solution d'accès au fichier n'a été trouvée pour le moment.
 En attendant de trouver une solution, nous avons copié le fichier dans un répertoire accessible pour effectuer les différents tests de lecture, et la fonction permettant la lecture des SMS renvoie des données "statiques" pour valider le fonctionnement de l'application.
-\\
 
 
 
@@ -124,5 +120,4 @@ Le schéma \ref{pattern_singleton} représente le diagramme de classe du singlet
 	\includegraphics[width=0.3\textwidth]{img/pattern_singleton.png}
 	\caption{Pattern singleton : diagramme de classe}
 	\label{pattern_singleton}
-~~\\
 \end{figure}

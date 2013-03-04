@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Fonctionnement global}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- 
+
 Le fonctionnement global du projet sur la plateforme Androïd est relativement simple. Nous souhaitons
 simplement pouvoir utiliser le téléphone portable comme un intermédiaire entre notre site web et le 
 correspondant avec qui nous discutons. Pour cela le téléphone fait office de proxy entre les deux 
@@ -10,28 +10,27 @@ proxy sert principalement à relayer l'information d'un élément vers un autre,
 Dans notre cas, le proxy s'occupe de recevoir des SMS et de les rediriger vers le site web. 
 Réciproquement, il récupère les messages envoyés par le site web et envoie un SMS vers le correspondant
 défini  dans le message reçu.
-\\
- 
- 
- 
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Création du service}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- 
+
 Les applications fonctionnant sous Androïd régissent par un principe simple, celui des "activités".
 Pour simplifier, une activité représente une fonctionnalité graphique d'une application. Par exemple,
 lorsqu'une application est ouverte, on tombe sur un menu avec différentes possibilités d'actions 
 qui nous sont offertes. Le menu représente donc ici une activité.
 \\
- 
- 
+
+
 Il faut savoir qu’une activité, lorsqu'elle est active, occupe le système qui attend des événements.
 Si l'utilisateur ne fait rien alors que le menu est affiché, le système peut s'occuper d'autres 
 tâches annexes. Si en revanche l'utilisateur navigue dans le menu, alors l'activité est considérée
 comme en fonctionnement et bloque toutes autres opérations non relatives à l'application exécutée.
 \\
- 
- 
+
+
 Dans le cadre de notre application, nous devons à son lancement, effectuer une série d'opérations 
 afin de mettre l'application en fonctionnement. Cela consiste notamment, à vérifier l'état de la 
 connectivité internet, récupérer les identifiants et se connecter sur le service GTalk. Ces 
@@ -41,11 +40,11 @@ gravement impacté. En revanche, si une erreur intervient, le programme va alors
 Cela n'est pas concevable. En effet, une perte soudaine de réseau pourrait par exemple mettre 
 l'application dans un état de recherche ce qui est potentiellement très lent. Cette situation rendrait
 le terminal complètement bloqué durant la recherche. 
- 
+
 Ce comportement n'étant pas souhaitable, nous avons dû trouver une solution pour pouvoir outrepasser ce blocage.
 \\
- 
- 
+
+
 Nous avons alors utilisé le concept Androïd de "services". Celui-ci consiste à exécuter une fonctionnalité 
 de manière asynchrone. Le service n'impacte pas le système, au contraire il fonctionne avec lui. 
  
@@ -55,18 +54,18 @@ de manière asynchrone. Le service n'impacte pas le système, au contraire il fo
   \caption{Fonctionnement d'un service Androïd}
   \label{fonctionnement-des-services-android}
 \end{figure}
- 
+
 Comme montré dans la figure \ref{fonctionnement-des-services-android}, le service n'est pas  bloquant. 
 Lors de son exécution, le système continue de fonctionner sur d'autres tâches en paire avec le service lancé.
 \\
- 
+
+
 Dans notre cas, le service sert à deux tâches principales. Tout d'abord il va configurer l'authentification
 de l'utilisateur sur GTalk. Ensuite il va simplement se mettre en attente d'événements et le cas échéant, 
 traiter ce même événement.
-\\
- 
- 
- 
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Authentification sur GTalk}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -78,7 +77,7 @@ Initialement, nous utilisions la méthode classique d'authentification. Lorsque 
 l'application, celle-ci lui demande de rentrer ses identifiant et mot de passe. Cela effectué, 
 l'application se charge de se connecter et de s'authentifier sur les serveurs GTalk en utilisant les
 paramètres rentrés par l'utilisateur.
- 
+
 Cette solution est la plus simple à implémenter mais n'est malheureusement pas la plus agréable
 à utiliser ni la plus sure. Nous forçons en effet l'utilisateur à rentrer ses identifiants ce qui 
 pourrait paraître légitime mais reste contraignant pour l'utilisateur. Celui-ci ne sait pas ce que 
@@ -86,22 +85,22 @@ nous faisons avec son mot de passe. Une application malveillante pourrait récup
 et s'en servir à des fins illégales. Dans notre cas, même si nous n'avions aucune mauvaise intention,
 nous ne pouvons demander aux utilisateurs de nous faire confiance. Nous avons donc opté pour une 
 deuxième solution, l'identification avec OAuth2.0.
- 
+
 Comme vu précédemment, OAuth permet de réaliser des actions en agissant à la place de l'utilisateur. 
 Ici nous souhaitions simplement utiliser le compte GTalk de l'utilisateur sans que celui-ci ai à rentrer
 ses identifiants. 
- 
+
 Le fonctionnement est simple. Lorsque utilisateur lance l'application, celle-ci demande tout d'abord
 à l'utilisateur quel compte Gmail il veut utiliser parmi ceux présent sur son téléphone. Dans le cas
 ou il n'existe qu'un seul compte, celui-ci est choisi par défaut.
 \\
- 
- 
+
+
 Suite à cela, le protocole OAuth va demander à l'utilisateur une seule et unique fois s'il autorise 
 l'application à accéder à son compte GTalk. La validation effectuée, l'application pourra se connecter 
 à chaque lancement, automatiquement et sans importuner l'utilisateur. 
- 
- 
+
+
 Contrairement à l'authentification sur le site web, l'authentification sur une plateforme Androïd est
 théoriquement plus simple. En effet, une fois que l'utilisateur a donné son accord, le serveur 
 d'authentification de Google va directement envoyer le token d'authentification. Il n'y a alors pas 
@@ -124,39 +123,38 @@ besoin d'effectuer une deuxième étape pour récupérer ce dernier comme le mon
   \caption{Procédure d'obtention d'un token avec un appareil Androïd}
   \label{obtention-token-avec-android}
 \end{figure}
- 
+
 Néanmoins, une des difficultés d'implémenter ce protocole est que la librairie de gestion de compte
 XMPP pour Androïd dénommée Asmack est différente de celle utiliser pour le site web. Asmack est un fork 
 de la librairie Smack pour Androïd et est l'unique librairie gérant les comptes XMPP présente sur
 Androïd. Ne souhaitant pas ré-implémenter toutes les fonctionnalités présentes dans celle-ci, nous avons
 choisi de l'utiliser. Malheureusement, les différences entre les deux librairies nous ont empêché de 
 ré-implémenter notre précédent travail effectué pour le site web qui était fonctionnel. 
- 
+
 Le langage Java fonctionne sur une machine virtuelle. Celle-ci contient des fonctionnalités basique sur
 lesquelles le langage peut s'appuyer. Dalvik, la machine virtuelle pour Java présente sur Androïd n'est 
 pas exactement la même que la machine virtuelle basique. En effet, pour des soucis de rapidité et de 
 légèreté, certaines parties de Dalvik ont été réécrites pour en faire une machine virtuelle plus adaptée
 aux plateformes mobiles.
- 
+
 Smack a été développé sur la machine virtuelle Java basique tandis que Asmack a été développé sur Dalvik.
 Cette différence implique des changements quant aux fonctionnements de celles-ci. 
- 
+
 Finalement, en ré-implémentant certaines fonctionnalités, nous avons réussi à nous authentifier avec OAuth.
 \\
 
 
 Authentifier un utilisateur via OAuth2.0 sur Androïd a été un réel challenge. Il nous a fallu comprendre 
-et trouver des équivalences au fonctionnement de Smack. 
-\\
- 
- 
- 
+et trouver des équivalences au fonctionnement de Smack.
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Envoi et réception d'un SMS}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- 
+
 \subsubsection{Réception d'un SMS}
- 
+
 Une fois authentifié, nous souhaitons pouvoir utiliser notre téléphone comme proxy. Notre application
 doit en effet servir d'intermédiaire entre le site web et un correspondant. Pour cela elle doit tout
 d'abord surveiller l'arrivée de nouveaux messages. 
@@ -170,50 +168,48 @@ Cela permet généralement à l'application qui l'utilise d’être prévenue lo
 d'un comportement particulier du téléphone.
 Son fonctionnement est simple. Il permet de s'enregistrer auprès du téléphone qui maintient une base de donnée des 
 membres à avertir lors d'un changement particulier.
- 
+
 \begin{figure}[!h]
   \center
   \includegraphics[width=12cm]{img/broadcast-receivers.png}
   \caption{Fonctionnement des broadcasts receivers sur Androïd}
   \label{broadcast-receivers}
 \end{figure}
- 
+
 Le schéma \ref{broadcast-receivers} permet de voir le système du téléphone qui contient les différents broadcast receiver à avertir en cas de nouveaux messages. Ici l'application de rédaction de SMS ainsi que deux autres 
 applications seront averties.
- 
+
 Dans notre cas, nous nous en sommes servis pour d'une part être avertis de l'arrivée de nouveaux SMS et d'autre part pour pouvoir récupérer le dit message et le traiter.
-\\
- 
- 
+
+
 \subsubsection{Envoi d'un SMS}
- 
+
 L'envoi quant à lui est beaucoup plus trivial. Androïd met à disposition un outil permettant d'envoyer
 des messages.
-\\
- 
- 
- 
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Traitement des événements}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- 
+
 \subsubsection{Architecture de l'application}
- 
+
 Pour pouvoir réagir en fonction d'un événement, notre application a successivement adopté deux méthodes.
  
 La première a été réalisée pour répondre aux besoins de notre projet. Il s'agissait d'un test sur le 
-type de l'événement entrant. Plus précisément, il s'agissait de vérifier si l’événement en question 
+type de l'événement entrant. Plus précisément, il s'agissait de vérifier si l'événement en question 
 était la réception d'un nouveau SMS ou bien la réception d'un nouveau message XMPP en provenance du 
 site web. En fonction du type de message en entrée, l'application décide d'envoyer, de  transmettre le message
 vers le bon destinataire. 
- 
+
 Ce fonctionnement basique convenait totalement à nos besoins mais par soucis de rendre notre application
 évolutive nous avons travaillé sur une deuxième solution.
  
 Lors de la réception d'un message XMPP, nous souhaitions pouvoir réagir différemment en fonction du contenu
 du message. Dans le cadre de notre projet, nous n'avions comme but, l'envoi de SMS à partir du webservice
 seulement. Notre travail respectait donc ce principe mais ne permettait aucune évolutivité.
- 
+
 A supposer qu'un tiers soit intéressé par la communication entre le webservice et le téléphone par 
 l'intermédiaire de XMPP, mais que son but ne soit pas d'envoyer de simple SMS, nous avons implémenté une
 architecture permettant de rajouter facilement de nouvelles fonctionnalités. Pour donner des exemples, 
@@ -232,7 +228,7 @@ dynamiquement un comportement particulier en fonction des conditions de son exé
 \begin{figure}[H]
   \center
   \includegraphics[width=12cm]{img/pattern_strategie.png}
-  \caption{Diagramme UML du pattern stratégie}
+  \caption{Pattern stratégie : diagramme UML}
   \label{pattern_strategie}
 \end{figure}
  
@@ -242,13 +238,13 @@ de rajouter d'autres stratégies comme l'extinction du téléphone ou encore l'e
 \\
  
  
-La fabrique décrite sur le schéma \ref{fabrique}, permet, quant à elle, de créer des objets sans en connaître l'existence avant le lancement du programme.
+La fabrique décrite sur le schéma \ref{pattern_fabrique}, permet, quant à elle, de créer des objets sans en connaître l'existence avant le lancement du programme.
  
 \begin{figure}[H]
   \center
-  \includegraphics[width=10cm]{img/fabrique.png}
-  \caption{Diagramme UML du pattern fabrique}
-  \label{fabrique}
+  \includegraphics[width=10cm]{img/pattern_fabrique.png}
+  \caption{Pattern fabrique : diagramme UML}
+  \label{pattern_fabrique}
 \end{figure}
  
 Dans notre cas, elle permet de créer des stratégies et de les utiliser. En effet, la fabrique 
@@ -264,27 +260,26 @@ soucier de l'implémentation du choix de la stratégie. Cette partie est figée 
 \begin{figure}[H]
   \center
   \includegraphics[width=10cm]{img/fonctionnement-strategie-factorie.png}
-  \caption{Diagramme UML du pattern fabrique}
+  \caption{Pattern fabrique : fonctionnement}
   \label{fonctionnement-strategie-factorie}
-~~\\
 \end{figure}
- 
- 
+
+
 \subsubsection{Traitements des événements}
- 
+
 Selon l'événement reçu, le traitement à effectuer n'est pas le même. Pour notre application, nous avons 
 crée et recensé deux événements et traitements associés possibles.
- 
+
 La réception d'un SMS est notre premier cas. Comme le montre le schéma \ref{encapsulation-sms}, le traitement se 
 décompose en trois étapes. 
- 
+
 \begin{figure}[!h]
   \center
   \includegraphics[width=12cm]{img/encapsulation-sms.png}
   \caption{Traitements lors de la réception d'un SMS}
   \label{encapsulation-sms}
 \end{figure}
- 
+
 Il faut tout d'abord récupérer le contenu du message ainsi que son auteur. Puis il faut encapsuler 
 ses données dans un message au format Json. Enfin nous terminons par envoyer le message encapsulé vers 
 le webservice qui s'occupera de notifier à l'utilisateur l'arrivée d'un nouveau message.

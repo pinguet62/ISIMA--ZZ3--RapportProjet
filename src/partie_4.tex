@@ -9,7 +9,6 @@ résoudre de la manière la plus efficiente qui soit. Seulement, il nous est arr
 parties pour lesquelles aucune solutions propres n'étaient réalisable. Nous avons alors du appliquer 
 des manipulations qui empêcheront ce projet d'être un projet considéré comme stable dans un environnement
 grand public.
-\\
 
 
 
@@ -25,7 +24,6 @@ grand public.
 
 Le choix de prendre GTalk comme moyen de communication n'était pas sans conséquences.
 En effet, il nous est apparu impossible d'avoir une gestion fine de GTalk.
-\\
 
 
 
@@ -50,7 +48,6 @@ Bien heureusement nos applications filtreront les messages qui ne leur sont pas 
 
 Comme le montre l'image \ref{boucle-envoi-xmpp}, une boucle se crée.
 Dans les faits elle ne causera jamais de problème, néanmoins c'est un comportement qui n'était pas désiré et qu'on aurait souhaité éviter.
-\\
 
 
 
@@ -80,7 +77,6 @@ Le résultat est montré dans l'image \ref{message-xmpp-json-gmail}, un message 
 	\includegraphics[width=10cm]{img/message-xmpp-json-gmail.png}
 	\caption{Message XMPP au format JSON reçu avec GTalk}
 	\label{message-xmpp-json-gmail}
-~~\\
 \end{figure}
 
 
@@ -97,7 +93,6 @@ Le résultat est montré dans l'image \ref{message-xmpp-json-gmail}, un message 
 
 Concernant le site web, les résultats obtenus sont probants.
 Néanmoins, plusieurs fonctionnalités auxquels nous avions pensé manquent.
-\\
 
 
 
@@ -114,7 +109,6 @@ Néanmoins, plusieurs fonctionnalités auxquels nous avions pensé manquent.
 Notre cahier des charges requérait une gestion simple et transparente des contacts pour l'utilisateur.
 
 Le téléchargement des contacts du compte Google couplé avec l'affichage de la liste des noms de ces contacts, permet à l'utilisateur d'envoyer des SMS très simplement sans avoir à spécifier le numéro de téléphone.
-\\
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -126,7 +120,6 @@ Ainsi par défaut il n'est pas possible d'accéder aux contacts de l'iPhone depu
 
 Contrairement à Google qui effectue ses authentifications avec OAuth, Apple ne propose pas d'API permettant l'authentification sur iCloud.
 La solution trouvée a donc été de synchroniser les contacts de l'iPhone avec un compte Google, au détriment de la synchronisation d'iCloud.
-\\
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -167,7 +160,6 @@ Play propose l'utilisation de \textit{caches}, mais ceux-ci sont accessible depu
 Ainsi nous avons été obligé de contourner le problème en utilisant des méthodes "peu orthodoxes" ce qui rend l'application peu maintenable.
 De plus cela ne facilite pas l'ajout de fonctionnalités.
 L'utilisation d'un framework plus adapté aurait été un choix plus judicieux.
-\\
 
 
 
@@ -185,7 +177,6 @@ Concernant tout d'abord les applications mobiles, certaines contraintes imposés
 
 Au vu des des techniques employés, il nous parait peu probable de pouvoir publier aucune des
 deux applications sur les "markets" officiels de Apple et Google.
-\\
 
 
 
@@ -226,7 +217,6 @@ système. Nous avons utiliser un éditeur de bases de données SQLite avec leque
 particulière. Il s'agit de la clé sms\_outgoing\_check\_max\_count que nous avons positionné à un nombre négatif afin de ne plus avoir de limite d'envoi de message.
 
 Cela modifié, nous sommes alors en mesure d'envoyer autant de messages que désiré. 
-\\
 
 
 
@@ -245,7 +235,6 @@ Ceci pourra réduire fortement le nombre d'utilisateurs car ceux-ci devront inst
 
 Compte tenu des problèmes rencontrés et des solutions utilisées, il est clair que l'application iOS nécessite de nombreuses améliorations.
 La lecture des SMS, imposant de lire un fichier hors de la Sandbox comme expliqué dans la partie \ref{III_iOS_receptionSMS}, sera le problème principal à résoudre dans la prochaine version de l'application iOS.
-\\
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -261,4 +250,3 @@ Cette solution n'a pas peu être testée pour l'instant car le fichier de la bas
 De plus lors de l'envoi des SMS aucune confirmation d'envoi n'est possible.
 Cela pourrait poser certains problème lorsque le SMS à envoyer est important.
 La solution pourrait être recherchée dans les prochaines versions de notre solution.
-\\
