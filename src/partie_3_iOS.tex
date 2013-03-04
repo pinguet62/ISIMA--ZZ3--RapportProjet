@@ -64,7 +64,8 @@ L'envoi de SMS peut ainsi se faire grâce à une ligne de code et de manière to
 
 La réception des SMS se décomposent en deux étapes : l'événement de réception, puis la lecture.
 
-\paragraph{Événement de réception -}
+\Jparagraph{Événement de réception}
+
 Le système envoie des notifications lors des appels ou de la réception des SMS.
 Pour que notre programme reçoive ces notifications il est nécessaire de définir une fonction qui sera appelée lorsque ces événements seront émis.
 Cela se fait grâce à la fonction \lstinline{CTTelephonyCenterAddObserver()} dans laquelle un des paramètres correspond à la fonction appelée.
@@ -72,7 +73,8 @@ Cela se fait grâce à la fonction \lstinline{CTTelephonyCenterAddObserver()} da
 % TODO: jailbreak ?
 
 
-\paragraph{Lecture des SMS -}
+\Jparagraph{Lecture des SMS}
+
 Les SMS sont stockés dans une base de données SQLite dont le fichier est \lstinline{/private/var/mobile/Library/SMS/sms.db} dans le répertoire du terminal.
 Pour parcourir les messages il est nécessaire d'effectuer des requêtes SQL, comme dans n'importe quelle base de données.
 

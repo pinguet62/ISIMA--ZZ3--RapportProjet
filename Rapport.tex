@@ -133,7 +133,11 @@
 }
 \makeatother							% fin d'utilisation des variables @
 % Format des titres de paragraphe
-%\renewcommand{\paragraph}{\paragraph{#1}\newline} TODO
+\newcommand\Jparagraph[1]{	%
+	\paragraph{#1}			%
+	~\par					% retour à la ligne + alinéa
+}
+%\renewcommand\paragraph[1]{\paragraph{#1}~\par}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

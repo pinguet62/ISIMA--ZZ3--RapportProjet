@@ -125,21 +125,21 @@ La solution trouvée a donc été de synchroniser les contacts de l'iPhone avec 
 
 \subsubsection{Amélioration possibles}
 
-\paragraph{Filtres -}
+\Jparagraph{Filtres}
+
 Dans notre site web nous avons filtré la liste des contacts à ceux présents dans notre carnet d'adresses et en nous limitant aux numéros de téléphone portable (06.xx.xx.xx.xx ou 07.xx.xx.xx.xx).
 Or il est possible de recevoir des SMS venant de numéro "courts" (8.xx.xx), de numéros de téléphone fixe, ou bien encore de contacts non présents dans nos contacts.
 
 Notre version actuelle ne permet pas de résoudre ce problème.
 Une solution serait d'ajouter un filtre sur la page web et enregistrer tous les contacts ainsi que ceux non présents dans Google.
-\\
 
 
-\paragraph{Anciens SMS -}
+\Jparagraph{Anciens SMS}
+
 Lorsque l'on se déconnecte du site web toutes les conversations sont supprimées du serveur en raison de la politique de sécurisé que nous avons voulu garder.
 
 Nous avons pensé apporter une amélioration à notre site web dans la prochaine version, qui aurait pour objectif de télécharger les anciens messages échangés avec un contact.
 Ces SMS transiteraient aussi par le protocole XMPP, soit un par un, soit sous forme de liste selon les performances et la taille maximale des messages XMPP.
-\\
 
 
 

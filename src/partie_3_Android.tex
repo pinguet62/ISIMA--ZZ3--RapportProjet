@@ -72,7 +72,9 @@ traiter ce même événement.
 
 Pour pouvoir converser avec le site web, l'application a besoin de s'authentifier auprès du service
 GTalk. Pour cela, nous sommes passés par deux étapes. 
- 
+\\
+
+
 Initialement, nous utilisions la méthode classique d'authentification. Lorsque l'utilisateur lance 
 l'application, celle-ci lui demande de rentrer ses identifiant et mot de passe. Cela effectué, 
 l'application se charge de se connecter et de s'authentifier sur les serveurs GTalk en utilisant les
@@ -84,29 +86,20 @@ pourrait paraître légitime mais reste contraignant pour l'utilisateur. Celui-c
 nous faisons avec son mot de passe. Une application malveillante pourrait récupérer les identifiants
 et s'en servir à des fins illégales. Dans notre cas, même si nous n'avions aucune mauvaise intention,
 nous ne pouvons demander aux utilisateurs de nous faire confiance. Nous avons donc opté pour une 
-deuxième solution, l'identification avec OAuth2.0.
-
-Comme vu précédemment, OAuth permet de réaliser des actions en agissant à la place de l'utilisateur. 
-Ici nous souhaitions simplement utiliser le compte GTalk de l'utilisateur sans que celui-ci ai à rentrer
-ses identifiants. 
-
-Le fonctionnement est simple. Lorsque utilisateur lance l'application, celle-ci demande tout d'abord
-à l'utilisateur quel compte Gmail il veut utiliser parmi ceux présent sur son téléphone. Dans le cas
-ou il n'existe qu'un seul compte, celui-ci est choisi par défaut.
+deuxième solution, l'identification avec OAuth 2.0.
 \\
 
 
-Suite à cela, le protocole OAuth va demander à l'utilisateur une seule et unique fois s'il autorise 
-l'application à accéder à son compte GTalk. La validation effectuée, l'application pourra se connecter 
-à chaque lancement, automatiquement et sans importuner l'utilisateur. 
-
+Comme détaillé dans la partie \ref{Authentification avec OAuth 2.0}, OAuth permet de réaliser des actions en agissant à la place de l'utilisateur. 
+Ici nous souhaitions simplement utiliser le compte GTalk de l'utilisateur sans que celui-ci ai à rentrer
+ses identifiants. 
 
 Contrairement à l'authentification sur le site web, l'authentification sur une plateforme Androïd est
 théoriquement plus simple. En effet, une fois que l'utilisateur a donné son accord, le serveur 
 d'authentification de Google va directement envoyer le token d'authentification. Il n'y a alors pas 
 besoin d'effectuer une deuxième étape pour récupérer ce dernier comme le montre le diagramme 
 \ref{obtention-token-avec-android}.
- 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %title Envoi d'un SMS
  
@@ -116,7 +109,7 @@ besoin d'effectuer une deuxième étape pour récupérer ce dernier comme le mon
 %Application->serveur GTalk: authentification(token)
 %serveur GTalk->Application: authentification validé
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
- 
+
 \begin{figure}[!h]
   \center
   \includegraphics[width=15cm]{img/obtention-token-avec-android.png}
@@ -124,6 +117,7 @@ besoin d'effectuer une deuxième étape pour récupérer ce dernier comme le mon
   \label{obtention-token-avec-android}
 \end{figure}
 
+% utilisation de aSmack ?
 Néanmoins, une des difficultés d'implémenter ce protocole est que la librairie de gestion de compte
 XMPP pour Androïd dénommée Asmack est différente de celle utiliser pour le site web. Asmack est un fork 
 de la librairie Smack pour Androïd et est l'unique librairie gérant les comptes XMPP présente sur
@@ -138,7 +132,7 @@ légèreté, certaines parties de Dalvik ont été réécrites pour en faire une
 aux plateformes mobiles.
 
 Smack a été développé sur la machine virtuelle Java basique tandis que Asmack a été développé sur Dalvik.
-Cette différence implique des changements quant aux fonctionnements de celles-ci. 
+Cette différence implique des changements quant aux fonctionnements de celles-ci.
 
 Finalement, en ré-implémentant certaines fonctionnalités, nous avons réussi à nous authentifier avec OAuth.
 \\
@@ -158,21 +152,20 @@ et trouver des équivalences au fonctionnement de Smack.
 Une fois authentifié, nous souhaitons pouvoir utiliser notre téléphone comme proxy. Notre application
 doit en effet servir d'intermédiaire entre le site web et un correspondant. Pour cela elle doit tout
 d'abord surveiller l'arrivée de nouveaux messages. 
- 
-Sur Androïd, le monitoring d'événements n'implique pas de devoir sortir des sentiers battus. En effet,
-des outils mis en place par Google autorisent la surveillance du comportement du téléphone. Dans notre cas 
-nous avons pu utiliser le principe de "Broadcast Receiver" du système. 
- 
+\\
+
+
+Google autorisent la surveillance du comportement du téléphone sur Androïd, permettant de réagir lors de différents événements.
+Dans notre cas nous avons pu utiliser le principe de "Broadcast Receiver" du système. 
 Un broadcast receiver est un outil qui permet de rendre une application consciente de son environnement.
-Cela permet généralement à l'application qui l'utilise d’être prévenue lors de nouvelles notifications ou 
+Cela permet généralement à l'application qui l'utilise d'être prévenue lors de nouvelles notifications ou 
 d'un comportement particulier du téléphone.
-Son fonctionnement est simple. Il permet de s'enregistrer auprès du téléphone qui maintient une base de donnée des 
-membres à avertir lors d'un changement particulier.
+Son fonctionnement est simple : il permet de s'enregistrer auprès du téléphone qui maintient une base de donnée des membres à avertir lors d'un changement particulier.
 
 \begin{figure}[!h]
   \center
   \includegraphics[width=12cm]{img/broadcast-receivers.png}
-  \caption{Fonctionnement des broadcasts receivers sur Androïd}
+  \caption{Androïd : fonctionnement des broadcasts receivers}
   \label{broadcast-receivers}
 \end{figure}
 
@@ -187,28 +180,45 @@ Dans notre cas, nous nous en sommes servis pour d'une part être avertis de l'ar
 L'envoi quant à lui est beaucoup plus trivial. Androïd met à disposition un outil permettant d'envoyer
 des messages.
 
+% développer ?
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Traitement des événements}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsubsection{Architecture de l'application}
+\subsection{Fonctionnement}
 
-Pour pouvoir réagir en fonction d'un événement, notre application a successivement adopté deux méthodes.
- 
-La première a été réalisée pour répondre aux besoins de notre projet. Il s'agissait d'un test sur le 
-type de l'événement entrant. Plus précisément, il s'agissait de vérifier si l'événement en question 
-était la réception d'un nouveau SMS ou bien la réception d'un nouveau message XMPP en provenance du 
-site web. En fonction du type de message en entrée, l'application décide d'envoyer, de  transmettre le message
-vers le bon destinataire. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Ce fonctionnement basique convenait totalement à nos besoins mais par soucis de rendre notre application
-évolutive nous avons travaillé sur une deuxième solution.
- 
-Lors de la réception d'un message XMPP, nous souhaitions pouvoir réagir différemment en fonction du contenu
-du message. Dans le cadre de notre projet, nous n'avions comme but, l'envoi de SMS à partir du webservice
-seulement. Notre travail respectait donc ce principe mais ne permettait aucune évolutivité.
+\subsubsection{Globalité}
+
+Le fonctionnement global de notre application est relativement simple.
+Elle a été tout d'abord implémentée de manière à répondre aux besoins du projet et être fonctionnelle pour donner une première version.
+
+Lors de la réception d'un SMS sur le smartphone l'application va tout d'abord récupérer le contenu du message ainsi que son auteur.
+Puis les données sont être encapsulée dans un message au format JSON.
+Enfin le message est envoyé vers le webservice grâce à GTalk, qui s'occupera de notifier à l'utilisateur l'arrivée d'un nouveau message.
+
+\begin{figure}[!h]
+  \center
+  \includegraphics[width=12cm]{img/encapsulation-sms.png}
+  \caption{Traitements lors de la réception d'un SMS}
+  \label{encapsulation-sms}
+\end{figure}
+
+Lors de la réception d'un nouveau message XMPP la méthode est l'inverse de celle de la réception d'un SMS.
+L'application va dé désencapsuler le message XMPP pour y récupérer l'information utile.
+Cela fait, notre application va ensuite envoyer le SMS au destinataire.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Architecture}
+
+Dans le cadre de notre projet, nous n'avions comme but, l'envoi de SMS à partir du webservice seulement.
+Lors de la réception d'un message XMPP, nous souhaitions pouvoir réagir différemment en fonction du contenu du message.
+Notre travail respectait donc ce principe mais ne permettait aucune évolutivité.
 
 A supposer qu'un tiers soit intéressé par la communication entre le webservice et le téléphone par 
 l'intermédiaire de XMPP, mais que son but ne soit pas d'envoyer de simple SMS, nous avons implémenté une
@@ -218,27 +228,35 @@ de photos de son téléphone à partir du webserver.
  
 Pour permettre cette évolutivité, nous avons réalisé une architecture qui s'adapte automatiquement en
 fonction des messages reçus. Il s'agit ici des patrons de conceptions fabrique et stratégie. 
-\\
- 
- 
-Le patron de stratégie est un patron de conception de type comportemental. Il permet de d'adopter 
-dynamiquement un comportement particulier en fonction des conditions de son exécution. Le schéma 
-\ref{pattern_strategie} décrit le fonctionnement du modèle.
- 
+
+
+\Jparagraph{Pattern stratégie}
+
+Le patron de stratégie est un patron de conception de type comportemental.
+Il permet d'adopter dynamiquement un comportement particulier en fonction des conditions de son exécution.
+Concrètement, quelque soit la classe implémentant l'interface de base, l'exécution d'un algorithme s'effectue simplement depuis une seule méthode.
+Le schéma \ref{pattern_strategie} décrit le fonctionnement du modèle.
+
 \begin{figure}[H]
   \center
   \includegraphics[width=12cm]{img/pattern_strategie.png}
   \caption{Pattern stratégie : diagramme UML}
   \label{pattern_strategie}
 \end{figure}
- 
-Dans notre cas, il permet de créer différents types de stratégies qui pourront potentiellement être utilisés. 
-Notre projet ne contenait que la stratégie "envoi de SMS" mais, avec cette architecture, il est possible 
-de rajouter d'autres stratégies comme l'extinction du téléphone ou encore l'envoi d'un email par exemple.
+
+Dans notre cas, il permet de créer différents types de stratégies qui pourront potentiellement être utilisés.
+Notre projet ne contient pour l'instant que les stratégies "envoi de SMS" et "envoi de messages XMPP", mais avec cette architecture il est possible de rajouter d'autres stratégies, comme par exemple l'extinction du téléphone ou encore l'envoi d'un email par exemple.
 \\
- 
- 
-La fabrique décrite sur le schéma \ref{pattern_fabrique}, permet, quant à elle, de créer des objets sans en connaître l'existence avant le lancement du programme.
+
+
+\Jparagraph{Pattern fabrique}
+
+L'avantage du pattern stratégie est qu'il permet de regrouper les algorithmes à exécuter dans des classes séparées plutôt que de le mélanger dans du code différent.
+Mais son inconvénient réside dans le fait qu'il est nécessaire d'effectuer un test sur le type d'algorithme à exécuter à chaque endroit où l'on doit instancier les stratégies.
+
+Le pattern fabrique permet de palier à ce problème en définissant les règles d'instanciation des différentes stratégies.
+Ainsi les différents tests ne se retrouvent pas dupliqués à chaque parties du code, mais regroupé dans une classe qui se chargera de définir la stratégie à appliquer en fonction des données qu'on lui transmet.
+Le schéma \ref{pattern_fabrique} représente le diagramme de classe du pattern fabrique.
  
 \begin{figure}[H]
   \center
@@ -247,44 +265,24 @@ La fabrique décrite sur le schéma \ref{pattern_fabrique}, permet, quant à ell
   \label{pattern_fabrique}
 \end{figure}
  
-Dans notre cas, elle permet de créer des stratégies et de les utiliser. En effet, la fabrique 
-va analyser chaque nouveau message. En fonction de leurs contenus, elle devra décider d'une stratégie
-et l'appliquer.
+Dans notre cas la fabrique va analyser chaque nouveau message.
+En fonction de leurs contenus elle devra décider d'une stratégie.
 \\
- 
-La figure \ref{fonctionnement-strategie-factorie} montre le fonctionnement du projet lors de l'arrivée d'un
-nouveau message. L'intérêt principal de ce pattern est l'évolutivité qu'il apporte. Le choix dynamique à
-l'exécution de la stratégie à un intérêt pour le développeur. En effet, celui-ci n'a plus besoin de se
-soucier de l'implémentation du choix de la stratégie. Cette partie est figée et fonctionnelle en plus d'être très facilement complétée.
- 
-\begin{figure}[H]
+
+
+\Jparagraph{Ajout de fonctionnalités}
+
+\begin{figure}[!h]
   \center
   \includegraphics[width=10cm]{img/fonctionnement-strategie-factorie.png}
   \caption{Pattern fabrique : fonctionnement}
   \label{fonctionnement-strategie-factorie}
 \end{figure}
 
+La figure \ref{fonctionnement-strategie-factorie} montre le fonctionnement du projet lors de l'arrivée d'un
+nouveau message (SMS ou XMPP).
+L'intérêt principal de ce pattern est l'évolutivité qu'il apporte.
+Le choix dynamique à l'exécution de la stratégie à un intérêt pour le développeur.
+En effet, celui-ci n'a plus besoin de se soucier de l'implémentation du choix de la stratégie ni de son exécution.
 
-\subsubsection{Traitements des événements}
-
-Selon l'événement reçu, le traitement à effectuer n'est pas le même. Pour notre application, nous avons 
-crée et recensé deux événements et traitements associés possibles.
-
-La réception d'un SMS est notre premier cas. Comme le montre le schéma \ref{encapsulation-sms}, le traitement se 
-décompose en trois étapes. 
-
-\begin{figure}[!h]
-  \center
-  \includegraphics[width=12cm]{img/encapsulation-sms.png}
-  \caption{Traitements lors de la réception d'un SMS}
-  \label{encapsulation-sms}
-\end{figure}
-
-Il faut tout d'abord récupérer le contenu du message ainsi que son auteur. Puis il faut encapsuler 
-ses données dans un message au format Json. Enfin nous terminons par envoyer le message encapsulé vers 
-le webservice qui s'occupera de notifier à l'utilisateur l'arrivée d'un nouveau message.
- 
-Concernant le deuxième événement possible, il s'agit de la réception d'un nouveau message XMPP. Comme le
-montre le schéma \ref{desencapsulation}, contrairement au premier traitement, il va être désencapsulé pour 
-pouvoir y récupérer l'information utile. Cela fait, notre fabrique va s'occuper d'appliquer la stratégie 
-adaptée pour ce nouveau message. Dans notre cas, puisque nous avions juste la stratégie d'envoi de SMS, c'était toujours celle-ci qui était appliquée.
+L'ajout d'une fonctionnalité ne se fait plus dans chaque partie du code source, mais en définissant une nouvelle stratégie (classe représentative) puis en ajoutant sa définition dans la fabrique.
