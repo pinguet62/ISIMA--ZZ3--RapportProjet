@@ -113,6 +113,7 @@
 %%%%%%%%%% En-tête de chapitre %%%%%%%%%%
 % Numérotation des chapitres en chiffres romains
 \renewcommand{\thechapter}{\Roman{chapter}}
+
 % Format des titres de chapitre
 \makeatletter							% début d'utilisation des variables @
 \def\@makechapterhead#1{
@@ -132,12 +133,12 @@
 	\vskip 40\p@						% espace vertical 
 }
 \makeatother							% fin d'utilisation des variables @
+
 % Format des titres de paragraphe
 \newcommand\Jparagraph[1]{	%
 	\paragraph{#1}			%
 	~\par					% retour à la ligne + alinéa
 }
-%\renewcommand\paragraph[1]{\paragraph{#1}~\par}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
