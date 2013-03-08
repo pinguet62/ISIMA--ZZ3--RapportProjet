@@ -1,3 +1,7 @@
+TODO:
+    Aligner les 2 noms sur la page de garde
+    Page après l'introduction : en-tête
+    Intro : le futur fait bizarre
 
 
 

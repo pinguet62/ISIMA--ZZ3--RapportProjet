@@ -1,6 +1,6 @@
 Nous avons pu terminer le projet dans les temps seulement, même si celui-ci est aujourd'hui fonctionnel, il persiste encore certains problèmes. Nous avons toujours essayé de les
 résoudre de la manière la plus efficiente qui soit. Cependant, il nous est arrivé de bloquer sur des
-parties pour lesquelles aucune solution propre n'était réalisable. Nous avons alors du appliquer 
+parties pour lesquelles aucune solution propre n'était réalisable. Nous avons alors du appliquer 
 des manipulations qui empêcheront ce projet d'être un projet considéré comme stable dans un environnement
 grand public.
 
@@ -64,7 +64,7 @@ En pratique, cela impliquait de recevoir des messages au format JSon sur plusieu
 \end{figure}
 
 Comme le montre le schéma \ref{broadcast-xmpp}, lors de l'envoi d'un message XMPP originellement destiné uniquement à une application ou au web service, c'est tout l'environnement qui reçoit et affiche les nouveaux messages.
-Le résultat est montré dans l'image \ref{message-xmpp-json-gmail}, un message XMPP au format JSON. 
+Le résultat est montré dans l'image \ref{message-xmpp-json-gmail}, un message XMPP au format JSON. 
 	
 \begin{figure}[!h]
 	\center
@@ -108,7 +108,7 @@ Le téléchargement des contacts du compte Google couplé avec l'affichage de la
 
 \subsubsection{Problème}
 
-Comme expliqué dans la partie \ref{Téléchargement des contacts Google} les contacts présents sur les smartphones Androïd sont synchronisés avec le même compte Gmail.
+Comme expliqué dans la partie \ref{Téléchargement des contacts Google} les contacts présents sur les smartphones Android sont synchronisés avec le même compte Gmail.
 Sous iOS cette fonction existe mais n'est pas associé à Google : Apple utilise iCloud qui permet aux utilisateurs une synchronisation automatique des contacts sur tous les appareils Apple associés à l'adresse mail.
 Ainsi par défaut il n'est pas possible d'accéder aux contacts de l'iPhone depuis le site web.
 
@@ -125,7 +125,7 @@ Dans notre site web nous avons filtré la liste des contacts à ceux présents d
 Or il est possible de recevoir des SMS venant de numéro "courts" (8.xx.xx), de numéros de téléphone fixe, ou bien encore de contacts non présents dans nos contacts.
 
 Notre version actuelle ne permet pas de résoudre ce problème.
-Une solution serait d'ajouter un filtre sur la page web et d’enregistrer tous les contacts ainsi que ceux non présents dans Google.
+Une solution serait d'ajouter un filtre sur la page web et d'enregistrer tous les contacts ainsi que ceux non présents dans Google.
 
 
 \Jparagraph{Anciens SMS}
@@ -178,27 +178,27 @@ deux applications sur les "markets" officiels de Apple et Google.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Androïd}
+\subsection{Android}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %\subsubsection{Limite des SMS}
 
-Un autre souci que nous avons rencontré sur la plateforme Androïd est la limite de SMS. Pour empêcher
-les applications de spammer à la place d'un utilisateur, Androïd a mis en place une limite d'envoi de 
+Un autre souci que nous avons rencontré sur la plateforme Android est la limite de SMS. Pour empêcher
+les applications de spammer à la place d'un utilisateur, Android a mis en place une limite d'envoi de 
 SMS pour une application. Toute application ne peut envoyer plus de 100 SMS par jours. Une fois la limite
 atteinte, l'application est bridée. Chaque nouveau SMS envoyé doit alors faire l'objet d'une confirmation
-par l'utilisateur ce qui rend le projet inutile car nous perdons l'avantage de pouvoir se passer du 
+par l'utilisateur ce qui rend le projet inutile car nous perdons l'avantage de pouvoir se passer du 
 téléphone portable.
 
 Malgré nos recherches sur le sujet, il s'est avéré impossible de modifier cette limite en passant par
 des solutions réglementaires. La limite est définie dans la base de données système du système d'exploitation
 qu'on ne peut modifier sans avoir les droits Root.
 
-Les droits Root correspondent simplement à avoir le droit de tout modifier sur son système avec les 
+Les droits Root correspondent simplement à avoir le droit de tout modifier sur son système avec les 
 risques que cela comporte. Il faut savoir que pour obtenir ces droits, il faut rooter son téléphone.
 Bien que rooter son téléphone est légal en soit, il comporte certains risques. Une mauvaise manipulation
-peut engendrer des dommages sur le téléphone. De plus l'action en elle même n'est pas à la porté des 
+peut engendrer des dommages sur le téléphone. De plus l'action en elle même n'est pas à la porté des 
 débutants.
 \\
 
@@ -206,11 +206,11 @@ débutants.
 Ces principales raisons font que notre application ne fonctionnera correctement que sur les téléphones
 possédant les droits root. Cela implique que l'utilisateur devra être capable de manipuler son téléphone.
 
-Pour pouvoir outrepasser ces contraintes, il est nécessaire de modifier le comportement par défaut du 
-système. Nous avons utilisé un éditeur de bases de données SQLite avec lequel nous avons modifié une clé 
+Pour pouvoir outrepasser ces contraintes, il est nécessaire de modifier le comportement par défaut du 
+système. Nous avons utilisé un éditeur de bases de données SQLite avec lequel nous avons modifié une clé 
 particulière. Il s'agit de la clé sms\_outgoing\_check\_max\_count que nous avons positionnée à un nombre négatif afin de ne plus avoir de limite d'envoi de message.
 
-Cela modifié, nous sommes alors en mesure d'envoyer autant de messages que désirés. 
+Cela modifié, nous sommes alors en mesure d'envoyer autant de messages que désirés. 
 
 
 
@@ -225,7 +225,7 @@ Cela modifié, nous sommes alors en mesure d'envoyer autant de messages que dés
 \subsubsection{Généralité}
 
 L'utilisation des frameworks privés rendra impossible la publication de notre solution sur l'Apple Store.
-Ceci pourra réduire fortement le nombre d'utilisateurs car ceux-ci devront installer l'application manuellement. 
+Ceci pourra réduire fortement le nombre d'utilisateurs car ceux-ci devront installer l'application manuellement. 
 
 Compte tenu des problèmes rencontrés et des solutions utilisées, il est clair que l'application iOS nécessite de nombreuses améliorations.
 La lecture des SMS, imposant de lire un fichier hors de la Sandbox comme expliqué dans la partie \ref{III_iOS_receptionSMS}, sera le problème principal à résoudre dans la prochaine version de l'application iOS.
@@ -270,10 +270,10 @@ nouvelles fonctionnalités pour le rendre véritablement fonctionnel.
 
 Notre web service fonctionne à condition d'avoir un serveur. Nous l'avons exclusivement fait fonctionner en local
 sur nos machines personnelles et nous n'avons donc pas pu vérifier son fonctionnement en condition réelle à grande
-échelle. Pour cela, nous aurions souhaité déployer notre service dans le cloud. Cela signifie simplement que le 
-projet aurait un support matériel qui ne nous appartient pas mais que nous louons. 
+échelle. Pour cela, nous aurions souhaité déployer notre service dans le cloud. Cela signifie simplement que le 
+projet aurait un support matériel qui ne nous appartient pas mais que nous louons. 
 
-\textit{Heroku}\footnote{Site web : \href{http://www.heroku.com/}{http://www.heroku.com/}} permet de louer un emplacement virtuel 
+\textit{Heroku}\footnote{Site web : \href{http://www.heroku.com/}{http://www.heroku.com/}} permet de louer un emplacement virtuel 
 dans lequel nous aurions pu y placer notre service. Ce système est très intéressant principalement pour une raison : il permet ainsi de déléguer la gestion du ou des serveurs à une autre entreprise. Un peu de la même manière que pour
 le protocole OAuth, une tache précise est alors gérée par une entité compétente. Plus aucun besoin alors de s'occuper
 de la maintenance des serveurs ou de gérer les charges des serveurs pour avoir un load balancing idéal.
@@ -289,13 +289,13 @@ principalement monétaire, nous avons choisi de ne pas déployer notre applicati
 
 \subsection{Déploiement dans les markets}
 
-De même, nous pensons que, une fois le projet mature, il serait intéressant de mettre nos applications Androïd et iOS dans 
-leurs markets respectifs. Les markets sont les plateformes de téléchargement officiel de iOS et Androïd. Déployer notre 
+De même, nous pensons que, une fois le projet mature, il serait intéressant de mettre nos applications Android et iOS dans 
+leurs markets respectifs. Les markets sont les plateformes de téléchargement officiel de iOS et Android. Déployer notre 
 travail sur ces markets est avant tout un souci de compréhension de ses plateformes. Cela permet aussi de gagner en visibilité
 même si n'est pas l'objectif premier de ce projet.
-\\
-Malheureusement, il nous parait impossible aujourd'hui de publier sur les markets. Les raisons sont les moyens mis en œuvre 
-pour développer nos applications. Sur iOS comme sur Androïd nous utilisons des solutions non présentes sur les frameworks officiels
+
+Malheureusement, il nous parait impossible aujourd'hui de publier sur les markets. Les raisons sont les moyens mis en œuvre 
+pour développer nos applications. Sur iOS comme sur Android nous utilisons des solutions non présentes sur les frameworks officiels
 pour réaliser certaines fonctionnalités. Rendre notre travail public sur un market ne serait donc sûrement pas possible ou bien
 inutilisable pour une grande majorité des utilisateurs.
 
@@ -309,9 +309,9 @@ inutilisable pour une grande majorité des utilisateurs.
 
 C'est clairement le maillon faible de notre travail. Nous avons privilégié le développement rapide pour atteindre nos objectifs
 primaires, les fonctionnalités. Plutôt que de se concentrer sur une tâche et de garantir son fonctionnement, nous avons préféré
-développer le plus possibles de fonctionnalités et nous nous sommes occupés de beaucoup de tâches secondaire. La couverture 
+développer le plus possibles de fonctionnalités et nous nous sommes occupés de beaucoup de tâches secondaire. La couverture 
 de test du projet est donc nulle. Couvrir un projet signifie garantir que celui-ci fonctionne à l'aide d'un jeu de tests. Cette partie
-d'un projet professionnel est souvent conséquente et nous avons fait le choix de ne pas travailler dessus. Il s'agit, à nos yeux, 
+d'un projet professionnel est souvent conséquente et nous avons fait le choix de ne pas travailler dessus. Il s'agit, à nos yeux, 
 d'une erreur et nous pensons adopter un développement orienté \textit{Tests Driven Development} sur nos prochains projets. Les méthodes
 TDD reposent sur une approche ou les tests de fonctionnement seront écris avant les fonctionnalités. Cela permet de maintenir un projet
 fonctionnel.
@@ -344,4 +344,4 @@ Nous avons néanmoins délibérément abandonné la conception d'une documentati
 
 Actuellement, le projet ne gère que les SMS. Nous avons envisagé de rendre possible l'utilisation de MMS. L'un des avantages principal
 de l'ordinateur par rapport au téléphone portable et la facilité avec laquelle on peut par exemple récupérer une image et à l'aide d'un
-glisser déposer, l'insérer dans un mail par exemple. Cette fonctionnalité serait très intéressante dans un projet comme celui la. 
+glisser déposer, l'insérer dans un mail par exemple. Cette fonctionnalité serait très intéressante dans un projet comme celui la. 

@@ -2,7 +2,7 @@
 \subsection{Fonctionnement global}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Le fonctionnement global du projet sur la plateforme Androïd est relativement simple. Nous souhaitons
+Le fonctionnement global du projet sur la plateforme Android est relativement simple. Nous souhaitons
 simplement pouvoir utiliser le téléphone portable comme un intermédiaire entre notre site web et le 
 correspondant avec qui nous discutons. Pour cela le téléphone fait office de proxy entre les deux 
 entités éloignées. Un proxy est un composant qui se place entre un interlocuteur et son auditeur. Le 
@@ -17,7 +17,7 @@ défini  dans le message reçu.
 \subsection{Création du service}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Les applications fonctionnant sous Androïd régissent par un principe simple, celui des "activités".
+Les applications fonctionnant sous Android régissent par un principe simple, celui des "activités".
 Pour simplifier, une activité représente une fonctionnalité graphique d'une application. Par exemple,
 lorsqu'une application est ouverte, on tombe sur un menu avec différentes possibilités d'actions 
 qui nous sont offertes. Le menu représente donc ici une activité.
@@ -45,13 +45,13 @@ Ce comportement n'étant pas souhaitable, nous avons dû trouver une solution po
 \\
 
 
-Nous avons alors utilisé le concept Androïd de "services". Celui-ci consiste à exécuter une fonctionnalité 
+Nous avons alors utilisé le concept Android de "services". Celui-ci consiste à exécuter une fonctionnalité 
 de manière asynchrone. Le service n'impacte pas le système, au contraire il fonctionne avec lui. 
  
 \begin{figure}[!h]
   \center
   \includegraphics[width=13cm]{img/fonctionnement-des-services-android.png}
-  \caption{Fonctionnement d'un service Androïd}
+  \caption{Fonctionnement d'un service Android}
   \label{fonctionnement-des-services-android}
 \end{figure}
 
@@ -94,7 +94,7 @@ Comme détaillé dans la partie \ref{Authentification avec OAuth 2.0}, OAuth per
 Ici nous souhaitions simplement utiliser le compte GTalk de l'utilisateur sans que celui-ci ai à rentrer
 ses identifiants. 
 
-Contrairement à l'authentification sur le site web, l'authentification sur une plateforme Androïd est
+Contrairement à l'authentification sur le site web, l'authentification sur une plateforme Android est
 théoriquement plus simple. En effet, une fois que l'utilisateur a donné son accord, le serveur 
 d'authentification de Google va directement envoyer le token d'authentification. Il n'y a alors pas 
 besoin d'effectuer une deuxième étape pour récupérer ce dernier comme le montre le diagramme 
@@ -113,20 +113,20 @@ besoin d'effectuer une deuxième étape pour récupérer ce dernier comme le mon
 \begin{figure}[!h]
   \center
   \includegraphics[width=15cm]{img/obtention-token-avec-android.png}
-  \caption{Procédure d'obtention d'un token avec un appareil Androïd}
+  \caption{Procédure d'obtention d'un token avec un appareil Android}
   \label{obtention-token-avec-android}
 \end{figure}
 
 % utilisation de aSmack ?
 Néanmoins, une des difficultés d'implémenter ce protocole est que la librairie de gestion de compte
-XMPP pour Androïd dénommée Asmack est différente de celle utiliser pour le site web. Asmack est un fork 
-de la librairie Smack pour Androïd et est l'unique librairie gérant les comptes XMPP présente sur
-Androïd. Ne souhaitant pas ré-implémenter toutes les fonctionnalités présentes dans celle-ci, nous avons
+XMPP pour Android dénommée Asmack est différente de celle utiliser pour le site web. Asmack est un fork 
+de la librairie Smack pour Android et est l'unique librairie gérant les comptes XMPP présente sur
+Android. Ne souhaitant pas ré-implémenter toutes les fonctionnalités présentes dans celle-ci, nous avons
 choisi de l'utiliser. Malheureusement, les différences entre les deux librairies nous ont empêché de 
 ré-implémenter notre précédent travail effectué pour le site web qui était fonctionnel. 
 
 Le langage Java fonctionne sur une machine virtuelle. Celle-ci contient des fonctionnalités basique sur
-lesquelles le langage peut s'appuyer. Dalvik, la machine virtuelle pour Java présente sur Androïd n'est 
+lesquelles le langage peut s'appuyer. Dalvik, la machine virtuelle pour Java présente sur Android n'est 
 pas exactement la même que la machine virtuelle basique. En effet, pour des soucis de rapidité et de 
 légèreté, certaines parties de Dalvik ont été réécrites pour en faire une machine virtuelle plus adaptée
 aux plateformes mobiles.
@@ -138,7 +138,7 @@ Finalement, en ré-implémentant certaines fonctionnalités, nous avons réussi 
 \\
 
 
-Authentifier un utilisateur via OAuth2.0 sur Androïd a été un réel challenge. Il nous a fallu comprendre 
+Authentifier un utilisateur via OAuth2.0 sur Android a été un réel challenge. Il nous a fallu comprendre 
 et trouver des équivalences au fonctionnement de Smack.
 
 
@@ -155,7 +155,7 @@ d'abord surveiller l'arrivée de nouveaux messages.
 \\
 
 
-Google autorisent la surveillance du comportement du téléphone sur Androïd, permettant de réagir lors de différents événements.
+Google autorisent la surveillance du comportement du téléphone sur Android, permettant de réagir lors de différents événements.
 Dans notre cas nous avons pu utiliser le principe de "Broadcast Receiver" du système. 
 Un broadcast receiver est un outil qui permet de rendre une application consciente de son environnement.
 Cela permet généralement à l'application qui l'utilise d'être prévenue lors de nouvelles notifications ou 
@@ -165,7 +165,7 @@ Son fonctionnement est simple : il permet de s'enregistrer auprès du téléphon
 \begin{figure}[!h]
   \center
   \includegraphics[width=12cm]{img/broadcast-receivers.png}
-  \caption{Androïd : fonctionnement des broadcasts receivers}
+  \caption{Android : fonctionnement des broadcasts receivers}
   \label{broadcast-receivers}
 \end{figure}
 
@@ -177,7 +177,7 @@ Dans notre cas, nous nous en sommes servis pour d'une part être avertis de l'ar
 
 \subsubsection{Envoi d'un SMS}
 
-L'envoi quant à lui est beaucoup plus trivial. Androïd met à disposition un outil permettant d'envoyer
+L'envoi quant à lui est beaucoup plus trivial. Android met à disposition un outil permettant d'envoyer
 des messages.
 
 % développer ?
