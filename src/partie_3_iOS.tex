@@ -30,13 +30,13 @@ Ces frameworks font la force des applications iOS car ils permettent d'interagir
 \\
 
 
-Il existe deux types de frameworks : les frameworks dits public et les frameworks dits privés.
+Il existe deux types de frameworks : les frameworks dits publiques et les frameworks dits privés.
 
-Les frameworks \textit{publics} doivent être documentés et approuvés par Apple pour que les applications qui les utilisent puissent être publiable sur l'Apple Store.
+Les frameworks \textit{publics} doivent être documentés et approuvés par Apple pour que les applications qui les utilisent puissent être publiables sur l'Apple Store.
 Cette politique très ferme d'Apple permet d'éviter toute faille de sécurité dans le système et permet de proposer des applications sûres aux utilisateurs.
 
 Les frameworks \textit{privés} proposent des outils de bas niveau non-documentés.
-Apple en disposent de plusieurs dans leur kit de développement mais ceux-ci ne peuvent pas être directement utilisés : il est nécessaire d'importer "à la main" des fichiers d'entête (headers ".h") pour pouvoir compiler le projet.
+Apple en dispose de plusieurs dans leur kit de développement mais ceux-ci ne peuvent pas être directement utilisés : il est nécessaire d'importer "à la main" des fichiers d'entête (headers ".h") pour pouvoir compiler le projet.
 
 
 
@@ -64,21 +64,20 @@ L'envoi de SMS peut ainsi se faire grâce à une ligne de code et de manière to
 
 La réception des SMS se décomposent en deux étapes : l'événement de réception, puis la lecture.
 
+
 \Jparagraph{Événement de réception}
 
 Le système envoie des notifications lors des appels ou de la réception des SMS.
 Pour que notre programme reçoive ces notifications il est nécessaire de définir une fonction qui sera appelée lorsque ces événements seront émis.
 Cela se fait grâce à la fonction \lstinline{CTTelephonyCenterAddObserver()} dans laquelle un des paramètres correspond à la fonction appelée.
 
-% TODO: jailbreak ?
-
 
 \Jparagraph{Lecture des SMS}
 
 Les SMS sont stockés dans une base de données SQLite dont le fichier est \lstinline{/private/var/mobile/Library/SMS/sms.db} dans le répertoire du terminal.
-Pour parcourir les messages il est nécessaire d'effectuer des requêtes SQL, comme dans n'importe quelle base de données.
+Pour parcourir les messages, il est nécessaire d'effectuer des requêtes SQL comme dans n'importe quelle base de données.
 
-Mais un problème critique : il est impossible d'accéder à ce fichier depuis une application.
+Mais un problème critique survient : il est impossible d'accéder à ce fichier depuis une application.
 En effet, chaque application iOS fonctionne séparément dans sa \textit{sandbox}, qui est un environnement virtuel clos permettant la protection contre les processus malveillants.
 Le schéma \ref{iOS_sandbox} représente les différents répertoires des sandbox.
 \begin{figure}[!h]
@@ -106,14 +105,13 @@ XMPPFramework est développé en Objective-C destiné aux applications OS X ou i
 \\
 
 
-% TODO: mise en commun avec Android ?
 Le client XMPP fonctionne comme celui sous Android.
-Lors de la réception d'un SMS l'application va formater le message sous le format JSON plus envoyer un message XMPP au propre compte Google.
+Lors de la réception d'un SMS l'application va formater le message sous le format JSON puis envoyer un message XMPP au propre compte Google.
 Lors de la réception de messages XMPP l'application va récupérer les données stockées sous le format XMPP puis va envoyer le SMS.
 \\
 
 
-Dans l'application mobile nous n'utiliserons qu'un seul client XMPP et nous voulions qu'il persiste durant toute la vie de l'application (jusqu'à ce que l'utilisateur tue le processus).
+Dans l'application mobile, nous n'utiliserons qu'un seul client XMPP et nous voulions qu'il persiste durant toute la vie de l'application (jusqu'à ce que l'utilisateur tue le processus).
 Le patron de conception (design pattern) \textit{singleton} a donc été utilisé dans le projet iOS.
 En effet singleton permet de s'assurer de n'avoir qu'une seule instance qui persiste en mémoire, et qui de plus est accessible dans toute l'application.
 Le schéma \ref{pattern_singleton} représente le diagramme de classe du singleton.

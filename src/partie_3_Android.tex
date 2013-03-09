@@ -4,7 +4,7 @@
 
 Le fonctionnement global du projet sur la plateforme Android est relativement simple. Nous souhaitons
 simplement pouvoir utiliser le téléphone portable comme un intermédiaire entre notre site web et le 
-correspondant avec qui nous discutons. Pour cela le téléphone fait office de proxy entre les deux 
+correspondant avec qui nous discutons. Pour cela, le téléphone fait office de proxy entre les deux 
 entités éloignées. Un proxy est un composant qui se place entre un interlocuteur et son auditeur. Le 
 proxy sert principalement à relayer l'information d'un élément vers un autre, il sert d'intermédiaire.
 Dans notre cas, le proxy s'occupe de recevoir des SMS et de les rediriger vers le site web. 
@@ -24,7 +24,7 @@ qui nous sont offertes. Le menu représente donc ici une activité.
 \\
 
 
-Il faut savoir qu’une activité, lorsqu'elle est active, occupe le système qui attend des événements.
+Il faut savoir qu'une activité, lorsqu'elle est active, occupe le système qui attend des événements.
 Si l'utilisateur ne fait rien alors que le menu est affiché, le système peut s'occuper d'autres 
 tâches annexes. Si en revanche l'utilisateur navigue dans le menu, alors l'activité est considérée
 comme en fonctionnement et bloque toutes autres opérations non relatives à l'application exécutée.
@@ -35,7 +35,7 @@ Dans le cadre de notre application, nous devons à son lancement, effectuer une 
 afin de mettre l'application en fonctionnement. Cela consiste notamment, à vérifier l'état de la 
 connectivité internet, récupérer les identifiants et se connecter sur le service GTalk. Ces 
 opérations rendent le système bloquant durant leur exécution. Cela n'est pas un problème lorsque la 
-connection s'effectue sans erreur. Le traitement durant moins d'une seconde, le système n'est pas
+connexion s'effectue sans erreur. Le traitement durant moins d'une seconde, le système n'est pas
 gravement impacté. En revanche, si une erreur intervient, le programme va alors essayer de la résoudre.
 Cela n'est pas concevable. En effet, une perte soudaine de réseau pourrait par exemple mettre 
 l'application dans un état de recherche ce qui est potentiellement très lent. Cette situation rendrait
@@ -60,7 +60,7 @@ Lors de son exécution, le système continue de fonctionner sur d'autres tâches
 \\
 
 
-Dans notre cas, le service sert à deux tâches principales. Tout d'abord il va configurer l'authentification
+Dans notre cas, le service sert à deux tâches principales. Tout d'abord, il va configurer l'authentification
 de l'utilisateur sur GTalk. Ensuite il va simplement se mettre en attente d'événements et le cas échéant, 
 traiter ce même événement.
 
@@ -91,7 +91,7 @@ deuxième solution, l'identification avec OAuth 2.0.
 
 
 Comme détaillé dans la partie \ref{Authentification avec OAuth 2.0}, OAuth permet de réaliser des actions en agissant à la place de l'utilisateur. 
-Ici nous souhaitions simplement utiliser le compte GTalk de l'utilisateur sans que celui-ci ai à rentrer
+Ici nous souhaitions simplement utiliser le compte GTalk de l'utilisateur sans que celui-ci ait à rentrer
 ses identifiants. 
 
 Contrairement à l'authentification sur le site web, l'authentification sur une plateforme Android est
@@ -118,14 +118,14 @@ besoin d'effectuer une deuxième étape pour récupérer ce dernier comme le mon
 \end{figure}
 
 % utilisation de aSmack ?
-Néanmoins, une des difficultés d'implémenter ce protocole est que la librairie de gestion de compte
-XMPP pour Android dénommée Asmack est différente de celle utiliser pour le site web. Asmack est un fork 
-de la librairie Smack pour Android et est l'unique librairie gérant les comptes XMPP présente sur
+Néanmoins, une des difficultés d'implémenter ce protocole est que la bibliothèque de gestion de compte
+XMPP pour Android dénommée Asmack est différente de celle utilisée pour le site web. Asmack est un fork 
+de la bibliothèque Smack pour Android et est l'unique bibliothèque gérant les comptes XMPP présente sur
 Android. Ne souhaitant pas ré-implémenter toutes les fonctionnalités présentes dans celle-ci, nous avons
-choisi de l'utiliser. Malheureusement, les différences entre les deux librairies nous ont empêché de 
+choisi de l'utiliser. Malheureusement, les différences entre les deux bibliothèque nous ont empêché de 
 ré-implémenter notre précédent travail effectué pour le site web qui était fonctionnel. 
 
-Le langage Java fonctionne sur une machine virtuelle. Celle-ci contient des fonctionnalités basique sur
+Le langage Java fonctionne sur une machine virtuelle. Celle-ci contient des fonctionnalités basiques sur
 lesquelles le langage peut s'appuyer. Dalvik, la machine virtuelle pour Java présente sur Android n'est 
 pas exactement la même que la machine virtuelle basique. En effet, pour des soucis de rapidité et de 
 légèreté, certaines parties de Dalvik ont été réécrites pour en faire une machine virtuelle plus adaptée
@@ -155,8 +155,8 @@ d'abord surveiller l'arrivée de nouveaux messages.
 \\
 
 
-Google autorisent la surveillance du comportement du téléphone sur Android, permettant de réagir lors de différents événements.
-Dans notre cas nous avons pu utiliser le principe de "Broadcast Receiver" du système. 
+Google autorise la surveillance du comportement du téléphone sur Android, permettant de réagir lors de différents événements.
+Dans notre cas, nous avons pu utiliser le principe de "Broadcast Receiver" du système. 
 Un broadcast receiver est un outil qui permet de rendre une application consciente de son environnement.
 Cela permet généralement à l'application qui l'utilise d'être prévenue lors de nouvelles notifications ou 
 d'un comportement particulier du téléphone.
@@ -198,7 +198,7 @@ Le fonctionnement global de notre application est relativement simple.
 Elle a été tout d'abord implémentée de manière à répondre aux besoins du projet et être fonctionnelle pour donner une première version.
 
 Lors de la réception d'un SMS sur le smartphone l'application va tout d'abord récupérer le contenu du message ainsi que son auteur.
-Puis les données sont être encapsulée dans un message au format JSON.
+Puis les données vont être encapsulées dans un message au format JSON.
 Enfin le message est envoyé vers le webservice grâce à GTalk, qui s'occupera de notifier à l'utilisateur l'arrivée d'un nouveau message.
 
 \begin{figure}[!h]
@@ -209,14 +209,14 @@ Enfin le message est envoyé vers le webservice grâce à GTalk, qui s'occupera 
 \end{figure}
 
 Lors de la réception d'un nouveau message XMPP la méthode est l'inverse de celle de la réception d'un SMS.
-L'application va dé désencapsuler le message XMPP pour y récupérer l'information utile.
+L'application va désencapsuler le message XMPP pour y récupérer l'information utile.
 Cela fait, notre application va ensuite envoyer le SMS au destinataire.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsubsection{Architecture}
 
-Dans le cadre de notre projet, nous n'avions comme but, l'envoi de SMS à partir du webservice seulement.
+Dans le cadre de notre projet, nous n'avions comme fonctionnalité de l'application que l'envoi de SMS.
 Lors de la réception d'un message XMPP, nous souhaitions pouvoir réagir différemment en fonction du contenu du message.
 Notre travail respectait donc ce principe mais ne permettait aucune évolutivité.
 
@@ -254,8 +254,8 @@ Notre projet ne contient pour l'instant que les stratégies "envoi de SMS" et "e
 L'avantage du pattern stratégie est qu'il permet de regrouper les algorithmes à exécuter dans des classes séparées plutôt que de le mélanger dans du code différent.
 Mais son inconvénient réside dans le fait qu'il est nécessaire d'effectuer un test sur le type d'algorithme à exécuter à chaque endroit où l'on doit instancier les stratégies.
 
-Le pattern fabrique permet de palier à ce problème en définissant les règles d'instanciation des différentes stratégies.
-Ainsi les différents tests ne se retrouvent pas dupliqués à chaque parties du code, mais regroupé dans une classe qui se chargera de définir la stratégie à appliquer en fonction des données qu'on lui transmet.
+Le pattern fabrique permet de palier ce problème en définissant les règles d'instanciation des différentes stratégies.
+Ainsi, les différents tests ne se retrouvent pas dupliqués à chaque partie du code, mais regroupé dans une classe qui se chargera de définir la stratégie à appliquer en fonction des données qu'on lui transmet.
 Le schéma \ref{pattern_fabrique} représente le diagramme de classe du pattern fabrique.
  
 \begin{figure}[H]
@@ -265,8 +265,8 @@ Le schéma \ref{pattern_fabrique} représente le diagramme de classe du pattern 
   \label{pattern_fabrique}
 \end{figure}
  
-Dans notre cas la fabrique va analyser chaque nouveau message.
-En fonction de leurs contenus elle devra décider d'une stratégie.
+Dans notre cas, la fabrique va analyser chaque nouveau message.
+En fonction de leur contenu elle devra décider d'une action à effectuer sur le smartphone.
 \\
 
 
@@ -275,7 +275,7 @@ En fonction de leurs contenus elle devra décider d'une stratégie.
 \begin{figure}[!h]
   \center
   \includegraphics[width=10cm]{img/fonctionnement-strategie-factorie.png}
-  \caption{Pattern fabrique : fonctionnement}
+  \caption{Pattern fabrique : fonctionnement dynamique}
   \label{fonctionnement-strategie-factorie}
 \end{figure}
 

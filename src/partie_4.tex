@@ -1,8 +1,13 @@
-Nous avons pu terminer le projet dans les temps seulement, même si celui-ci est aujourd'hui fonctionnel, il persiste encore certains problèmes. Nous avons toujours essayé de les
-résoudre de la manière la plus efficiente qui soit. Cependant, il nous est arrivé de bloquer sur des
-parties pour lesquelles aucune solution propre n'était réalisable. Nous avons alors du appliquer 
-des manipulations qui empêcheront ce projet d'être un projet considéré comme stable dans un environnement
-grand public.
+\cleardoublepage
+
+
+
+\chapter{Résultats - Discussion}
+
+Nous avons pu terminer le projet dans les temps seulement, même si celui-ci est aujourd'hui fonctionnel, il persiste encore certains problèmes.
+Nous avons toujours essayé de les résoudre de la manière la plus efficiente qui soit.
+Cependant, il nous est arrivé de bloquer sur des parties pour lesquelles aucune solution propre n'était réalisable.
+Nous avons alors du appliquer des manipulations qui empêcheront ce projet d'être un projet considéré comme stable dans un environnement grand public.
 
 
 
@@ -27,11 +32,11 @@ En effet, il nous est apparu impossible d'avoir une gestion fine de GTalk.
 
 \subsection{Réception et traitement}
 
-Lors de l'envoi d'un message XMPP d'un compte A vers un compte B, toutes les interfaces de connexions de B recevront le message.
+Lors de l'envoi d'un message XMPP d'un compte A vers un compte B, toutes les interfaces de connexion de B recevront le message.
 Alors l'envoi d'un message XMPP d'un compte A vers ce même compte A, le message sera aussitôt reçu par A.
 
-Dans notre cas le fait d'envoyer un message XMPP sur notre propre compte revient à recevoir et traiter ce même message que l'on vient d'envoyer.
-Bien heureusement nos applications filtreront les messages qui ne leurs sont pas destinés.
+Dans notre cas, le fait d'envoyer un message XMPP sur notre propre compte revient à recevoir et traiter ce même message que l'on vient d'envoyer.
+Bien heureusement, nos applications filtreront les messages qui ne leurs sont pas destinés.
 
 \begin{figure}[!h]
 	\center
@@ -54,7 +59,7 @@ Dans les faits, elle ne causera jamais de problème, néanmoins c'est un comport
 Les messages XMPP ne se limitent pas aux quelques clients présents dans notre projet : site web et applications mobiles.
 Tous les messages que nous envoyons sont aussi redirigés vers les outils utilisant GTalk.
 
-En pratique, cela impliquait de recevoir des messages au format JSon sur plusieurs lieux indésirables.
+En pratique, cela impliquait de recevoir des messages au format JSON sur plusieurs lieux indésirables.
 
 \begin{figure}[!h]
 	\center
@@ -63,7 +68,7 @@ En pratique, cela impliquait de recevoir des messages au format JSon sur plusieu
 	\label{broadcast-xmpp}
 \end{figure}
 
-Comme le montre le schéma \ref{broadcast-xmpp}, lors de l'envoi d'un message XMPP originellement destiné uniquement à une application ou au web service, c'est tout l'environnement qui reçoit et affiche les nouveaux messages.
+Comme le montre le schéma \ref{broadcast-xmpp}, lors de l'envoi d'un message XMPP originellement destiné uniquement à une application ou au web service, c'est tout l'environnement qui reçoit et affiche le nouveau message.
 Le résultat est montré dans l'image \ref{message-xmpp-json-gmail}, un message XMPP au format JSON. 
 	
 \begin{figure}[!h]
@@ -182,11 +187,9 @@ deux applications sur les "markets" officiels de Apple et Google.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%\subsubsection{Limite des SMS}
-
 Un autre souci que nous avons rencontré sur la plateforme Android est la limite de SMS. Pour empêcher
 les applications de spammer à la place d'un utilisateur, Android a mis en place une limite d'envoi de 
-SMS pour une application. Toute application ne peut envoyer plus de 100 SMS par jours. Une fois la limite
+SMS pour une application. Toute application ne peut envoyer plus de 100 SMS par jour. Une fois la limite
 atteinte, l'application est bridée. Chaque nouveau SMS envoyé doit alors faire l'objet d'une confirmation
 par l'utilisateur ce qui rend le projet inutile car nous perdons l'avantage de pouvoir se passer du 
 téléphone portable.
@@ -197,8 +200,8 @@ qu'on ne peut modifier sans avoir les droits Root.
 
 Les droits Root correspondent simplement à avoir le droit de tout modifier sur son système avec les 
 risques que cela comporte. Il faut savoir que pour obtenir ces droits, il faut rooter son téléphone.
-Bien que rooter son téléphone est légal en soit, il comporte certains risques. Une mauvaise manipulation
-peut engendrer des dommages sur le téléphone. De plus l'action en elle même n'est pas à la porté des 
+Bien que rooter son téléphone soit légal en soit, il comporte certains risques. Une mauvaise manipulation
+peut engendrer des dommages sur le téléphone. De plus, l'action en elle même n'est pas à la porté des 
 débutants.
 \\
 
@@ -235,13 +238,14 @@ La lecture des SMS, imposant de lire un fichier hors de la Sandbox comme expliqu
 \subsubsection{Les SMS}
 
 Lorsque l'on envoie un SMS manuellement depuis un iPhone, le message s'ajoute dans la conversation ce qui permet d'avoir un historique et un suivi des messages échangés avec la personne.
-Par contre lorsque les SMS sont envoyés depuis l'application, ceux-ci ne s'ajoutent pas dans la conversation avec le destinataire.
+Par contre, lorsque les SMS sont envoyés depuis l'application, ceux-ci ne s'ajoutent pas dans la conversation avec le destinataire.
 
 La solution qui pourrait être utilisée serait d'ajouter "manuellement" le message dans la base de données des SMS de l'iPhone depuis l'application juste avant son envoi.
 Cette solution n'a pas pu être testée pour l'instant car le fichier de la base de données est (pour l'instant) inaccessible comme expliqué dans la partie \ref{III_iOS_receptionSMS}.
 \\
 
-De plus lors de l'envoi des SMS aucune confirmation d'envoi n'est possible.
+
+De plus, lors de l'envoi des SMS, aucune confirmation d'envoi n'est possible.
 Cela pourrait poser certains problèmes lorsque le SMS à envoyer est important.
 La solution pourrait être recherchée dans les prochaines versions de notre solution.
 
@@ -278,8 +282,8 @@ dans lequel nous aurions pu y placer notre service. Ce système est très intér
 le protocole OAuth, une tache précise est alors gérée par une entité compétente. Plus aucun besoin alors de s'occuper
 de la maintenance des serveurs ou de gérer les charges des serveurs pour avoir un load balancing idéal.
 
-Pour nous s'était aussi l'occasion d'utiliser un service de gestion d'application dans le cloud. Pour des contraintes
-principalement monétaire, nous avons choisi de ne pas déployer notre application dans le cloud.
+Pour nous c'était aussi l'occasion d'utiliser un service de gestion d'application dans le cloud. Pour des contraintes
+principalement budgétaires, nous avons choisi de ne pas déployer notre application dans le cloud.
 
 
 
@@ -290,8 +294,8 @@ principalement monétaire, nous avons choisi de ne pas déployer notre applicati
 \subsection{Déploiement dans les markets}
 
 De même, nous pensons que, une fois le projet mature, il serait intéressant de mettre nos applications Android et iOS dans 
-leurs markets respectifs. Les markets sont les plateformes de téléchargement officiel de iOS et Android. Déployer notre 
-travail sur ces markets est avant tout un souci de compréhension de ses plateformes. Cela permet aussi de gagner en visibilité
+leurs markets respectif. Les markets sont les plateformes de téléchargement officiel de iOS et Android. Déployer notre 
+travail sur ces markets est avant tout un souci de compréhension de ces plateformes. Cela permet aussi de gagner en visibilité
 même si n'est pas l'objectif premier de ce projet.
 
 Malheureusement, il nous parait impossible aujourd'hui de publier sur les markets. Les raisons sont les moyens mis en œuvre 
@@ -307,14 +311,15 @@ inutilisable pour une grande majorité des utilisateurs.
 
 \subsection{Couverture de test}
 
-C'est clairement le maillon faible de notre travail. Nous avons privilégié le développement rapide pour atteindre nos objectifs
-primaires, les fonctionnalités. Plutôt que de se concentrer sur une tâche et de garantir son fonctionnement, nous avons préféré
-développer le plus possibles de fonctionnalités et nous nous sommes occupés de beaucoup de tâches secondaire. La couverture 
-de test du projet est donc nulle. Couvrir un projet signifie garantir que celui-ci fonctionne à l'aide d'un jeu de tests. Cette partie
-d'un projet professionnel est souvent conséquente et nous avons fait le choix de ne pas travailler dessus. Il s'agit, à nos yeux, 
-d'une erreur et nous pensons adopter un développement orienté \textit{Tests Driven Development} sur nos prochains projets. Les méthodes
-TDD reposent sur une approche ou les tests de fonctionnement seront écris avant les fonctionnalités. Cela permet de maintenir un projet
-fonctionnel.
+C'est clairement le maillon faible de notre travail.
+Nous avons privilégié le développement rapide pour atteindre nos objectifs primaires, les fonctionnalités.
+Plutôt que de se concentrer sur une tâche et de garantir son fonctionnement, nous avons préféré développer le plus possibles de fonctionnalités et nous nous sommes occupés de beaucoup de tâches secondaires.
+La couverture de test du projet est donc nulle.
+Couvrir un projet signifie garantir que celui-ci fonctionne à l'aide d'un jeu de tests.
+Cette partie d'un projet professionnel est souvent conséquente et nous avons fait le choix de ne pas travailler dessus.
+Il s'agit, à nos yeux, d'une erreur et nous pensons adopter un développement orienté \textit{Tests Driven Development} sur nos prochains projets.
+Les méthodes TDD reposent sur une approche ou les tests de fonctionnement seront écris avant les fonctionnalités.
+Cela permet de maintenir un projet fonctionnel.
 
 
 
@@ -342,6 +347,7 @@ Nous avons néanmoins délibérément abandonné la conception d'une documentati
 
 \subsection{Gestion des MMS}
 
-Actuellement, le projet ne gère que les SMS. Nous avons envisagé de rendre possible l'utilisation de MMS. L'un des avantages principal
-de l'ordinateur par rapport au téléphone portable et la facilité avec laquelle on peut par exemple récupérer une image et à l'aide d'un
-glisser déposer, l'insérer dans un mail par exemple. Cette fonctionnalité serait très intéressante dans un projet comme celui la. 
+Actuellement, le projet ne gère que les SMS.
+Nous avons envisagé de rendre possible l'utilisation de MMS.
+L'un des avantages principal de l'ordinateur par rapport au téléphone portable et la facilité avec laquelle on peut par exemple récupérer une image et à l'aide d'un glisser déposer, l'insérer dans un mail par exemple.
+Cette fonctionnalité serait très intéressante dans un projet comme celui là.

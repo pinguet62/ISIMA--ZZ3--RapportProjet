@@ -80,7 +80,7 @@ Le protocole XMPP est de plus en plus utilisé par les services de messagerie in
 
 En raison de la nature dynamique, évolutive et ouverte du protocole XMPP, de très nombreuses bibliothèques sont disponibles (référencées sur le \href{http://xmpp.org/xmpp-software/libraries/}{site officiel} de la fondation) dans la majorité des langages de programmation.
 
-Dans ce projet nous utiliserons \textit{aSmack}, un portage sous Android de la biblioyhèqhe Java \textit{Smack}, une bibliothèque Java, ainsi que \textit{XMPPFramework} une bibliothèque pour Objective-C.
+Dans ce projet nous utiliserons \textit{aSmack}, un portage sous Android de la bibliothèque Java \textit{Smack}, ainsi que \textit{XMPPFramework} une bibliothèque pour Objective-C.
 
 
 
@@ -124,7 +124,7 @@ Voici l'exemple d'un message XMPP qui transitera du smartphone de l'utilisateur 
     "body": "Ceci est le contenu du SMS"
 }
 \end{lstlisting}
-La première ligne corresponde au type de message : "receive-sms-action" lorsque l'utilise reçoit un SMS, "send-sms-action" lorsqu'il souhaite en envoyer un.
+La première ligne corresponde au type de message : "receive-sms-action" lorsque l'utilisateur reçoit un SMS, "send-sms-action" lorsqu'il souhaite en envoyer un.
 La seconde ligne correspond au numéro de l'auteur du SMS (facultatif lors d'un envoi).
 La troisième ligne correspond au numéro du destinataire (facultatif lors de la réception).
 Et enfin la dernière ligne correspond au contenu du SMS.
@@ -193,8 +193,8 @@ Cependant GTalk ne le permet pas, pour au moins deux raisons :
 	\item Gtalk n'affiche pas les messages que l'on s'envoie à soi-même, depuis un autre client XMPP comme une application mobile par exemple.
 \end{itemize}
 
-De ce fait il est donc nécessaire d'utiliser un compte intermédiaire.
-On peut ainsi créer un compte spécial qui représenterai notre smartphone, et qui sera utilisé uniquement par l'application.
+De ce fait, il est donc nécessaire d'utiliser un compte intermédiaire.
+On peut ainsi créer un compte spécial qui représentera notre smartphone, et qui sera utilisé uniquement par l'application.
 Le fonctionnement global de la solution se résumerait au schéma \ref{schemaFonctionnement_GTalk}.
 
 \begin{figure}[!h]
@@ -208,13 +208,13 @@ Le fonctionnement global de la solution se résumerait au schéma \ref{schemaFon
 
 \subsubsection{Praticité}
 
-Pour différencier les SMS que l'utilisateur voudrait envoyer et les messages privés qui pourraient transiter par le biais du compte intermédiaire, nous voulions imposer une "règle", c'est à dire un format comme par exemple :
+Pour différencier les SMS que l'utilisateur voudra envoyer et les messages privés qui pourront transiter par le biais du compte intermédiaire, nous voulions imposer une "règle", c'est à dire un format comme par exemple :
 \begin{lstlisting}
 sms 0123456789 Coucou, comment vas-tu ?
 \end{lstlisting}
 
-Mais cela impose à l'utilisateur de saisir un message correctement formaté.
-De plus l'utilisateur doit saisir le numéro de téléphone du destinataire pour pouvoir envoyer le message, ce qui soulève les problèmes cités dans la partie \ref{Introduction de l'étude} du rapport.
+Mais cela imposera à l'utilisateur de saisir un message correctement formaté.
+De plus l'utilisateur devra saisir le numéro de téléphone du destinataire pour pouvoir envoyer le message, ce qui soulèvera les problèmes cités dans la partie \ref{Introduction de l'étude} du rapport.
 
 
 
@@ -235,10 +235,10 @@ Pour notre projet, l'inconvénient de cette solution est l'obligation d'installa
 \\
 
 
-Le site web est une application fourni par un serveur distant et accessible depuis n'importe quel navigateur internet.
+Le site web est une application fournie par un serveur distant et accessible depuis n'importe quel navigateur internet.
 Aucun programme ne devra être installé car cette solution est totalement indépendante de l'ordinateur de l'utilisateur.
 Le seule pré-requis est un accès à internet, qui, quelque soit le type de solution proposé à l'utilisateur (client lourd, client léger, ...), est obligatoire pour l'utilisation du protocole XMPP.
-C'est cette solution que nous utiliseront dans ce projet.
+C'est cette solution que nous utiliserons dans ce projet.
 \\
 
 
