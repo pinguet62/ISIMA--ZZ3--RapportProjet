@@ -56,7 +56,7 @@
 
 %%%%%%%%%% Liens %%%%%%%%%%
 \usepackage{hyperref}
-\hypersetup{
+\hypersetup{ 			% Options : http://forum.ubuntu-fr.org/viewtopic.php?id=81505%29
 	backref = true,
 	pagebackref = true,	% dans bibliographie
 	pdfborder = {0 0 0}	% retirer le cadre
@@ -167,16 +167,16 @@
 %%%%%%%%%% Abstract %%%%%%%%%%
 \input{src/abstract}
 
-%%%%%%%%%% Table des matières %%%%%%%%%%
-\cleardoublepage
-\pagestyle{empty}
-\tableofcontents
-\thispagestyle{empty}
-
 %%%%%%%%%% Table des figures %%%%%%%%%%
 \cleardoublepage
 \pagestyle{empty}
 \listoffigures
+\thispagestyle{empty}
+
+%%%%%%%%%% Table des matières %%%%%%%%%%
+\cleardoublepage
+\pagestyle{empty}
+\tableofcontents
 \thispagestyle{empty}
 
 %%%%%%%%%% Corps du rapport %%%%%%%%%%
@@ -186,6 +186,8 @@
 
 %%%%%%%%%% Introduction %%%%%%%%%%
 \input{src/introduction}
+\newpage
+\thispagestyle{empty} % Bug : entête ce la liste des figures...
 
 %%%%%%%%%% Chapitre 1 %%%%%%%%%%
 \input{src/partie_1}
