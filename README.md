@@ -1,9 +1,6 @@
 TODO:
-    Aligner les 2 noms sur la page de garde
     Résumé : 1er paragraphe un peu verbeux
     Intro : le futur fait bizarre
-    Intro page 2 : en-tête
-    Partie II : changer titre pour "Recherche de la solution optimale"
     Partie IV : Couverture de test : on faisait un prototype
 
 
